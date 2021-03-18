@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
+title: Niko的小窝
+subtitle: '思考/技术/知识/分享'
 description: ''
 keywords:
-author: John Doe
-language: en
+author: WangLuffy
+language: zh-Hans
 timezone: ''
 
 # URL
@@ -103,8 +103,6 @@ theme: landscape
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  # repo: https://github.com/amuqiao/amuqiao.io.git
-  # repo: https://github.com/amuqiao/amuqiao.github.io.git
   repo: git@github.com:amuqiao/amuqiao.github.io.git
   branch: main
 
