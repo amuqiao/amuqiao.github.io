@@ -9,18 +9,25 @@ password:
 summary:
 tags:
 - git
-- git pull 
 categories:
-- Git
+- 开发工具
+
 ---
 
+> 修改`hosts`配置解决`git pull`网络通信慢的问题
+
+<!--more -->
+
 ### 问题描述
+
 - git pull 特别慢
 - ssh -T `git@github.com `很慢
 
 
 ### 解决办法一
+
 #### 查询GitHub域名ip
+
 我们可以利用https://www.ipaddress.com/ 来获得以下两个GitHub域名的IP地址：
 
 - github.com
@@ -33,9 +40,11 @@ categories:
 
 
 #### 修改hosts文件,刷新dns缓存
+
 将以上两段IP写入Hosts文件中：
 
 mac:
+
 ```
 sudo vi /etc/hosts
 # 添加
@@ -46,6 +55,7 @@ sudo killall -HUP mDNSResponder
 ```
 
 windows:
+
 ```
 # hosts文件位置：
 C:\windows\system32\drivers\etc
@@ -58,4 +68,5 @@ ps:ipconfig /displaydns//显示DNS缓存内容
 ```
 
 ### 解决办法二
+
 由于看到github的两个IP属地为美国，因此将代理服务器切换至美国，并开启全局模式（实际验证PAC模式问题依旧），重新打开一个终端，git pull速度大幅提升

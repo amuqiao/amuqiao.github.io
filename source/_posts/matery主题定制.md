@@ -9,11 +9,22 @@ password:
 summary:
 tags:
 - hexo
-- matery主题
+- hexo-theme-matery
 categories:
-- Hexo
+- 前端
 
 ---
+> 基于hexo-theme-matery做的个性化美化
+
+<!-- more-->
+
+### 限定预览文字字数
+```
+# 在预览文字后添加限定符号 <!-- more-->
+Welcome to Hexo <!-- more--> This is your very first post. 
+```
+![限定预览文字](https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/87j2QT.jpg)
+
 
 ### 去掉首页banner的背景颜色
 打开`themes/matery/source/css/matery.css`文件(367行，也可以快速搜索`.bg-cover:after`进行定位):

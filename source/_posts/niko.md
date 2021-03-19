@@ -6,7 +6,11 @@ tags:
 - niko
 - 猫
 categories:
-- 猫
+- 随笔
 ---
+
+> 小猫niko的生活照
+
+<!--more-->
 
 ![niko](https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/niko.jpeg)

@@ -12,8 +12,12 @@ tags:
 - niko
 - 猫
 categories:
-- 猫
+- 随笔
 ---
+
+> 买了一只两个月大的小猫
+
+<!--more-->
 
 ![刚收到的小猫](https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/z9dj69.jpg)
 

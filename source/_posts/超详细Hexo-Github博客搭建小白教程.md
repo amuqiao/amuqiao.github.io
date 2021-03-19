@@ -9,12 +9,15 @@ password:
 summary:
 tags: 
 - hexo
-- 个人博客搭建
+- hexo-theme-matery
 categories: 
-- 博客搭建
+- 前端
+
 ---
 
-### 前言
+> 利用`github`和`hexo`快速搭建个人博客，效果炫酷
+
+<!-- more -->
 
 
 ### 安装Node.js
@@ -193,3 +196,4 @@ categories:
 
 ### 参考
 - [超详细Hexo+Github博客搭建小白教程](https://godweiyang.com/2018/04/13/hexo-blog/)
+- [Hexo博客主题之hexo-theme-matery的介绍](https://blinkfox.github.io/2018/09/28/qian-duan/hexo-bo-ke-zhu-ti-zhi-hexo-theme-matery-de-jie-shao/)
