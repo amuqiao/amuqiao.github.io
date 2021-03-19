@@ -1,5 +1,4 @@
 ---
-​--- 
 title: {{ title }} 
 date: {{ date }} 
 top: false 
@@ -10,6 +9,4 @@ mathjax: true
 summary: 
 tags: 
 categories: 
-​---
-
 ---
