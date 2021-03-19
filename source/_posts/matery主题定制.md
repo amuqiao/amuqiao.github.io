@@ -50,3 +50,22 @@ socialLink:
   zhihu: # https://www.zhihu.com/xxx
   rss: true # true、false
 ```
+### 本地资源文件夹
+> 资源（Asset）代表 source 文件夹中除了文章以外的所有文件，例如图片、CSS、JS 文件等。比方说，如果你的Hexo项目中只有少量图片，那最简单的方法就是将它们放在 source/images 文件夹中。然后通过类似于 ![](/images/image.jpg) 的方法访问它们。
+
+添加[资源文件夹](https://hexo.io/zh-cn/docs/asset-folders.html)
+
+
+#### 修改文章特色图片
+![森林的猫](https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/%E6%A3%AE%E6%9E%97%E7%9A%84%E7%8C%AB.jpg)
+
+修改文章 Front-matter选项
+- 修改`img`为图片的`url`链接
+
+```
+img: https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/%E6%A3%AE%E6%9E%97%E7%9A%84%E7%8C%AB.jpg
+```
+- 修改为本地资源路径
+```
+img: images/森林的猫.jpg
+```

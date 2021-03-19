@@ -1,7 +1,8 @@
 ---
 title: 新来的小猫叫niko
 top: false
-cover: false
+img: https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/%E6%A3%AE%E6%9E%97%E7%9A%84%E7%8C%AB.jpg
+cover: true
 toc: true
 mathjax: true
 date: 2021-02-21
