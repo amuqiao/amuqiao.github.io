@@ -4,7 +4,7 @@
 
 # Site
 title: Niko的小窝
-subtitle: ''
+subtitle: '思考/技术/知识/分享'
 description: ''
 keywords:
 author: WangLuffy
@@ -111,8 +111,6 @@ permalink_pinyin:
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  # repo: https://github.com/amuqiao/amuqiao.io.git
-  # repo: https://github.com/amuqiao/amuqiao.github.io.git
   repo: git@github.com:amuqiao/amuqiao.github.io.git
   branch: main
 
