@@ -12,6 +12,7 @@ tags:
 - matery主题
 categories:
 - Hexo
+
 ---
 
 ### 去掉首页banner的背景颜色
@@ -66,6 +67,7 @@ socialLink:
 img: https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/%E6%A3%AE%E6%9E%97%E7%9A%84%E7%8C%AB.jpg
 ```
 - 修改为本地资源路径
+
 ```
 img: images/森林的猫.jpg
 ```
