@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Niko的小窝
+title: 王路飞的博客
 subtitle: '思考/技术/知识/分享'
 description: ''
 keywords:
-author: WangLuffy
+author: LuffyKing
 language: zh-CN
 timezone: ''
 
@@ -63,7 +63,7 @@ prismjs:
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
   path: ''
-  per_page: 10
+  per_page: 18
   order_by: -date
 
 # Category & Tag
@@ -86,7 +86,7 @@ updated_option: 'mtime'
 
 # Pagination
 ## Set per_page to 0 to disable pagination
-per_page: 12
+per_page: 18
 pagination_dir: page
 
 # Include / Exclude file(s)
