@@ -1,5 +1,5 @@
 ---
-title: 使用docker部署flask服务
+title: Docker部署flask服务
 top: false
 cover: false
 toc: true
@@ -9,13 +9,13 @@ img:
 password:
 summary:
 tags:
-- docker
-- flask
+- Docker
+- Flask
 categories:
 - 运维
 
 ---
-> docker部署服务
+> docker部署flask服务示例
 
 <!--more-->
 

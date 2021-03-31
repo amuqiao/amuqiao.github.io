@@ -1,5 +1,5 @@
 ---
-title: Grafana教程-构建你的第一个仪表盘
+title: Grafana入门教程
 top: false
 cover: false
 toc: true
