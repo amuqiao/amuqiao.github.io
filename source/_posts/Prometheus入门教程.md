@@ -9,7 +9,7 @@ img:
 password:
 summary:
 tags:
-- Prometheus
+- prometheus
 - 数据库
 - 监控
 categories:

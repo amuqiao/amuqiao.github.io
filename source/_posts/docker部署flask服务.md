@@ -9,8 +9,8 @@ img:
 password:
 summary:
 tags:
-- Docker
-- Flask
+- docker
+- flask
 categories:
 - 运维
 

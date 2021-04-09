@@ -9,7 +9,7 @@ img:
 password:
 summary:
 tags:
-- Python
+- python
 - datetime
 - time
 - 时间戳

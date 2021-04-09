@@ -9,7 +9,7 @@ img:
 password:
 summary:
 tags:
-- Python
+- python
 - 文件路径
 categories:
 - 后端

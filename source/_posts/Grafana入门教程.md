@@ -9,7 +9,7 @@ img:
 password:
 summary:
 tags:
-- Grafana
+- grafana
 categories:
 - 运维
 ---

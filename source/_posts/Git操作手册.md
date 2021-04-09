@@ -9,7 +9,7 @@ img:
 password:
 summary:
 tags:
-- Git
+- git
 categories:
 - 开发工具
 

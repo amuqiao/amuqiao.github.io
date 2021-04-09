@@ -9,7 +9,7 @@ img:
 password:
 summary:
 tags:
-- Tmux
+- tmux
 categories:
 - 开发工具
 

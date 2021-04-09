@@ -9,7 +9,7 @@ img:
 password:
 summary:
 tags:
-- Pycharm
+- pycharm
 - autopep8
 categories:
 - 工具

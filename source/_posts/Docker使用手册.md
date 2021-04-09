@@ -9,7 +9,7 @@ img:
 password:
 summary:
 tags:
-- Docker
+- docker
 categories:
 - 运维
 

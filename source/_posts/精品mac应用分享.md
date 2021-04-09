@@ -10,7 +10,6 @@ password:
 summary:
 tags:
 - mac
-- mac应用
 categories:
 - 工具
 
