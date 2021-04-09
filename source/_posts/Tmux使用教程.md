@@ -11,7 +11,7 @@ summary:
 tags:
 - Tmux
 categories:
-- 工具
+- 开发工具
 
 ---
 > Tmux 是一个终端复用器（terminal multiplexer），非常有用，属于常用的开发工具。
