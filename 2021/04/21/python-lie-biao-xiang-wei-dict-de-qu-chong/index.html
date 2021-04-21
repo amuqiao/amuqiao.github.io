@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="baidu-site-verification" content="code-XwKXPvlX0k" />
-    <meta name="keywords" content="Git操作手册, 王路飞">
+    <meta name="keywords" content="Python列表项为dict的去重, 王路飞">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Git操作手册 | 王路飞</title>
+    <title>Python列表项为dict的去重 | 王路飞</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -311,12 +311,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/f_32.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/f_8.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Git操作手册</h1>
+                    <h1 class="description center-align post-title">Python列表项为dict的去重</h1>
                 </div>
             </div>
         </div>
@@ -432,8 +432,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/git/">
-                                <span class="chip bg-color">git</span>
+                            <a href="/tags/python/">
+                                <span class="chip bg-color">python</span>
+                            </a>
+                        
+                            <a href="/tags/dict/">
+                                <span class="chip bg-color">dict</span>
                             </a>
                         
                     </div>
@@ -444,8 +448,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="post-category">
-                                开发工具
+                            <a href="/categories/%E5%90%8E%E7%AB%AF/" class="post-category">
+                                后端
                             </a>
                         
                     </div>
@@ -457,7 +461,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-24
+                    2021-04-21
                 </div>
                 
 
@@ -466,7 +470,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.5k
+                    231
                 </div>
                 
 
@@ -486,154 +490,38 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <blockquote>
-<p>Git 常用操作示例</p>
-</blockquote>
-<span id="more"></span>
+                <p>有如下列表</p>
+<pre class="line-numbers language-none"><code class="language-none">li &#x3D; [&#123;&#39;a&#39;: 1&#125;, &#123;&#39;b&#39;: 2&#125;, &#123;&#39;a&#39;: 1&#125;]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h3 id="添加远程仓库"><a href="#添加远程仓库" class="headerlink" title="添加远程仓库"></a>添加远程仓库</h3><pre class="line-numbers language-none"><code class="language-none">git remote add origin git@github.com:michaelliao&#x2F;learngit.git  
-git push -u origin master  向master 分支推送<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>如果采用set的去重方式，则会报错</p>
+<pre class="line-numbers language-none"><code class="language-none">li &#x3D; list(set(li))
+&gt;&gt;&gt;TypeError: unhashable type: &#39;dict&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h3 id="删除本地分支-远程分支"><a href="#删除本地分支-远程分支" class="headerlink" title="删除本地分支|远程分支"></a>删除本地分支|远程分支</h3><ul>
-<li>删除远程分支(推送一个空分支)<pre class="line-numbers language-none"><code class="language-none">git push origin :issue_101 删除远程分支<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-</ul>
-<h3 id="远程分支管理"><a href="#远程分支管理" class="headerlink" title="远程分支管理"></a>远程分支管理</h3><pre class="line-numbers language-none"><code class="language-none">git branch -a # 查看所有本地分支和远程分支
-git branch -r # 只查看远程分支
-git remote prune origin # 发现很多在远程仓库已经删除的分支在本地依然可以看到,删除远程不存在的分支
-git remote show origin # 查看remote地址，远程分支，还有本地分支与之相对应关系等信息<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以用下面的方法：<br>第一种：reduce</p>
+<pre class="line-numbers language-none"><code class="language-none">def deleteDuplicate(li):
+    func &#x3D; lambda x, y: x if y in x else x + [y]
+    li &#x3D; reduce(func, [[], ] + li)
+    return li
 
-<h3 id="设置默认推送远程分支"><a href="#设置默认推送远程分支" class="headerlink" title="设置默认推送远程分支"></a>设置默认推送远程分支</h3><pre class="line-numbers language-none"><code class="language-none"># 将本地分支与远程分支进行关联
-# 设置git push&#x2F;pull 默认推送远程分支 
-git branch --set-upstream-to&#x3D;origin&#x2F;&lt;远端分支&gt; &lt;本地分支&gt;  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+&gt;&gt;&gt; deleteDuplicate(li)
+&gt;&gt;&gt;[&#123;&#39;a&#39;: 1&#125;, &#123;&#39;b&#39;: 2&#125;]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p>第二种：</p>
+<pre class="line-numbers language-none"><code class="language-none">def deleteDuplicate(li):
+    temp_list &#x3D; list(set([str(i) for i in li]))
+    li&#x3D;[eval(i) for i in temp_list]
+    return li
 
+&gt;&gt;&gt; deleteDuplicate(li)
+&gt;&gt;&gt;[&#123;&#39;a&#39;: 1&#125;, &#123;&#39;b&#39;: 2&#125;]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="删除远程不存在的分支"><a href="#删除远程不存在的分支" class="headerlink" title="删除远程不存在的分支"></a>删除远程不存在的分支</h3><p>使用<code>git branch -a</code>命令可以查看所有本地分支和远程分支（<code>git branch -r</code>可以只查看远程分支）<br>发现很多在远程仓库已经删除的分支在本地依然可以看到。</p>
-<pre class="line-numbers language-none"><code class="language-none">$ git branch -a
-  feature-account-resell
-  feature-code-refactor
-  feature-crontab
-  feature-data-source
-  feature-utf8
-* master
-  remotes&#x2F;origin&#x2F;HEAD -&gt; origin&#x2F;master
-  remotes&#x2F;origin&#x2F;feature-account-resell
-  remotes&#x2F;origin&#x2F;feature-add-faka
-  remotes&#x2F;origin&#x2F;feature-code-refactor
-  remotes&#x2F;origin&#x2F;feature-crontab
-  remotes&#x2F;origin&#x2F;feature-data-source
-  remotes&#x2F;origin&#x2F;feature-ias
-  remotes&#x2F;origin&#x2F;feature-utf8
-  remotes&#x2F;origin&#x2F;master
-  remotes&#x2F;origin&#x2F;zengjinping<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>使用命令 <code>git remote show origin</code>，可以查看<code>remote</code>地址，远程分支，还有本地分支与之相对应关系等信息。</p>
-<pre class="line-numbers language-none"><code class="language-none">$ git remote show origin
-* remote origin
-  Fetch URL: git@wangqiao.threathunter.cn:alert&#x2F;SaleCardScript.git
-  Push  URL: git@wangqiao.threathunter.cn:alert&#x2F;SaleCardScript.git
-  HEAD branch: master
-  Remote branches:
-    feature-add-faka                           tracked
-    feature-ias                                tracked
-    master                                     tracked
-    refs&#x2F;remotes&#x2F;origin&#x2F;feature-account-resell stale (use &#39;git remote prune&#39; to remove)
-    refs&#x2F;remotes&#x2F;origin&#x2F;feature-code-refactor  stale (use &#39;git remote prune&#39; to remove)
-    refs&#x2F;remotes&#x2F;origin&#x2F;feature-crontab        stale (use &#39;git remote prune&#39; to remove)
-    refs&#x2F;remotes&#x2F;origin&#x2F;feature-data-source    stale (use &#39;git remote prune&#39; to remove)
-    refs&#x2F;remotes&#x2F;origin&#x2F;feature-utf8           stale (use &#39;git remote prune&#39; to remove)
-    zengjinping                                tracked
-  Local branches configured for &#39;git pull&#39;:
-    feature-account-resell merges with remote feature-account-resell
-    feature-code-refactor  merges with remote feature-code-refactor
-    feature-crontab        merges with remote feature-crontab
-    feature-data-source    merges with remote feature-data-source
-    feature-utf8           merges with remote feature-utf8
-    master                 merges with remote master
-  Local ref configured for &#39;git push&#39;:
-    master pushes to master (up to date)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>此时我们可以看到那些远程仓库已经不存在的分支，根据提示，使用 <code>git remote prune origin</code> 命令</p>
-<pre class="line-numbers language-none"><code class="language-none">$ git remote prune origin
-Pruning origin
-URL: git@wangqiao.threathunter.cn:alert&#x2F;SaleCardScript.git
- * [pruned] origin&#x2F;feature-account-resell
- * [pruned] origin&#x2F;feature-code-refactor
- * [pruned] origin&#x2F;feature-crontab
- * [pruned] origin&#x2F;feature-data-source
- * [pruned] origin&#x2F;feature-utf8
-(venv) [user_00@test-env &#x2F;data&#x2F;server&#x2F;SaleCardScript]$ 
-(venv) [user_00@test-env &#x2F;data&#x2F;server&#x2F;SaleCardScript]$ git branch -a
-  feature-account-resell
-  feature-code-refactor
-  feature-crontab
-  feature-data-source
-  feature-utf8
-* master
-  remotes&#x2F;origin&#x2F;HEAD -&gt; origin&#x2F;master
-  remotes&#x2F;origin&#x2F;feature-add-faka
-  remotes&#x2F;origin&#x2F;feature-ias
-  remotes&#x2F;origin&#x2F;master
-  remotes&#x2F;origin&#x2F;zengjinping<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>这样就删除了那些远程仓库不存在的分支。</p>
-<h3 id="删除已提交的-需要被忽略-的文件"><a href="#删除已提交的-需要被忽略-的文件" class="headerlink" title="删除已提交的(需要被忽略)的文件"></a>删除已提交的(需要被忽略)的文件</h3><pre class="line-numbers language-none"><code class="language-none">1.在终端输入;
+<p>第三种：</p>
+<pre class="line-numbers language-none"><code class="language-none">&gt;&gt;&gt;li &#x3D; [dict(t) for t in set([tuple(d.items()) for d in li])]
+&gt;&gt;&gt;li
+&gt;&gt;&gt;[&#123;&#39;a&#39;: 1&#125;, &#123;&#39;b&#39;: 2&#125;]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-git rm -r --cached 要删除的文件名,如:
+<p>建议使用第三种，因为速度更加快，经过测试相同的数据，第三种方法速度比第一种的10倍。</p>
 
-git rm -r --cached .idea
-
---cached 只删远程仓库的文件,不会删除本地的
-
-2.提交操作记录描述
-
-git commit -m &#39;删除XX文件&#39;
-
-3.推送到远程仓库
-
-git push -u origin master
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-<h3 id="更新被拒绝，因为您当前分支的最新提交落后于其对应的远程分支"><a href="#更新被拒绝，因为您当前分支的最新提交落后于其对应的远程分支" class="headerlink" title="更新被拒绝，因为您当前分支的最新提交落后于其对应的远程分支"></a>更新被拒绝，因为您当前分支的最新提交落后于其对应的远程分支</h3><pre class="line-numbers language-none"><code class="language-none">$ git push
-To github.com:amuqiao&#x2F;amuqiao.github.io.git
- ! [rejected]        hexo -&gt; hexo (non-fast-forward)
-error: 推送一些引用到 &#39;github.com:amuqiao&#x2F;amuqiao.github.io.git&#39; 失败
-提示：更新被拒绝，因为您当前分支的最新提交落后于其对应的远程分支。
-提示：再次推送前，先与远程变更合并（如 &#39;git pull ...&#39;）。详见
-提示：&#39;git push --help&#39; 中的 &#39;Note about fast-forwards&#39; 小节。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>解决方案：需要先获取远端更新并与本地合并,再git push</p>
-<pre class="line-numbers language-none"><code class="language-none">git remote add origin https:&#x2F;&#x2F;github.com&#x2F;miaoihan&#x2F;weibo.git  
-$git fetch origin    &#x2F;&#x2F;获取远程更新
-$git merge origin&#x2F;master &#x2F;&#x2F;把更新的内容合并到本地分支<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="将本地已有的项目完整的提交到github上"><a href="#将本地已有的项目完整的提交到github上" class="headerlink" title="将本地已有的项目完整的提交到github上"></a>将本地已有的项目完整的提交到github上</h3><p><code>~/NutstoreFiles/project/grafana-tutorial</code>项目为示例进行操作</p>
-<p>在GitHub新建一个仓库</p>
-<pre class="line-numbers language-none"><code class="language-none">$ cd ~&#x2F;NutstoreFiles&#x2F;project&#x2F;grafana-tutorial
-# 本地仓库初始化
-$ git init
-# 把全部文件添加到暂存区
-git add .
-# 把暂存区的文件提交到本地仓库
-git commit -m &quot;初始化提交&quot;
-
-# 连接远程仓库并推送
-# git remote add origin 远程仓库地址
-# origin是给远程仓库取的一个别名，远程仓库地址是GitHub仓库地址。该命令作用是让本地仓库和远程仓库相连接。
-git remote add origin git@github.com:amuqiao&#x2F;grafana-tutorial.git
-
-# 把本地库的内容推送到远程，用git push命令，实际上是把当前分支master推送到远程。由于远程库是空的，
-# 我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，
-# 还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令（直接用git pull或者git push）。
-# 向master分支进行推送
-git push -u origin master
-
-# 强行推送，本地仓库代码强行覆盖远程仓库：
-$ git push -f origin master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li>参考 <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42780289/article/details/102512463">Git：将本地项目推送到GitHub</a></li>
-<li></li>
-</ul>
-<h3 id="git-branch-结果不在当前页显示"><a href="#git-branch-结果不在当前页显示" class="headerlink" title="git branch 结果不在当前页显示"></a>git branch 结果不在当前页显示</h3><p>某些git命令的输出内容不是直接显示在命令下面，而是会额外打开一个窗口来显示，按q才能退出该窗口<br>终端执行</p>
-<pre class="line-numbers language-none"><code class="language-none">git config --global core.pager &#39;&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -659,7 +547,7 @@ $ git push -f origin master<span aria-hidden="true" class="line-numbers-rows"><s
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://amuqiao.github.io/2021/03/24/git-cao-zuo-shou-ce/">https://amuqiao.github.io/2021/03/24/git-cao-zuo-shou-ce/</a>
+                    <a href="https://amuqiao.github.io/2021/04/21/python-lie-biao-xiang-wei-dict-de-qu-chong/">https://amuqiao.github.io/2021/04/21/python-lie-biao-xiang-wei-dict-de-qu-chong/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -697,8 +585,12 @@ $ git push -f origin master<span aria-hidden="true" class="line-numbers-rows"><s
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/git/">
-                                    <span class="chip bg-color">git</span>
+                                <a href="/tags/python/">
+                                    <span class="chip bg-color">python</span>
+                                </a>
+                            
+                                <a href="/tags/dict/">
+                                    <span class="chip bg-color">dict</span>
                                 </a>
                             
                         </div>
@@ -868,52 +760,52 @@ $ git push -f origin master<span aria-hidden="true" class="line-numbers-rows"><s
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/03/25/docker-bu-shu-flask-fu-wu/">
+                <a href="/2021/04/21/python-lie-biao-xiang-wei-dict-de-qu-chong/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/f_3.jpg" class="responsive-img" alt="Docker部署flask服务">
+                        <img src="/medias/featureimages/f_8.jpg" class="responsive-img" alt="Python列表项为dict的去重">
                         
-                        <span class="card-title">Docker部署flask服务</span>
+                        <span class="card-title">Python列表项为dict的去重</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                             
-docker部署flask服务示例
-
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-25
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-21
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
-                                    运维
+                            <a href="/categories/%E5%90%8E%E7%AB%AF/" class="post-category">
+                                    后端
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/docker/">
-                        <span class="chip bg-color">docker</span>
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
                     </a>
                     
-                    <a href="/tags/flask/">
-                        <span class="chip bg-color">flask</span>
+                    <a href="/tags/dict/">
+                        <span class="chip bg-color">dict</span>
                     </a>
                     
                 </div>
@@ -927,33 +819,31 @@ docker部署flask服务示例
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/22/tmux-shi-yong-jiao-cheng/">
+                <a href="/2021/04/10/sqlalchemy-shi-yong-jiao-cheng/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/f_11.jpg" class="responsive-img" alt="Tmux使用教程">
+                        <img src="/medias/featureimages/f_30.jpg" class="responsive-img" alt="sqlalchemy使用教程">
                         
-                        <span class="card-title">Tmux使用教程</span>
+                        <span class="card-title">sqlalchemy使用教程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                             
-Tmux 是一个终端复用器（terminal multiplexer），非常有用，属于常用的开发工具。
-
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-22
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-10
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="post-category">
-                                    开发工具
+                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
+                                    数据库
                                 </a>
                             
                             
@@ -963,8 +853,8 @@ Tmux 是一个终端复用器（terminal multiplexer），非常有用，属于�
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/tmux/">
-                        <span class="chip bg-color">tmux</span>
+                    <a href="/tags/sqlalchemy/">
+                        <span class="chip bg-color">sqlalchemy</span>
                     </a>
                     
                 </div>

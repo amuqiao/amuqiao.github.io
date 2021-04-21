@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Python列表项为dict的去重</title>
+      <link href="2021/04/21/python-lie-biao-xiang-wei-dict-de-qu-chong/"/>
+      <url>2021/04/21/python-lie-biao-xiang-wei-dict-de-qu-chong/</url>
+      
+        <content type="html"><![CDATA[<p>有如下列表</p><pre class="line-numbers language-none"><code class="language-none">li &#x3D; [&#123;&#39;a&#39;: 1&#125;, &#123;&#39;b&#39;: 2&#125;, &#123;&#39;a&#39;: 1&#125;]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>如果采用set的去重方式，则会报错</p><pre class="line-numbers language-none"><code class="language-none">li &#x3D; list(set(li))&gt;&gt;&gt;TypeError: unhashable type: &#39;dict&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>可以用下面的方法：<br>第一种：reduce</p><pre class="line-numbers language-none"><code class="language-none">def deleteDuplicate(li):    func &#x3D; lambda x, y: x if y in x else x + [y]    li &#x3D; reduce(func, [[], ] + li)    return li&gt;&gt;&gt; deleteDuplicate(li)&gt;&gt;&gt;[&#123;&#39;a&#39;: 1&#125;, &#123;&#39;b&#39;: 2&#125;]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>第二种：</p><pre class="line-numbers language-none"><code class="language-none">def deleteDuplicate(li):    temp_list &#x3D; list(set([str(i) for i in li]))    li&#x3D;[eval(i) for i in temp_list]    return li&gt;&gt;&gt; deleteDuplicate(li)&gt;&gt;&gt;[&#123;&#39;a&#39;: 1&#125;, &#123;&#39;b&#39;: 2&#125;]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>第三种：</p><pre class="line-numbers language-none"><code class="language-none">&gt;&gt;&gt;li &#x3D; [dict(t) for t in set([tuple(d.items()) for d in li])]&gt;&gt;&gt;li&gt;&gt;&gt;[&#123;&#39;a&#39;: 1&#125;, &#123;&#39;b&#39;: 2&#125;]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p>建议使用第三种，因为速度更加快，经过测试相同的数据，第三种方法速度比第一种的10倍。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 后端 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> dict </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>sqlalchemy使用教程</title>
       <link href="2021/04/10/sqlalchemy-shi-yong-jiao-cheng/"/>
       <url>2021/04/10/sqlalchemy-shi-yong-jiao-cheng/</url>
