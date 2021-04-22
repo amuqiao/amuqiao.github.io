@@ -4,6 +4,93 @@
   
     
     <entry>
+      <title>Python模块搜索路径(看这一篇就够了)</title>
+      <link href="2021/04/22/python-mo-kuai-sou-suo-lu-jing-kan-zhe-yi-pian-jiu-gou-liao/"/>
+      <url>2021/04/22/python-mo-kuai-sou-suo-lu-jing-kan-zhe-yi-pian-jiu-gou-liao/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>由于某些原因，执行Python程序时，常常出现ImportError、ModuleNotFoundError等错误，归根究底，是当前需要的模块不在python搜索路径中。那么，Python 如何知道在哪里搜索模块的路径呢？</p></blockquote><h3 id="什么是模块搜索路径？"><a href="#什么是模块搜索路径？" class="headerlink" title="什么是模块搜索路径？"></a>什么是模块搜索路径？</h3><p>Python导入模块<code>hello</code>时，按照以下路径进行搜索</p><pre class="line-numbers language-none"><code class="language-none">1.具有该名称的内置模块2.在变量 sys.path 给出的目录列表中搜索名为 hello.py 的文件<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p><code>sys.path</code> 从这些位置初始化：</p><pre class="line-numbers language-none"><code class="language-none">1.包含输入脚本的目录（或当前目录，当没有指定文件时）2.PYTHONPATH（目录名列表，与 shell 变量 PATH 语法相同）3.与安装相关的默认值<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p>查看搜索路径</p><pre class="line-numbers language-none"><code class="language-none"># &#39;&#39; 表示当前目录（当前脚本所在的路径）$ python&gt;&gt;&gt; import sys&gt;&gt;&gt; sys.path[&#39;&#39;, &#39;&#x2F;usr&#x2F;local&#x2F;var&#x2F;pyenv&#x2F;versions&#x2F;3.6.5&#x2F;lib&#x2F;python36.zip&#39;, &#39;&#x2F;usr&#x2F;local&#x2F;var&#x2F;pyenv&#x2F;versions&#x2F;3.6.5&#x2F;lib&#x2F;python3.6&#39;, &#39;&#x2F;usr&#x2F;local&#x2F;var&#x2F;pyenv&#x2F;versions&#x2F;3.6.5&#x2F;lib&#x2F;python3.6&#x2F;lib-dynload&#39;, &#39;&#x2F;Users&#x2F;wangqiao&#x2F;code&#x2F;TH&#x2F;THKarma&#x2F;venv&#x2F;lib&#x2F;python3.6&#x2F;site-packages&#39;]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="添加模块搜索路径"><a href="#添加模块搜索路径" class="headerlink" title="添加模块搜索路径"></a>添加模块搜索路径</h3><p>为了解决上述问题，需要添加模块搜索路径，可以使用以下几种方式</p><h4 id="动态增加路径"><a href="#动态增加路径" class="headerlink" title="动态增加路径"></a>动态增加路径</h4><p>临时生效，对于不经常使用的模块，这通常是最好的方式，因为不必用所有次要模块的路径来污染 <code>PYTHONPATH</code>。</p><p>通过 <code>sys</code> 模块的 <code>append()</code> 方法在 Python 环境中增加搜索路径：</p><pre class="line-numbers language-none"><code class="language-none">&gt;&gt;&gt; import sys&gt;&gt;&gt; sys.path.append(&#39;&#x2F;home&#x2F;wang&#x2F;workspace&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h4 id="修改-PYTHONPATH-变量"><a href="#修改-PYTHONPATH-变量" class="headerlink" title="修改 PYTHONPATH 变量"></a>修改 <code>PYTHONPATH</code> 变量</h4><p>永久生效，对于在许多程序中都使用的模块，可以采用这种方式。这将改变所有 Python 应用的搜索路径，因为启动 Python 时，它会读取这个变量，甚至不同版本的 Python 都会受影响。</p><pre class="line-numbers language-none"><code class="language-none">vi ~&#x2F;.bash_profileexport PYTHONPATH&#x3D;$PYTHONPATH:&#x2F;home&#x2F;wang&#x2F;workspace或者export PYTHONPATH&#x3D;&#x2F;Users&#x2F;wangqiao&#x2F;code&#x2F;TH:$PYTHONPATHsource ~&#x2F;.bash_profile  # 使配置生效<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="增加-pth-文件"><a href="#增加-pth-文件" class="headerlink" title="增加 .pth 文件"></a>增加 <code>.pth</code> 文件</h4><p>永久生效，这是最简单的、也是推荐的方式,<br>Python在遍历已知的库文件目录过程中，如果见到一个<code>.pth</code> 文件，就会将文件中所记录的路径加入到 <code>sys.path</code> 设置中，于是 <code>.pth</code> 文件说指明的库也就可以被 Python 运行环境找到了。<br>python中有一个<code>.pth</code>文件，该文件的用法是：</p><p>在 <code>/usr/local/lib/python3.5/site-packages</code> 或者当前虚拟环境下<code>site-packages</code> 中添加一个扩展名为 <code>.pth</code> 的配置文件（例如：my.pth），内容为要添加的路径：</p><pre class="line-numbers language-none"><code class="language-none">&#x2F;Users&#x2F;wangqiao&#x2F;code&#x2F;TH&#x2F;THKarma&#x2F;Users&#x2F;wangqiao&#x2F;code&#x2F;TH<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>验证路径是否添加</p><pre class="line-numbers language-none"><code class="language-none">$ python&gt;&gt;&gt; import sys&gt;&gt;&gt; sys.path[&#39;&#39;, &#39;&#x2F;usr&#x2F;local&#x2F;var&#x2F;pyenv&#x2F;versions&#x2F;3.6.5&#x2F;lib&#x2F;python36.zip&#39;, &#39;&#x2F;usr&#x2F;local&#x2F;var&#x2F;pyenv&#x2F;versions&#x2F;3.6.5&#x2F;lib&#x2F;python3.6&#39;, &#39;&#x2F;usr&#x2F;local&#x2F;var&#x2F;pyenv&#x2F;versions&#x2F;3.6.5&#x2F;lib&#x2F;python3.6&#x2F;lib-dynload&#39;, &#39;&#x2F;Users&#x2F;wangqiao&#x2F;code&#x2F;TH&#x2F;THKarma&#x2F;venv&#x2F;lib&#x2F;python3.6&#x2F;site-packages&#39;, &#39;&#x2F;Users&#x2F;wangqiao&#x2F;code&#x2F;TH&#x2F;THKarma&#39;, &#39;&#x2F;Users&#x2F;wangqiao&#x2F;code&#x2F;TH&#39;]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><p>注意，如果添加了路径还是出现<code>ModuleNotFoundError</code>，将项目的上层路径也添加到搜索路径中</p><p>参考：</p><ul><li><a href="https://www.jianshu.com/p/cb6447e1cf88">为Python添加默认模块搜索路径</a></li><li><a href="https://blog.csdn.net/liang19890820/article/details/76219560">Python 模块搜索路径</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 后端 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> 模块搜索路径 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>simplejson和json使用及区别</title>
+      <link href="2021/04/22/simplejson-he-json-shi-yong-ji-qu-bie/"/>
+      <url>2021/04/22/simplejson-he-json-shi-yong-ji-qu-bie/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>json、simplejson效率比较：simplejson在效率上来得有优势，推荐用simplejson</p></blockquote><span id="more"></span><p>几个主要函数：dump、dumps、load、loads，带s跟不带s的区别： 带s的是对 字符串的处理，而不带 s的是对文件对像的处理。</p><h3 id="python-json-dumps-json-dump-的区别"><a href="#python-json-dumps-json-dump-的区别" class="headerlink" title="python json.dumps() json.dump()的区别"></a>python json.dumps() json.dump()的区别</h3><p>首先说明基本功能：</p><ul><li>dumps是将dict转化成str格式，loads是将str转化成dict格式。</li><li>dump和load也是类似的功能，只是与文件操作结合起来了。</li></ul><pre class="line-numbers language-none"><code class="language-none">import simplejson as jsonfw &#x3D; open(&quot;test.txt&quot;,&quot;wb&quot;)dict &#x3D; &#123;&quot;name&quot;:xiaoming,&quot;age&quot;:20,&quot;school&quot;:&quot;sysu&quot;&#125;json.dump(dict,fw) # 存入文件dict &#x3D; json.load(open(&quot;test.txt&quot;,&quot;rb&quot;))for k,v in dict.items():    print k,v<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>参考文档</p><ul><li><a href="http://www.cnblogs.com/wswang/p/5411826.html">python json.dumps() json.dump()的区别</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 后端 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> json </tag>
+            
+            <tag> simplejson </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Django ORM中原生JSONField的使用方法</title>
+      <link href="2021/04/21/django-orm-zhong-yuan-sheng-jsonfield-de-shi-yong-fang-fa/"/>
+      <url>2021/04/21/django-orm-zhong-yuan-sheng-jsonfield-de-shi-yong-fang-fa/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>Django最新版v3.1的主要更新之一便是完善了对JSON数据存储的支持，新增models.JSONField<br>和forms.JSONField<br>，可在所有受支持的数据库后端上使用</p></blockquote><p>目前支持的数据库以及对应版本主要有</p><ul><li>MariaDB 10.2.7+</li><li>MySQL 5.7.8+</li><li>Oracle</li><li>PostgreSQL</li><li>SQLite 3.9.0+</li></ul><p>但个别Django的查询方法可能与部分数据库不兼容，例如contains<br>和contained_by<br>就不支持Oracle和SQLite数据库</p><h3 id="JSONField使用"><a href="#JSONField使用" class="headerlink" title="JSONField使用"></a>JSONField使用</h3><pre class="line-numbers language-none"><code class="language-none">from django.db import modelsclass Hero(models.Model):        name &#x3D; models.CharField(max_length&#x3D;200)        data &#x3D; models.JSONField(null&#x3D;True)          def __str__(self):                return self.name<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>通过models.JSONField</p><p>可指定此字段为存储类型为JSON格式。null=True</p><p>表示此字段可以为空，这个NULL指的是SQL NULL</p><p>如果想存储为JsonNULL，则可以使用Value(‘null’)来实现</p><pre class="line-numbers language-none"><code class="language-none">Hero.objects.create(name&#x3D;&#39;coffee&#39;, data&#x3D;Value(&#39;null&#39;))<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>SQL NULL与JsonNULL的区别主要在is_null<br>的查询上不同，可以通过以下这个示例来理解下</p><pre class="line-numbers language-none"><code class="language-none">&gt;&gt;&gt; from django.db.models import Value&gt;&gt;&gt;&gt;&gt;&gt; Hero.objects.create(name&#x3D;&#39;ops&#39;)&lt;Hero: ops&gt;&gt;&gt;&gt; Hero.objects.create(name&#x3D;&#39;coffee&#39;, data&#x3D;Value(&#39;null&#39;))&lt;Hero: coffee&gt;&gt;&gt;&gt;&gt;&gt;&gt; Hero.objects.filter(data&#x3D;None)&lt;QuerySet [&lt;Hero: coffee&gt;]&gt;&gt;&gt;&gt; Hero.objects.filter(data&#x3D;Value(&#39;null&#39;))&lt;QuerySet [&lt;Hero: coffee&gt;]&gt;&gt;&gt;&gt;&gt;&gt;&gt; Hero.objects.get(name&#x3D;&#39;ops&#39;).data&gt;&gt;&gt; Hero.objects.get(name&#x3D;&#39;coffee&#39;).data&gt;&gt;&gt;&gt;&gt;&gt; Hero.objects.filter(data__isnull&#x3D;True)&lt;QuerySet [&lt;Hero: ops&gt;]&gt;&gt;&gt;&gt; Hero.objects.filter(data__isnull&#x3D;False)&lt;QuerySet [&lt;Hero: coffee&gt;]&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="JSONField查询"><a href="#JSONField查询" class="headerlink" title="JSONField查询"></a>JSONField查询</h3><pre class="line-numbers language-none"><code class="language-none">data &#x3D; &#123;&#39;age&#39;: 12,&#39;group&#39;:                 &#123;                    &#39;name&#39;: &#39;ow1&#39;,                    &#39;skill&#39;: [                            &#123;&#39;name&#39;: &#39;swim&#39;, &#39;rank&#39;: &#39;A+&#39;&#125;,                            &#123;&#39;name&#39;: &#39;shot&#39;, &#39;rank&#39;: None&#125;                            ]                                    &#125;            &#125;Hero.objects.create(name&#x3D;&#39;ops-coffee.cn&#39;, data&#x3D;data)Hero.objects.create(name&#x3D;&#39;ops-coffee&#39;, data&#x3D;&#123;&#39;age&#39;:16&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>当想要查询age为12的数据时可以这样查询</p><pre class="line-numbers language-none"><code class="language-none">Hero.objects.filter(data__age&#x3D;12)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>当想要查询group的name为ow1的数据时可以这样查询</p><pre class="line-numbers language-none"><code class="language-none">Hero.objects.filter(data__group__name&#x3D;&#39;ow1&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>当想要查询group下skill中第一个数据的name值为swim的数据时可以这样查询</p><pre class="line-numbers language-none"><code class="language-none">Hero.objects.filter(data__group__skill__0__name&#x3D;&#39;swim&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>当想要查找包含group键的所有数据时，可以通过has_key来实现</p><pre class="line-numbers language-none"><code class="language-none">Hero.objects.filter(data__has_key&#x3D;&#39;group&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>当想要查找同时包含group<br>键和age<br>键的所有数据时，可以通过has_keys<br>来实现</p><pre class="line-numbers language-none"><code class="language-none">Hero.objects.filter(data__has_keys&#x3D;[&#39;group&#39;,&#39;age&#39;])<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>当想要查找包含group<br>键或者age<br>键的所有数据时，可以通过has_any_keys<br>来实现</p><pre class="line-numbers language-none"><code class="language-none">Hero.objects.filter(data__has_any_keys&#x3D;[&#39;group&#39;,&#39;age&#39;])<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>当想一次性查找包含age<br>为12<br>且group<br>的name<br>为ow1<br>的数据时，可以通过contains<br>来实现</p><pre class="line-numbers language-none"><code class="language-none">Hero.objects.filter(data__contains&#x3D;&#123;&#39;age&#39;:12,&#39;group&#39;: &#123;&#39;name&#39;: &#39;ow1&#39;&#125;&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>JSONField除了支持以上查询方式外，对于ORM所提供的大部分其他查询方式同样支持，例如</p><ul><li>icontains</li><li>endswith</li><li>iendswith</li><li>iexact</li><li>regex</li><li>iregex</li><li>startswith</li><li>istartswith</li><li>lt</li><li>lte</li><li>gt</li><li>gte</li></ul><p>使用起来也是非常方便</p><pre class="line-numbers language-none"><code class="language-none">Hero.objects.filter(data__age__lte&#x3D;12)Hero.objects.filter(data__group__name__startswith&#x3D;&#39;ow&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 后端 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> django </tag>
+            
+            <tag> orm </tag>
+            
+            <tag> jsonfield </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Python列表项为dict的去重</title>
       <link href="2021/04/21/python-lie-biao-xiang-wei-dict-de-qu-chong/"/>
       <url>2021/04/21/python-lie-biao-xiang-wei-dict-de-qu-chong/</url>
