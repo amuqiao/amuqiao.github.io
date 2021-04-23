@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="baidu-site-verification" content="code-XwKXPvlX0k" />
-    <meta name="keywords" content="Python项目配置文件, 王路飞">
+    <meta name="keywords" content="Python深拷贝与浅拷贝的区别(一文看懂), 王路飞">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Python项目配置文件 | 王路飞</title>
+    <title>Python深拷贝与浅拷贝的区别(一文看懂) | 王路飞</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -311,12 +311,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/f_31.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/f_20.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Python项目配置文件</h1>
+                    <h1 class="description center-align post-title">Python深拷贝与浅拷贝的区别(一文看懂)</h1>
                 </div>
             </div>
         </div>
@@ -436,12 +436,8 @@
                                 <span class="chip bg-color">python</span>
                             </a>
                         
-                            <a href="/tags/yaml/">
-                                <span class="chip bg-color">yaml</span>
-                            </a>
-                        
-                            <a href="/tags/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
-                                <span class="chip bg-color">配置文件</span>
+                            <a href="/tags/copy/">
+                                <span class="chip bg-color">copy</span>
                             </a>
                         
                     </div>
@@ -465,7 +461,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-04-09
+                    2021-04-23
                 </div>
                 
 
@@ -474,7 +470,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    262
+                    1k
                 </div>
                 
 
@@ -495,69 +491,81 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <blockquote>
-<p>Python 项目配置文件</p>
+<p>很多人在学python的过程中往往会混淆深拷贝与浅拷贝的概念，深拷贝是对于对象的完全复制，这个好理解。很多人对浅拷贝理解为windows的快捷方式，其实也不尽然…下面的文字将会让你彻底理解他们之间的关系。</p>
+<span id="more"></span>
+<p>先从一道面试题开始：<br>写出下列代码运行结果：</p>
 </blockquote>
-<h3 id="Yaml格式配置文件"><a href="#Yaml格式配置文件" class="headerlink" title="Yaml格式配置文件"></a>Yaml格式配置文件</h3><h4 id="为什么使用YAML"><a href="#为什么使用YAML" class="headerlink" title="为什么使用YAML"></a>为什么使用YAML</h4><ul>
-<li>YAML的可读性好。</li>
-<li>YAML和脚本语言的交互性好。</li>
-<li>YAML使用实现语言的数据类型。</li>
-<li>YAML有一个一致的信息模型。</li>
-<li>YAML易于实现。</li>
+<pre class="line-numbers language-none"><code class="language-none">import copy  
+a &#x3D; [1, 2, 3, 4, [&#39;a&#39;, &#39;b&#39;]] 
+b &#x3D; a 
+c &#x3D; copy.copy(a) 
+d &#x3D; copy.deepcopy(a) 
+a.append(5)             [1, 2, 3, 4, [&#39;a&#39;, &#39;b&#39;], 5] 
+a[4].append(&#39;c&#39;)        [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]
+print &#39;a &#x3D; &#39;, a   		[1, 2, 3, 4, [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], 5]
+print &#39;b &#x3D; &#39;, b  		[1, 2, 3, 4, [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], 5]
+print &#39;c &#x3D; &#39;, c  		[1, 2, 3, 4, [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]]
+print &#39;d &#x3D; &#39;, d  		[1, 2, 3, 4, [&#39;a&#39;, &#39;b&#39;]] <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>很多人不理解c的输出结果，这正是因为没有深刻理解浅拷贝而容易走进的误区。</p>
+<hr>
+<p>先说结论，让我们来一起按图索骥:</p>
+<ul>
+<li>浅拷贝：对顶层对象引用的拷贝。</li>
+<li>深拷贝：对一个对象所有层次的拷贝（递归）。【即按照原来的样子在内存中申请空间另外创建一份，与拷贝对象没有任何关系】</li>
 </ul>
-<h4 id="首先安装yaml模块"><a href="#首先安装yaml模块" class="headerlink" title="首先安装yaml模块"></a>首先安装yaml模块</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python">pip3 install pyyaml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h4 id="编写yaml配置文件-yaml-example-yaml"><a href="#编写yaml配置文件-yaml-example-yaml" class="headerlink" title="编写yaml配置文件 yaml_example.yaml"></a>编写yaml配置文件 yaml_example.yaml</h4><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">app_config</span><span class="token punctuation">:</span>
-    <span class="token key atrule">log_level</span><span class="token punctuation">:</span> <span class="token number">10</span>
+<p>示例:</p>
+<pre class="line-numbers language-none"><code class="language-none">&gt;&gt;&gt; import copy
+&gt;&gt;&gt; a &#x3D; [1,2]
+&gt;&gt;&gt; b &#x3D; [3,4]
+&gt;&gt;&gt; c &#x3D; [a,b]
+&gt;&gt;&gt; d &#x3D; c  # d &#x3D; c相当于增加了对 对象[a,b] 的引用计数
+&gt;&gt;&gt; e &#x3D; copy.copy(c) # e是对c的浅拷贝，即对c顶层对象的拷贝<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="d-c-与-e-copy-copy-c-的区别？"><a href="#d-c-与-e-copy-copy-c-的区别？" class="headerlink" title="d = c 与 e = copy.copy(c)的区别？"></a>d = c 与 e = copy.copy(c)的区别？</h3><pre class="line-numbers language-none"><code class="language-none">&gt;&gt;&gt; id(c),id(d),id(e)
+(140089296095856, 140089296095856, 140089296096144)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>可以看出<code>c</code>和<code>d</code>指向同一块内存,<code>e</code>为另外一块内存区域,所以<code>d=c</code>仅仅是增加了<code>[a,b]</code>的引用计数,而<code>e = copy.copy(c)</code>使系统在内存中另外申请一块内存,用于存放<code>[a,b]</code>的值.</p>
+<h3 id="针对可变与不可变类型的浅拷贝"><a href="#针对可变与不可变类型的浅拷贝" class="headerlink" title="针对可变与不可变类型的浅拷贝"></a>针对可变与不可变类型的浅拷贝</h3><ul>
+<li>可变类型mutable：列表、字典</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">&gt;&gt;&gt; import copy
+&gt;&gt;&gt; a &#x3D; [1,2]
+&gt;&gt;&gt; b &#x3D; copy.copy(a)
+&gt;&gt;&gt; id(a)
+139729228940856
+&gt;&gt;&gt; id(b) 
+139729228503808<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>浅拷贝对于可变类型而言：在内存重新划分一块区域，其中保存对顶层对象的引用</p>
+<ul>
+<li>不可变类型immutable：数字、字符串、元组</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">&gt;&gt;&gt; import copy
+&gt;&gt;&gt; a &#x3D; &quot;amuqiao&quot;
+&gt;&gt;&gt; b &#x3D; copy.copy(a)
+&gt;&gt;&gt; id(a)
+140663661215344
+&gt;&gt;&gt; id(b)
+140663661215344<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>浅拷贝对于不可变类型而言是对被拷贝对象的引用</p>
+<h3 id="带着结论回顾第一题"><a href="#带着结论回顾第一题" class="headerlink" title="带着结论回顾第一题"></a>带着结论回顾第一题</h3><pre class="line-numbers language-none"><code class="language-none">import copy  
+a &#x3D; [1, 2, 3, 4, [&#39;a&#39;, &#39;b&#39;]] 
+b &#x3D; a 
+c &#x3D; copy.copy(a) 
+d &#x3D; copy.deepcopy(a) 
+a.append(5)             [1, 2, 3, 4, [&#39;a&#39;, &#39;b&#39;], 5] 
+a[4].append(&#39;c&#39;)        [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]
+print &#39;a &#x3D; &#39;, a   		[1, 2, 3, 4, [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], 5]
+print &#39;b &#x3D; &#39;, b  		[1, 2, 3, 4, [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], 5]
+# 可以得到两点:1.c是对a的浅拷贝;2.a是可变类型,即只保存对a顶层对象的引用。
+# 换句话说:在内存中重新划分一块内存,用于保存对a顶层对象的引用,此时id(a)不等于id(c),
+# 当a.append(5)的时候,c中保存的&quot;a的顶层对象的引用&quot;的值并没有改变,所以c不变
+# 当a[4].append(&#39;c&#39;)的时候,c中保存的&quot;a的顶层对象的引用&quot;的值[&#39;a&#39;, &#39;b&#39;]变成了
+# [&#39;a&#39;, &#39;b&#39;,&#39;c&#39;],所以c也改变了
+print &#39;c &#x3D; &#39;, c  		[1, 2, 3, 4, [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]]
+print &#39;d &#x3D; &#39;, d  		[1, 2, 3, 4, [&#39;a&#39;, &#39;b&#39;]] <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<span class="token key atrule">session_server</span><span class="token punctuation">:</span>
-    <span class="token key atrule">driver</span><span class="token punctuation">:</span> redis
-    <span class="token key atrule">driver_settings</span><span class="token punctuation">:</span>
-        <span class="token key atrule">host</span><span class="token punctuation">:</span> localhost
-        <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">6379</span>
-        <span class="token key atrule">password</span><span class="token punctuation">:</span> 
-        <span class="token key atrule">db</span><span class="token punctuation">:</span> <span class="token number">1</span>
-        <span class="token key atrule">max_connections</span><span class="token punctuation">:</span> <span class="token number">512</span>
 
-<span class="token key atrule">cache_server</span><span class="token punctuation">:</span>
-    <span class="token key atrule">driver</span><span class="token punctuation">:</span> redis
-    <span class="token key atrule">driver_settings</span><span class="token punctuation">:</span>
-        <span class="token key atrule">REDIS_HOST</span><span class="token punctuation">:</span> localhost
-        <span class="token key atrule">REDIS_PORT</span><span class="token punctuation">:</span> <span class="token number">6379</span>
-        <span class="token key atrule">REDIS_PASSWORD</span><span class="token punctuation">:</span> 
-        <span class="token key atrule">REDIS_DB</span><span class="token punctuation">:</span> <span class="token number">2</span>
-        <span class="token key atrule">REDIS_EX</span><span class="token punctuation">:</span> <span class="token number">172800</span> 
-        <span class="token key atrule">REDIS_MAX_CONNECTIONS</span><span class="token punctuation">:</span> <span class="token number">512</span>
+<h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h3><p>对一个对象所有层次的拷贝（递归）。【即按照原来的样子在内存中申请空间另外创建一份，与拷贝对象没有任何关系】</p>
+<p>参考链接:<br>1.<a target="_blank" rel="noopener" href="http://www.cnblogs.com/nobkb/p/3322684.html">Python中的copy和deepcopy</a><br>2.<a target="_blank" rel="noopener" href="http://www.cnblogs.com/huamingao/p/5809936.html">理解python可变类型vs不可变类型，深拷贝vs浅拷贝</a></p>
 
-<span class="token key atrule">database</span><span class="token punctuation">:</span>
-    <span class="token key atrule">host</span><span class="token punctuation">:</span> localhost
-    <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">3306</span>
-    <span class="token key atrule">user</span><span class="token punctuation">:</span> root
-    <span class="token key atrule">password</span><span class="token punctuation">:</span> <span class="token number">123456</span>
-    <span class="token key atrule">database</span><span class="token punctuation">:</span> test
-    <span class="token key atrule">charset</span><span class="token punctuation">:</span> utf8
-
-<span class="token key atrule">captcha_fonts</span><span class="token punctuation">:</span>
-    <span class="token punctuation">-</span> fonts/RedHatDisplay<span class="token punctuation">-</span>Regular.ttf
-    <span class="token punctuation">-</span> fonts/RedHatDisplay<span class="token punctuation">-</span>Medium.ttf
-    <span class="token punctuation">-</span> fonts/RedHatDisplay<span class="token punctuation">-</span>Black.ttf
-    <span class="token punctuation">-</span> fonts/RedHatDisplay<span class="token punctuation">-</span>Bold.ttf
-
-<span class="token key atrule">crypto_rsa</span><span class="token punctuation">:</span>
-    <span class="token key atrule">public_key_file</span><span class="token punctuation">:</span> keys/rsa_pub_key.pem
-    <span class="token key atrule">private_key_file</span><span class="token punctuation">:</span> keys/rsa_pri_key.pem<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="编写解析yaml文件的python程序-yaml-example-py"><a href="#编写解析yaml文件的python程序-yaml-example-py" class="headerlink" title="编写解析yaml文件的python程序 yaml_example.py"></a>编写解析yaml文件的python程序 yaml_example.py</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> yaml
-
-<span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'local.yml'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
-    content <span class="token operator">=</span> yaml<span class="token punctuation">.</span>load<span class="token punctuation">(</span>f<span class="token punctuation">)</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token builtin">type</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'before modification:'</span><span class="token punctuation">,</span> content<span class="token punctuation">)</span>
-    content<span class="token punctuation">[</span><span class="token string">'age'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">17</span>
-    content<span class="token punctuation">[</span><span class="token string">'children'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'age'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'after modification'</span><span class="token punctuation">,</span> content<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="输出配置结果"><a href="#输出配置结果" class="headerlink" title="输出配置结果:"></a>输出配置结果:</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">&lt;</span><span class="token keyword">class</span> <span class="token string">'dict'</span><span class="token operator">></span>
-before modification<span class="token punctuation">:</span> <span class="token punctuation">&#123;</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'junxi'</span><span class="token punctuation">,</span> <span class="token string">'age'</span><span class="token punctuation">:</span> <span class="token number">18</span><span class="token punctuation">,</span> <span class="token string">'spouse'</span><span class="token punctuation">:</span> <span class="token punctuation">&#123;</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Rui'</span><span class="token punctuation">,</span> <span class="token string">'age'</span><span class="token punctuation">:</span> <span class="token number">18</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token string">'children'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Chen You'</span><span class="token punctuation">,</span> <span class="token string">'age'</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Ruo Xi'</span><span class="token punctuation">,</span> <span class="token string">'age'</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span>
-after modification <span class="token punctuation">&#123;</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'junxi'</span><span class="token punctuation">,</span> <span class="token string">'age'</span><span class="token punctuation">:</span> <span class="token number">17</span><span class="token punctuation">,</span> <span class="token string">'spouse'</span><span class="token punctuation">:</span> <span class="token punctuation">&#123;</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Rui'</span><span class="token punctuation">,</span> <span class="token string">'age'</span><span class="token punctuation">:</span> <span class="token number">18</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token string">'children'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Chen You'</span><span class="token punctuation">,</span> <span class="token string">'age'</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Ruo Xi'</span><span class="token punctuation">,</span> <span class="token string">'age'</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -583,7 +591,7 @@ after modification <span class="token punctuation">&#123;</span><span class="tok
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://amuqiao.github.io/2021/04/09/python-xiang-mu-pei-zhi-wen-jian/">https://amuqiao.github.io/2021/04/09/python-xiang-mu-pei-zhi-wen-jian/</a>
+                    <a href="https://amuqiao.github.io/2021/04/23/python-shen-kao-bei-yu-qian-kao-bei-de-qu-bie-yi-wen-kan-dong/">https://amuqiao.github.io/2021/04/23/python-shen-kao-bei-yu-qian-kao-bei-de-qu-bie-yi-wen-kan-dong/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -625,12 +633,8 @@ after modification <span class="token punctuation">&#123;</span><span class="tok
                                     <span class="chip bg-color">python</span>
                                 </a>
                             
-                                <a href="/tags/yaml/">
-                                    <span class="chip bg-color">yaml</span>
-                                </a>
-                            
-                                <a href="/tags/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
-                                    <span class="chip bg-color">配置文件</span>
+                                <a href="/tags/copy/">
+                                    <span class="chip bg-color">copy</span>
                                 </a>
                             
                         </div>
@@ -800,46 +804,53 @@ after modification <span class="token punctuation">&#123;</span><span class="tok
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/04/10/sqlalchemy-shi-yong-jiao-cheng/">
+                <a href="/2021/04/23/python-shen-kao-bei-yu-qian-kao-bei-de-qu-bie-yi-wen-kan-dong/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/f_30.jpg" class="responsive-img" alt="sqlalchemy使用教程">
+                        <img src="/medias/featureimages/f_20.jpg" class="responsive-img" alt="Python深拷贝与浅拷贝的区别(一文看懂)">
                         
-                        <span class="card-title">sqlalchemy使用教程</span>
+                        <span class="card-title">Python深拷贝与浅拷贝的区别(一文看懂)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                             
+很多人在学python的过程中往往会混淆深拷贝与浅拷贝的概念，深拷贝是对于对象的完全复制，这个好理解。很多人对浅拷贝理解为windows的快捷方式，其实也不尽然…下面的文字将会让你彻底理解他们之间的关系。
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-10
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-23
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
-                                    数据库
+                            <a href="/categories/%E5%90%8E%E7%AB%AF/" class="post-category">
+                                    后端
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/sqlalchemy/">
-                        <span class="chip bg-color">sqlalchemy</span>
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                    <a href="/tags/copy/">
+                        <span class="chip bg-color">copy</span>
                     </a>
                     
                 </div>
@@ -853,26 +864,26 @@ after modification <span class="token punctuation">&#123;</span><span class="tok
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/04/09/python-ri-qi-zhuan-huan/">
+                <a href="/2021/04/23/python-zhong-requests-shi-yong-zhi-nan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/f_6.jpg" class="responsive-img" alt="Python日期转换">
+                        <img src="/medias/featureimages/f_4.jpg" class="responsive-img" alt="python中requests使用指南">
                         
-                        <span class="card-title">Python日期转换</span>
+                        <span class="card-title">python中requests使用指南</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                             
-Python日期转换、datetime模块和time模块的使用
+python模块requests使用指南
 
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-09
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-23
                             </span>
                         <span class="publish-author">
                             
@@ -893,16 +904,8 @@ Python日期转换、datetime模块和time模块的使用
                         <span class="chip bg-color">python</span>
                     </a>
                     
-                    <a href="/tags/datetime/">
-                        <span class="chip bg-color">datetime</span>
-                    </a>
-                    
-                    <a href="/tags/time/">
-                        <span class="chip bg-color">time</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%97%B6%E9%97%B4%E6%88%B3/">
-                        <span class="chip bg-color">时间戳</span>
+                    <a href="/tags/requests/">
+                        <span class="chip bg-color">requests</span>
                     </a>
                     
                 </div>

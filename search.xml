@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>Python深拷贝与浅拷贝的区别(一文看懂)</title>
+      <link href="2021/04/23/python-shen-kao-bei-yu-qian-kao-bei-de-qu-bie-yi-wen-kan-dong/"/>
+      <url>2021/04/23/python-shen-kao-bei-yu-qian-kao-bei-de-qu-bie-yi-wen-kan-dong/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>很多人在学python的过程中往往会混淆深拷贝与浅拷贝的概念，深拷贝是对于对象的完全复制，这个好理解。很多人对浅拷贝理解为windows的快捷方式，其实也不尽然…下面的文字将会让你彻底理解他们之间的关系。</p><span id="more"></span><p>先从一道面试题开始：<br>写出下列代码运行结果：</p></blockquote><pre class="line-numbers language-none"><code class="language-none">import copy  a &#x3D; [1, 2, 3, 4, [&#39;a&#39;, &#39;b&#39;]] b &#x3D; a c &#x3D; copy.copy(a) d &#x3D; copy.deepcopy(a) a.append(5)             [1, 2, 3, 4, [&#39;a&#39;, &#39;b&#39;], 5] a[4].append(&#39;c&#39;)        [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]print &#39;a &#x3D; &#39;, a   [1, 2, 3, 4, [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], 5]print &#39;b &#x3D; &#39;, b  [1, 2, 3, 4, [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], 5]print &#39;c &#x3D; &#39;, c  [1, 2, 3, 4, [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]]print &#39;d &#x3D; &#39;, d  [1, 2, 3, 4, [&#39;a&#39;, &#39;b&#39;]] <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>很多人不理解c的输出结果，这正是因为没有深刻理解浅拷贝而容易走进的误区。</p><hr><p>先说结论，让我们来一起按图索骥:</p><ul><li>浅拷贝：对顶层对象引用的拷贝。</li><li>深拷贝：对一个对象所有层次的拷贝（递归）。【即按照原来的样子在内存中申请空间另外创建一份，与拷贝对象没有任何关系】</li></ul><p>示例:</p><pre class="line-numbers language-none"><code class="language-none">&gt;&gt;&gt; import copy&gt;&gt;&gt; a &#x3D; [1,2]&gt;&gt;&gt; b &#x3D; [3,4]&gt;&gt;&gt; c &#x3D; [a,b]&gt;&gt;&gt; d &#x3D; c  # d &#x3D; c相当于增加了对 对象[a,b] 的引用计数&gt;&gt;&gt; e &#x3D; copy.copy(c) # e是对c的浅拷贝，即对c顶层对象的拷贝<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="d-c-与-e-copy-copy-c-的区别？"><a href="#d-c-与-e-copy-copy-c-的区别？" class="headerlink" title="d = c 与 e = copy.copy(c)的区别？"></a>d = c 与 e = copy.copy(c)的区别？</h3><pre class="line-numbers language-none"><code class="language-none">&gt;&gt;&gt; id(c),id(d),id(e)(140089296095856, 140089296095856, 140089296096144)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>可以看出<code>c</code>和<code>d</code>指向同一块内存,<code>e</code>为另外一块内存区域,所以<code>d=c</code>仅仅是增加了<code>[a,b]</code>的引用计数,而<code>e = copy.copy(c)</code>使系统在内存中另外申请一块内存,用于存放<code>[a,b]</code>的值.</p><h3 id="针对可变与不可变类型的浅拷贝"><a href="#针对可变与不可变类型的浅拷贝" class="headerlink" title="针对可变与不可变类型的浅拷贝"></a>针对可变与不可变类型的浅拷贝</h3><ul><li>可变类型mutable：列表、字典</li></ul><pre class="line-numbers language-none"><code class="language-none">&gt;&gt;&gt; import copy&gt;&gt;&gt; a &#x3D; [1,2]&gt;&gt;&gt; b &#x3D; copy.copy(a)&gt;&gt;&gt; id(a)139729228940856&gt;&gt;&gt; id(b) 139729228503808<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>浅拷贝对于可变类型而言：在内存重新划分一块区域，其中保存对顶层对象的引用</p><ul><li>不可变类型immutable：数字、字符串、元组</li></ul><pre class="line-numbers language-none"><code class="language-none">&gt;&gt;&gt; import copy&gt;&gt;&gt; a &#x3D; &quot;amuqiao&quot;&gt;&gt;&gt; b &#x3D; copy.copy(a)&gt;&gt;&gt; id(a)140663661215344&gt;&gt;&gt; id(b)140663661215344<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>浅拷贝对于不可变类型而言是对被拷贝对象的引用</p><h3 id="带着结论回顾第一题"><a href="#带着结论回顾第一题" class="headerlink" title="带着结论回顾第一题"></a>带着结论回顾第一题</h3><pre class="line-numbers language-none"><code class="language-none">import copy  a &#x3D; [1, 2, 3, 4, [&#39;a&#39;, &#39;b&#39;]] b &#x3D; a c &#x3D; copy.copy(a) d &#x3D; copy.deepcopy(a) a.append(5)             [1, 2, 3, 4, [&#39;a&#39;, &#39;b&#39;], 5] a[4].append(&#39;c&#39;)        [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]print &#39;a &#x3D; &#39;, a   [1, 2, 3, 4, [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], 5]print &#39;b &#x3D; &#39;, b  [1, 2, 3, 4, [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], 5]# 可以得到两点:1.c是对a的浅拷贝;2.a是可变类型,即只保存对a顶层对象的引用。# 换句话说:在内存中重新划分一块内存,用于保存对a顶层对象的引用,此时id(a)不等于id(c),# 当a.append(5)的时候,c中保存的&quot;a的顶层对象的引用&quot;的值并没有改变,所以c不变# 当a[4].append(&#39;c&#39;)的时候,c中保存的&quot;a的顶层对象的引用&quot;的值[&#39;a&#39;, &#39;b&#39;]变成了# [&#39;a&#39;, &#39;b&#39;,&#39;c&#39;],所以c也改变了print &#39;c &#x3D; &#39;, c  [1, 2, 3, 4, [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]]print &#39;d &#x3D; &#39;, d  [1, 2, 3, 4, [&#39;a&#39;, &#39;b&#39;]] <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h3><p>对一个对象所有层次的拷贝（递归）。【即按照原来的样子在内存中申请空间另外创建一份，与拷贝对象没有任何关系】</p><p>参考链接:<br>1.<a href="http://www.cnblogs.com/nobkb/p/3322684.html">Python中的copy和deepcopy</a><br>2.<a href="http://www.cnblogs.com/huamingao/p/5809936.html">理解python可变类型vs不可变类型，深拷贝vs浅拷贝</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 后端 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> copy </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>python中requests使用指南</title>
+      <link href="2021/04/23/python-zhong-requests-shi-yong-zhi-nan/"/>
+      <url>2021/04/23/python-zhong-requests-shi-yong-zhi-nan/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>python模块requests使用指南</p></blockquote><span id="more"></span><ul><li>使用get方法带参数请求时，是params=参数字典</li><li>使用post方法带参数请求时，是post=参数字典</li><li>在url编码时，有些编码是把空格编码为+，有些则是编码为%20</li><li>requests会对参数进行自动编码</li></ul><h3 id="get方法带参数请求"><a href="#get方法带参数请求" class="headerlink" title="get方法带参数请求"></a>get方法带参数请求</h3><pre class="line-numbers language-none"><code class="language-none">params&#x3D;&#123;    &#39;cid&#39;:567464,    &#39;page&#39;:1,    &#39;key&#39;:&#39;&#39;,    &#39;language&#39;:1,    &#39;gtk&#39;:6,    &#39;_cid&#39;:567464,    &#39;_mid&#39;:34949,    &#39;_dt&#39;:&#39;2019-05-03 13:03:08&#39;,    &#39;_sign&#39;:&#39;e74c8c52618a64a454dd7f12aff3cc1c&#39;    &#125;def getFun(url,data):    ret&#x3D;requests.get(url,params&#x3D;params)    print(ret.url)    return ret<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="post方法带参数请求"><a href="#post方法带参数请求" class="headerlink" title="post方法带参数请求"></a>post方法带参数请求</h3><pre class="line-numbers language-none"><code class="language-none">data&#x3D;&#123;    &#39;cid&#39;:567464,    &#39;page&#39;:1,    &#39;key&#39;:&#39;&#39;,    &#39;language&#39;:1,    &#39;gtk&#39;:6,    &#39;_cid&#39;:567464,    &#39;_mid&#39;:34949,    &#39;_dt&#39;:&#39;2019-05-03 13:03:08&#39;,    &#39;_sign&#39;:&#39;e74c8c52618a64a454dd7f12aff3cc1c&#39;    &#125;def getFun(url,data):    ret&#x3D;requests.post(url,data&#x3D;data)    print(ret.url)    return ret<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 后端 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> requests </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Python模块搜索路径(看这一篇就够了)</title>
       <link href="2021/04/22/python-mo-kuai-sou-suo-lu-jing-kan-zhe-yi-pian-jiu-gou-liao/"/>
       <url>2021/04/22/python-mo-kuai-sou-suo-lu-jing-kan-zhe-yi-pian-jiu-gou-liao/</url>
