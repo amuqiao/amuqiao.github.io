@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>vscode使用教程</title>
+      <link href="2021/04/28/vscode-shi-yong-jiao-cheng/"/>
+      <url>2021/04/28/vscode-shi-yong-jiao-cheng/</url>
+      
+        <content type="html"><![CDATA[<h3 id="python"><a href="#python" class="headerlink" title="python"></a>python</h3><h4 id="在vscode中调试django"><a href="#在vscode中调试django" class="headerlink" title="在vscode中调试django"></a>在vscode中调试django</h4><p>1.创建/打开django项目</p><p>2.在调试侧边栏里，选择创建launch.json</p><p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/VbnGJr.png" alt="创建launch.json"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/kzbo9I.png" alt="选择python环境"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/htbiNC.png" alt="选择django项目"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/Z8iTuK.png" alt="launch.json"></p><p>配置参考</p><pre class="line-numbers language-none"><code class="language-none">&#123;    &#x2F;&#x2F; 使用 IntelliSense 了解相关属性。     &#x2F;&#x2F; 悬停以查看现有属性的描述。    &#x2F;&#x2F; 欲了解更多信息，请访问: https:&#x2F;&#x2F;go.microsoft.com&#x2F;fwlink&#x2F;?linkid&#x3D;830387    &quot;version&quot;: &quot;0.2.0&quot;,    &quot;configurations&quot;: [        &#123;            &quot;name&quot;: &quot;Python: Django&quot;,            &quot;type&quot;: &quot;python&quot;,            &quot;request&quot;: &quot;launch&quot;,            &quot;program&quot;: &quot;$&#123;workspaceFolder&#125;&#x2F;manage.py&quot;,            &quot;args&quot;: [                &quot;runserver&quot;,                &quot;0.0.0.0:8001&quot;            ],            &quot;django&quot;: true        &#125;    ]&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 开发工具 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> vscode </tag>
+            
+            <tag> ide </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Python深拷贝与浅拷贝的区别(一文看懂)</title>
       <link href="2021/04/23/python-shen-kao-bei-yu-qian-kao-bei-de-qu-bie-yi-wen-kan-dong/"/>
       <url>2021/04/23/python-shen-kao-bei-yu-qian-kao-bei-de-qu-bie-yi-wen-kan-dong/</url>

@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="baidu-site-verification" content="code-XwKXPvlX0k" />
-    <meta name="keywords" content="Prometheus入门教程, 王路飞">
+    <meta name="keywords" content="vscode使用教程, 王路飞">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Prometheus入门教程 | 王路飞</title>
+    <title>vscode使用教程 | 王路飞</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -311,12 +311,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/f_21.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/f_7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Prometheus入门教程</h1>
+                    <h1 class="description center-align post-title">vscode使用教程</h1>
                 </div>
             </div>
         </div>
@@ -432,16 +432,16 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/prometheus/">
-                                <span class="chip bg-color">prometheus</span>
+                            <a href="/tags/python/">
+                                <span class="chip bg-color">python</span>
                             </a>
                         
-                            <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
-                                <span class="chip bg-color">数据库</span>
+                            <a href="/tags/vscode/">
+                                <span class="chip bg-color">vscode</span>
                             </a>
                         
-                            <a href="/tags/%E7%9B%91%E6%8E%A7/">
-                                <span class="chip bg-color">监控</span>
+                            <a href="/tags/ide/">
+                                <span class="chip bg-color">ide</span>
                             </a>
                         
                     </div>
@@ -452,8 +452,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
-                                运维
+                            <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="post-category">
+                                开发工具
                             </a>
                         
                     </div>
@@ -465,7 +465,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-31
+                    2021-04-28
                 </div>
                 
 
@@ -474,7 +474,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.1k
+                    141
                 </div>
                 
 
@@ -494,106 +494,29 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <blockquote>
-<p>Prometheus 一款优秀的开源监控告警系统</p>
-</blockquote>
-<span id="more"></span>
-
-<h3 id="Prometheus是什么"><a href="#Prometheus是什么" class="headerlink" title="Prometheus是什么"></a>Prometheus是什么</h3><p>Prometheus 最开始是由 SoundCloud 开发的开源监控告警系统，是 Google BorgMon 监控系统的开源版本。能很好地与容器平台、云平台配合。</p>
-<p>2016年继Kubernetes之后成为第二个正式加入CNCF基金会的项目，随着 Kubernetes 在容器编排领头羊地位的确立，Prometheus 也成为 Kubernetes 容器监控的标配。</p>
-<h4 id="设计架构"><a href="#设计架构" class="headerlink" title="设计架构"></a>设计架构</h4><p>监控系统的总体架构大多是类似的，都有数据采集、数据处理存储、告警动作触发和告警，以及对监控数据的展示。</p>
-<p>下面是 Prometheus 的架构：<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/Prometheus%E8%AE%BE%E8%AE%A1%E6%9E%B6%E6%9E%84.png" alt="Prometheus设计架构"></p>
-<p>Prometheus Server 负责定时从 Prometheus 采集端 Pull(拉) 监控数据。Prometheus 采集端可以是实现了 /metrics 接口的服务，可以是从第三方服务导出监控数据的 exporter，也可以是存放短生命周期服务监控数据的 Pushgateway。相比大多数采用 Push(推) 监控数据的方式，Pull 使得 Promethues Server 与被采集端的耦合度更低，Prometheus Server 更容易实现水平拓展。</p>
-<p>对于采集的监控数据，Prometheus Server 使用内置时序数据库 TSDB 进行存储。同时也会使用这些监控数据进行告警规则的计算，产生的告警将会通过 Prometheus 另一个独立的组件 Alertmanager 进行发送。Alertmanager 提供了十分灵活的告警方式，并且支持高可用部署。</p>
-<p>对于采集到的监控数据，可以通过 Prometheus 自身提供的 Web UI 进行查询，也可以使用 Grafana 进行展示。</p>
-<h4 id="Prometheus与Influxdb的区别"><a href="#Prometheus与Influxdb的区别" class="headerlink" title="Prometheus与Influxdb的区别"></a>Prometheus与Influxdb的区别</h4><p><strong>prometheus是pull模型，influxdb是push模型。</strong></p>
-<p>prometheus server启动的时候，你需要告诉它你想它监听哪些节点，每次增加或者减少节点，得重启prometheus server的。</p>
-<p>而influxdb则是，每个监控的节点自己配置好influxdb server的地址，向服务端推送数据</p>
-<p>对于Prometheus而言，监控节点不需要知道server在哪里，即使server挂了，对监控节点本身无影响</p>
-<p>相对的，influxdb server如果挂了，那么所有influxdb 节点发送的请求都会出错</p>
-<p>当然，prometheus可以通过push gateway转换成push模型，influxdb可以通过collector转化成pull模型</p>
-<p><strong>influxdb的查询语句是类SQL，prometheus则不是</strong></p>
-<p>Prometheus 是一套完整的监控系统，包括数据采集、数据处理存储、告警动作触发和告警，以及对监控数据的展示(数据展示很烂，官方都推荐使用Grafana)</p>
-<p>influxdb 只是一个数据库</p>
-<h3 id="安装Prometheus"><a href="#安装Prometheus" class="headerlink" title="安装Prometheus"></a>安装Prometheus</h3><p>Prometheus基于Golang编写，编译后的软件包，不依赖于任何的第三方依赖。用户只需要下载对应平台的二进制包，解压并且添加基本的配置即可正常启动Prometheus Server。<a target="_blank" rel="noopener" href="https://github.com/prometheus/prometheus">Prometheus-GitHub项目</a></p>
-<p>本文直接从<a target="_blank" rel="noopener" href="https://prometheus.io/download/">官网下载</a></p>
-<p><code>从二进制包安装</code>和<code>使用Docker安装</code>请查阅<a target="_blank" rel="noopener" href="https://github.com/prometheus/prometheus">Prometheus-GitHub项目</a></p>
-<p>解压，并将Prometheus相关的命令，添加到系统环境变量路径即可</p>
-<p>解压后当前目录会包含默认的Prometheus配置文件promethes.yml</p>
-<pre class="line-numbers language-none"><code class="language-none">➜  prometheus-2.25.2.darwin-amd64 ls
-LICENSE           console_libraries prometheus        promtool
-NOTICE            consoles          prometheus.yml<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>Promtheus包含一个时间序列数据库，其采集的数据会以文件的形式存储在本地中，默认的存储路径为data/</p>
-<p>用户也可以通过参数<code>--storage.tsdb.path=&quot;data/&quot;</code>修改本地数据存储的路径</p>
-<h3 id="启动prometheus服务"><a href="#启动prometheus服务" class="headerlink" title="启动prometheus服务"></a>启动prometheus服务</h3><p>其会默认加载当前路径下的prometheus.yaml文件：</p>
-<pre class="line-numbers language-none"><code class="language-none">.&#x2F;prometheus <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>正常的情况下，你可以看到以下输出内容：</p>
-<pre class="line-numbers language-none"><code class="language-none">➜  prometheus-2.25.2.darwin-amd64 .&#x2F;prometheus
-level&#x3D;info ts&#x3D;2021-03-31T06:06:48.254Z caller&#x3D;main.go:366 msg&#x3D;&quot;No time or size retention was set so using the default time retention&quot; duration&#x3D;15d
-level&#x3D;info ts&#x3D;2021-03-31T06:06:48.254Z caller&#x3D;main.go:404 msg&#x3D;&quot;Starting Prometheus&quot; version&#x3D;&quot;(version&#x3D;2.25.2, branch&#x3D;HEAD, revision&#x3D;bda05a23ada314a0b9806a362da39b7a1a4e04c3)&quot;
-level&#x3D;info ts&#x3D;2021-03-31T06:06:48.254Z caller&#x3D;main.go:409 build_context&#x3D;&quot;(go&#x3D;go1.15.10, user&#x3D;root@de38ec01ef10, date&#x3D;20210316-18:16:26)&quot;
-level&#x3D;info ts&#x3D;2021-03-31T06:06:48.254Z caller&#x3D;main.go:410 host_details&#x3D;(darwin)
-level&#x3D;info ts&#x3D;2021-03-31T06:06:48.254Z caller&#x3D;main.go:411 fd_limits&#x3D;&quot;(soft&#x3D;256, hard&#x3D;unlimited)&quot;
-level&#x3D;info ts&#x3D;2021-03-31T06:06:48.254Z caller&#x3D;main.go:412 vm_limits&#x3D;&quot;(soft&#x3D;unlimited, hard&#x3D;unlimited)&quot;
-level&#x3D;info ts&#x3D;2021-03-31T06:06:48.256Z caller&#x3D;web.go:532 component&#x3D;web msg&#x3D;&quot;Start listening for connections&quot; address&#x3D;0.0.0.0:9090
-level&#x3D;info ts&#x3D;2021-03-31T06:06:48.256Z caller&#x3D;main.go:779 msg&#x3D;&quot;Starting TSDB ...&quot;
-level&#x3D;info ts&#x3D;2021-03-31T06:06:48.258Z caller&#x3D;tls_config.go:191 component&#x3D;web msg&#x3D;&quot;TLS is disabled.&quot; http2&#x3D;false
-level&#x3D;info ts&#x3D;2021-03-31T06:06:48.260Z caller&#x3D;head.go:668 component&#x3D;tsdb msg&#x3D;&quot;Replaying on-disk memory mappable chunks if any&quot;
-level&#x3D;info ts&#x3D;2021-03-31T06:06:48.260Z caller&#x3D;head.go:682 component&#x3D;tsdb msg&#x3D;&quot;On-disk memory mappable chunks replay completed&quot; duration&#x3D;6.222µs
-level&#x3D;info ts&#x3D;2021-03-31T06:06:48.260Z caller&#x3D;head.go:688 component&#x3D;tsdb msg&#x3D;&quot;Replaying WAL, this may take a while&quot;
-level&#x3D;info ts&#x3D;2021-03-31T06:06:48.260Z caller&#x3D;head.go:740 component&#x3D;tsdb msg&#x3D;&quot;WAL segment loaded&quot; segment&#x3D;0 maxSegment&#x3D;0
-level&#x3D;info ts&#x3D;2021-03-31T06:06:48.260Z caller&#x3D;head.go:745 component&#x3D;tsdb msg&#x3D;&quot;WAL replay completed&quot; checkpoint_replay_duration&#x3D;37.072µs wal_replay_duration&#x3D;250.379µs total_replay_duration&#x3D;308.367µs
-level&#x3D;info ts&#x3D;2021-03-31T06:06:48.261Z caller&#x3D;main.go:799 fs_type&#x3D;1a
-level&#x3D;info ts&#x3D;2021-03-31T06:06:48.261Z caller&#x3D;main.go:802 msg&#x3D;&quot;TSDB started&quot;
-level&#x3D;info ts&#x3D;2021-03-31T06:06:48.261Z caller&#x3D;main.go:928 msg&#x3D;&quot;Loading configuration file&quot; filename&#x3D;prometheus.yml
-level&#x3D;info ts&#x3D;2021-03-31T06:06:50.775Z caller&#x3D;main.go:959 msg&#x3D;&quot;Completed loading of configuration file&quot; filename&#x3D;prometheus.yml totalDuration&#x3D;2.513709691s remote_storage&#x3D;4.524µs web_handler&#x3D;305ns query_engine&#x3D;721ns scrape&#x3D;2.513249415s scrape_sd&#x3D;80.407µs notify&#x3D;65.766µs notify_sd&#x3D;46.36µs rules&#x3D;9.82µs
-level&#x3D;info ts&#x3D;2021-03-31T06:06:50.775Z caller&#x3D;main.go:751 msg&#x3D;&quot;Server is ready to receive web requests.&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="采集数据"><a href="#采集数据" class="headerlink" title="采集数据"></a>采集数据</h4><p>若使用Prometheus默认配置文件启动，由于默认配置文件中已经配置了数据采集节点</p>
-<p>这一步可以跳过，直接看<strong>使用Node Exporter采集主机数据</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">scrape_configs:
-  # The job name is added as a label &#96;job&#x3D;&lt;job_name&gt;&#96; to any timeseries scraped from this config.
-  - job_name: &#39;prometheus&#39;
-
-    # metrics_path defaults to &#39;&#x2F;metrics&#39;
-    # scheme defaults to &#39;http&#39;.
-
-    static_configs:
-    - targets: [&#39;localhost:9090&#39;]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>使用<code>metrics</code>接口获取采集数据</p>
-<pre class="line-numbers language-none"><code class="language-none">➜  prometheus-2.25.2.darwin-amd64 curl http:&#x2F;&#x2F;localhost:9090&#x2F;metrics
-# HELP go_gc_duration_seconds A summary of the pause duration of garbage collection cycles.
-# TYPE go_gc_duration_seconds summary
-go_gc_duration_seconds&#123;quantile&#x3D;&quot;0&quot;&#125; 7.5208e-05
-go_gc_duration_seconds&#123;quantile&#x3D;&quot;0.25&quot;&#125; 0.000109181
-go_gc_duration_seconds&#123;quantile&#x3D;&quot;0.5&quot;&#125; 0.000141038
-go_gc_duration_seconds&#123;quantile&#x3D;&quot;0.75&quot;&#125; 0.000168269
-go_gc_duration_seconds&#123;quantile&#x3D;&quot;1&quot;&#125; 0.00025607
-go_gc_duration_seconds_sum 0.008501346
-go_gc_duration_seconds_count 61
-# HELP go_goroutines Number of goroutines that currently exist.
-# TYPE go_goroutines gauge<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-<p>启动完成后，可以通过<a target="_blank" rel="noopener" href="http://localhost:9090/">http://localhost:9090</a>访问Prometheus的UI界面：<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/O6L7Sd.png" alt="Prometheus"></p>
-<h3 id="使用Node-Exporter采集主机数据"><a href="#使用Node-Exporter采集主机数据" class="headerlink" title="使用Node Exporter采集主机数据"></a>使用Node Exporter采集主机数据</h3><h4 id="安装Node-Exporter"><a href="#安装Node-Exporter" class="headerlink" title="安装Node Exporter"></a>安装Node Exporter</h4><p>在Prometheus的架构设计中，Prometheus Server并不直接服务监控特定的目标，其主要任务负责数据的收集，存储并且对外提供数据查询支持。因此为了能够能够监控到某些东西，如主机的CPU使用率，我们需要使用到Exporter。Prometheus周期性的从Exporter暴露的HTTP服务地址（通常是/metrics）拉取监控样本数据。</p>
-<p>从上面的描述中可以看出Exporter可以是一个相对开放的概念，其可以是一个独立运行的程序独立于监控目标以外，也可以是直接内置在监控目标中。只要能够向Prometheus提供标准格式的监控样本数据即可。</p>
-<p>这里为了能够采集到主机的运行指标如CPU, 内存，磁盘等信息。我们可以使用<a target="_blank" rel="noopener" href="https://github.com/prometheus/node_exporter">Node Exporter</a>。</p>
-<p>Node Exporter同样采用Golang编写，并且不存在任何的第三方依赖，只需要下载，解压即可运行。</p>
-<p>本文直接从<a target="_blank" rel="noopener" href="https://prometheus.io/download/">官网下载</a></p>
-<h4 id="启动Exporter"><a href="#启动Exporter" class="headerlink" title="启动Exporter"></a>启动Exporter</h4><p>解压，进入目录执行</p>
-<pre class="line-numbers language-none"><code class="language-none">➜  node_exporter-1.1.2.darwin-amd64 ls
-LICENSE       NOTICE        node_exporter
-➜  node_exporter-1.1.2.darwin-amd64 .&#x2F;node_exporter<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>访问<a target="_blank" rel="noopener" href="http://localhost:9100/">http://localhost:9100/</a>可以看到以下页面<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/VFogux.png" alt="http://localhost:9100/"></p>
-<h3 id="监控数据可视化"><a href="#监控数据可视化" class="headerlink" title="监控数据可视化"></a>监控数据可视化</h3><h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903938001469453">Prometheus入门实践</a></li>
-<li><a target="_blank" rel="noopener" href="https://yunlzheng.gitbook.io/prometheus-book/">Prometheus-book</a></li>
-<li><a target="_blank" rel="noopener" href="https://opensource.actionsky.com/20200427-prometheus/">第01期：详解 Prometheus 专栏开篇</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/6cc9a5046f17">Prometheus数据采集</a></li>
-</ul>
-
+                <h3 id="python"><a href="#python" class="headerlink" title="python"></a>python</h3><h4 id="在vscode中调试django"><a href="#在vscode中调试django" class="headerlink" title="在vscode中调试django"></a>在vscode中调试django</h4><p>1.创建/打开django项目</p>
+<p>2.在调试侧边栏里，选择创建launch.json</p>
+<p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/VbnGJr.png" alt="创建launch.json"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/kzbo9I.png" alt="选择python环境"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/htbiNC.png" alt="选择django项目"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/Z8iTuK.png" alt="launch.json"></p>
+<p>配置参考</p>
+<pre class="line-numbers language-none"><code class="language-none">&#123;
+    &#x2F;&#x2F; 使用 IntelliSense 了解相关属性。 
+    &#x2F;&#x2F; 悬停以查看现有属性的描述。
+    &#x2F;&#x2F; 欲了解更多信息，请访问: https:&#x2F;&#x2F;go.microsoft.com&#x2F;fwlink&#x2F;?linkid&#x3D;830387
+    &quot;version&quot;: &quot;0.2.0&quot;,
+    &quot;configurations&quot;: [
+        &#123;
+            &quot;name&quot;: &quot;Python: Django&quot;,
+            &quot;type&quot;: &quot;python&quot;,
+            &quot;request&quot;: &quot;launch&quot;,
+            &quot;program&quot;: &quot;$&#123;workspaceFolder&#125;&#x2F;manage.py&quot;,
+            &quot;args&quot;: [
+                &quot;runserver&quot;,
+                &quot;0.0.0.0:8001&quot;
+            ],
+            &quot;django&quot;: true
+        &#125;
+    ]
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -619,7 +542,7 @@ LICENSE       NOTICE        node_exporter
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://amuqiao.github.io/2021/03/31/prometheus-ru-men-jiao-cheng/">https://amuqiao.github.io/2021/03/31/prometheus-ru-men-jiao-cheng/</a>
+                    <a href="https://amuqiao.github.io/2021/04/28/vscode-shi-yong-jiao-cheng/">https://amuqiao.github.io/2021/04/28/vscode-shi-yong-jiao-cheng/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -657,16 +580,16 @@ LICENSE       NOTICE        node_exporter
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/prometheus/">
-                                    <span class="chip bg-color">prometheus</span>
+                                <a href="/tags/python/">
+                                    <span class="chip bg-color">python</span>
                                 </a>
                             
-                                <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
-                                    <span class="chip bg-color">数据库</span>
+                                <a href="/tags/vscode/">
+                                    <span class="chip bg-color">vscode</span>
                                 </a>
                             
-                                <a href="/tags/%E7%9B%91%E6%8E%A7/">
-                                    <span class="chip bg-color">监控</span>
+                                <a href="/tags/ide/">
+                                    <span class="chip bg-color">ide</span>
                                 </a>
                             
                         </div>
@@ -836,17 +759,18 @@ LICENSE       NOTICE        node_exporter
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/03/31/gitignore-wen-jian-ping-bi-gui-ze/">
+                <a href="/2021/04/28/vscode-shi-yong-jiao-cheng/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/f_8.jpg" class="responsive-img" alt="gitignore文件屏蔽规则">
+                        <img src="/medias/featureimages/f_7.jpg" class="responsive-img" alt="vscode使用教程">
                         
-                        <span class="card-title">gitignore文件屏蔽规则</span>
+                        <span class="card-title">vscode使用教程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -856,9 +780,9 @@ LICENSE       NOTICE        node_exporter
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-31
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-28
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -871,15 +795,20 @@ LICENSE       NOTICE        node_exporter
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/git/">
-                        <span class="chip bg-color">git</span>
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
                     </a>
                     
-                    <a href="/tags/gitignore/">
-                        <span class="chip bg-color">gitignore</span>
+                    <a href="/tags/vscode/">
+                        <span class="chip bg-color">vscode</span>
+                    </a>
+                    
+                    <a href="/tags/ide/">
+                        <span class="chip bg-color">ide</span>
                     </a>
                     
                 </div>
@@ -893,31 +822,32 @@ LICENSE       NOTICE        node_exporter
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/26/docker-shi-yong-shou-ce/">
+                <a href="/2021/04/23/python-shen-kao-bei-yu-qian-kao-bei-de-qu-bie-yi-wen-kan-dong/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/f_28.jpg" class="responsive-img" alt="Docker使用手册">
+                        <img src="/medias/featureimages/f_20.jpg" class="responsive-img" alt="Python深拷贝与浅拷贝的区别(一文看懂)">
                         
-                        <span class="card-title">Docker使用手册</span>
+                        <span class="card-title">Python深拷贝与浅拷贝的区别(一文看懂)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                             
+很多人在学python的过程中往往会混淆深拷贝与浅拷贝的概念，深拷贝是对于对象的完全复制，这个好理解。很多人对浅拷贝理解为windows的快捷方式，其实也不尽然…下面的文字将会让你彻底理解他们之间的关系。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-26
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-23
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
-                                    运维
+                            <a href="/categories/%E5%90%8E%E7%AB%AF/" class="post-category">
+                                    后端
                                 </a>
                             
                             
@@ -927,8 +857,12 @@ LICENSE       NOTICE        node_exporter
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/docker/">
-                        <span class="chip bg-color">docker</span>
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                    <a href="/tags/copy/">
+                        <span class="chip bg-color">copy</span>
                     </a>
                     
                 </div>
