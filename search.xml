@@ -4,6 +4,64 @@
   
     
     <entry>
+      <title>Linux常用命令整理</title>
+      <link href="2021/04/29/linux-chang-yong-ming-ling-zheng-li/"/>
+      <url>2021/04/29/linux-chang-yong-ming-ling-zheng-li/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>Linux 常用命令整理</p></blockquote><span id="more"></span><h3 id="端口占用"><a href="#端口占用" class="headerlink" title="端口占用"></a>端口占用</h3><p>lsof -i:端口号 用于查看某一端口的占用情况，比如查看8000端口使用情况，lsof -i:8000</p><pre class="line-numbers language-none"><code class="language-none"># lsof -i:端口号➜  lsof -i:8001COMMAND   PID     USER   FD   TYPE             DEVICE SIZE&#x2F;OFF NODE NAMEPython  12594 wangqiao    5u  IPv4 0xe79196fc978d9f53      0t0  TCP *:vcom-tunnel (LISTEN)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>netstat -tunlp |grep 端口号，用于查看指定的端口号的进程情况，如查看8000端口的情况，netstat -tunlp |grep 8000</p><pre class="line-numbers language-none"><code class="language-none"># netstat -tunlp Active Internet connections (only servers)Proto Recv-Q Send-Q Local Address               Foreign Address             State       PID&#x2F;Program name   tcp        0      0 0.0.0.0:111                 0.0.0.0:*                   LISTEN      4814&#x2F;rpcbind        tcp        0      0 0.0.0.0:5908                0.0.0.0:*                   LISTEN      25492&#x2F;qemu-kvm      tcp        0      0 0.0.0.0:6996                0.0.0.0:*                   LISTEN      22065&#x2F;lwfs          tcp        0      0 192.168.122.1:53            0.0.0.0:*                   LISTEN      38296&#x2F;dnsmasq       tcp        0      0 0.0.0.0:22                  0.0.0.0:*                   LISTEN      5278&#x2F;sshd           tcp        0      0 127.0.0.1:631               0.0.0.0:*                   LISTEN      5013&#x2F;cupsd          tcp        0      0 127.0.0.1:25                0.0.0.0:*                   LISTEN      5962&#x2F;master         tcp        0      0 0.0.0.0:8666                0.0.0.0:*                   LISTEN      44868&#x2F;lwfs          tcp        0      0 0.0.0.0:8000                0.0.0.0:*                   LISTEN      22065&#x2F;lwfs<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><pre class="line-numbers language-none"><code class="language-none"># netstat -tunlp | grep 8000tcp        0      0 0.0.0.0:8000                0.0.0.0:*                   LISTEN      22065&#x2F;lwfs <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h3 id="磁盘清理"><a href="#磁盘清理" class="headerlink" title="磁盘清理"></a>磁盘清理</h3><pre class="line-numbers language-none"><code class="language-none">du -shdu -sh *df -hdu -sh * grep Gll ll -h<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 后端 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+            <tag> shell </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Pycharm配置autopep8</title>
+      <link href="2021/04/28/pycharm-pei-zhi-autopep8/"/>
+      <url>2021/04/28/pycharm-pei-zhi-autopep8/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>Pycharm让代码自动转换成pip8风格</p></blockquote><span id="more"></span><p>Pycharm本身是有pep8风格检测的，当你敲得代码中不符合规范时，会有下划波浪线提示。为了去掉这些难看的波浪线，我们需要借助autopep8这个工具让代码自动转换成pip8风格。</p><h3 id="安装autopep8"><a href="#安装autopep8" class="headerlink" title="安装autopep8"></a>安装autopep8</h3><pre class="line-numbers language-none"><code class="language-none">pip install autopep8<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="mac-配置"><a href="#mac-配置" class="headerlink" title="mac 配置"></a>mac 配置</h3><p>Preferences-&gt;Tools-&gt;External Tools-&gt;点击加号<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/AcfE3V.png" alt="AcfE3V"><br>点击+号后出现配置选项<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/z0xfgQ.png" alt="z0xfgQ"><br>添加autopep8配置<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/AmDFFI.png" alt="AmDFFI"></p><pre class="line-numbers language-none"><code class="language-none">- Name：Autopep8（可以随便取）- Tools settings:     - Programs：autopep8 （前提是你已经安装了哦）    - Parameters: --in-place --aggressive --aggressive $FilePath$&#96;    - Working directory: $ProjectFileDir$- 点击Output Filters→添加，在对话框中的：Regular expression to match output中输入：$FILE_PATH$\:$LINE$\:$COLUMN$\:.*<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>配置完成External Tools出现aotopep8</p><p>使用</p><p>autopep8在pycharm中的使用：在Pycharm编辑其中新建一个python文件，编辑一些不符合pep8风格的代码；将鼠标放在该文件的编辑器中→右键→External Tools→点击Autopep8。这样你的代码就符合pep8的风格了。</p><h3 id="windows-配置"><a href="#windows-配置" class="headerlink" title="windows 配置"></a>windows 配置</h3><p>File-&gt;Settings-&gt;Tools-&gt;External Tools-&gt; 点击<code>+</code>添加</p><p>配置</p><pre class="line-numbers language-none"><code class="language-none">Name: Autopep8（自定义名称）Tool Settings:    Program:C:\ProgramData\Anaconda4.3.0\Scripts\autopep8.exe    Argumetns: --in-place --aggressive --aggressive $FilePath$    Working direcroty: $ProjectFileDir$    Advanced Options:    Output filters: $FILE_PATH$\:$LINE$\:$COLUMNS$\:.*<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>应用</p><p><code>Tools</code>-&gt;<code>External Tools</code>-&gt; <code>Autopep8</code></p><p>参考：</p><ul><li><a href="https://segmentfault.com/a/1190000005816556">Pycharm配置autopep8教程，让Python代码更符合pep8规范</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 开发工具 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> pycharm </tag>
+            
+            <tag> autopep8 </tag>
+            
+            <tag> python </tag>
+            
+            <tag> ide </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>vscode使用教程</title>
       <link href="2021/04/28/vscode-shi-yong-jiao-cheng/"/>
       <url>2021/04/28/vscode-shi-yong-jiao-cheng/</url>
@@ -278,33 +336,6 @@
             <tag> time </tag>
             
             <tag> 时间戳 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Pycharm配置autopep8</title>
-      <link href="2021/04/04/pycharm-pei-zhi-autopep8/"/>
-      <url>2021/04/04/pycharm-pei-zhi-autopep8/</url>
-      
-        <content type="html"><![CDATA[<blockquote><p>Pycharm让代码自动转换成pip8风格</p></blockquote><span id="more"></span><p>Pycharm本身是有pep8风格检测的，当你敲得代码中不符合规范时，会有下划波浪线提示。为了去掉这些难看的波浪线，我们需要借助autopep8这个工具让代码自动转换成pip8风格。</p><h4 id="安装autopep8"><a href="#安装autopep8" class="headerlink" title="安装autopep8"></a>安装autopep8</h4><pre class="line-numbers language-none"><code class="language-none">pip install autopep8<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="在Pycharm中配置autopep8"><a href="#在Pycharm中配置autopep8" class="headerlink" title="在Pycharm中配置autopep8"></a>在Pycharm中配置autopep8</h4><p>Preferences-&gt;Tools-&gt;External Tools-&gt;点击加号<br><img src="http://phdc6jit1.bkt.clouddn.com/blog/2018-11-03-035621.png"><br>点击+号后出现配置选项<br><img src="http://phdc6jit1.bkt.clouddn.com/blog/2018-11-03-032314.png"></p><pre class="line-numbers language-none"><code class="language-none">- Name：Autopep8（可以随便取）- Tools settings:     - Programs：autopep8 （前提是你已经安装了哦）    - Parameters: --in-place --aggressive --aggressive $FilePath$&#96;    - Working directory: $ProjectFileDir$- 点击Output Filters→添加，在对话框中的：Regular expression to match output中输入：$FILE_PATH$\:$LINE$\:$COLUMN$\:.*<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>配置完成External Tools出现aotopep8<br><img src="http://phdc6jit1.bkt.clouddn.com/blog/2018-11-03-032417.png"></p><h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>autopep8在pycharm中的使用：在Pycharm编辑其中新建一个python文件，编辑一些不符合pep8风格的代码；将鼠标放在该文件的编辑器中→右键→External Tools→点击Autopep8。这样你的代码就符合pep8的风格了。如下图所示<br><img src="http://phdc6jit1.bkt.clouddn.com/blog/2018-11-03-040141.png"></p><h3 id="win10-Pyachrm-配置autopep8"><a href="#win10-Pyachrm-配置autopep8" class="headerlink" title="win10 Pyachrm 配置autopep8"></a>win10 Pyachrm 配置autopep8</h3><p>File-&gt;Settings-&gt;Tools-&gt;External Tools-&gt; 点击<code>+</code>添加</p><p>配置</p><pre class="line-numbers language-none"><code class="language-none">Name: Autopep8（自定义名称）Tool Settings:    Program:C:\ProgramData\Anaconda4.3.0\Scripts\autopep8.exe    Argumetns: --in-place --aggressive --aggressive $FilePath$    Working direcroty: $ProjectFileDir$    Advanced Options:    Output filters: $FILE_PATH$\:$LINE$\:$COLUMNS$\:.*<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>应用</p><p><code>Tools</code>-&gt;<code>External Tools</code>-&gt; <code>Autopep8</code></p><p>参考：</p><ul><li><a href="https://segmentfault.com/a/1190000005816556">Pycharm配置autopep8教程，让Python代码更符合pep8规范</a></li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 工具 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> pycharm </tag>
-            
-            <tag> autopep8 </tag>
             
         </tags>
       

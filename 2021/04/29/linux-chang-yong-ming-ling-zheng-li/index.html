@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="baidu-site-verification" content="code-XwKXPvlX0k" />
-    <meta name="keywords" content="Pycharm配置autopep8, 王路飞">
+    <meta name="keywords" content="Linux常用命令整理, 王路飞">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Pycharm配置autopep8 | 王路飞</title>
+    <title>Linux常用命令整理 | 王路飞</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -311,12 +311,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/f_11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/f_23.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Pycharm配置autopep8</h1>
+                    <h1 class="description center-align post-title">Linux常用命令整理</h1>
                 </div>
             </div>
         </div>
@@ -432,12 +432,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/pycharm/">
-                                <span class="chip bg-color">pycharm</span>
+                            <a href="/tags/linux/">
+                                <span class="chip bg-color">linux</span>
                             </a>
                         
-                            <a href="/tags/autopep8/">
-                                <span class="chip bg-color">autopep8</span>
+                            <a href="/tags/shell/">
+                                <span class="chip bg-color">shell</span>
                             </a>
                         
                     </div>
@@ -448,8 +448,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%B7%A5%E5%85%B7/" class="post-category">
-                                工具
+                            <a href="/categories/%E5%90%8E%E7%AB%AF/" class="post-category">
+                                后端
                             </a>
                         
                     </div>
@@ -461,7 +461,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-04-04
+                    2021-04-29
                 </div>
                 
 
@@ -470,7 +470,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    317
+                    310
                 </div>
                 
 
@@ -491,40 +491,39 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <blockquote>
-<p>Pycharm让代码自动转换成pip8风格</p>
+<p>Linux 常用命令整理</p>
 </blockquote>
 <span id="more"></span>
 
-<p>Pycharm本身是有pep8风格检测的，当你敲得代码中不符合规范时，会有下划波浪线提示。为了去掉这些难看的波浪线，我们需要借助autopep8这个工具让代码自动转换成pip8风格。</p>
-<h4 id="安装autopep8"><a href="#安装autopep8" class="headerlink" title="安装autopep8"></a>安装autopep8</h4><pre class="line-numbers language-none"><code class="language-none">pip install autopep8<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="端口占用"><a href="#端口占用" class="headerlink" title="端口占用"></a>端口占用</h3><p>lsof -i:端口号 用于查看某一端口的占用情况，比如查看8000端口使用情况，lsof -i:8000</p>
+<pre class="line-numbers language-none"><code class="language-none"># lsof -i:端口号
+➜  lsof -i:8001
 
-<h4 id="在Pycharm中配置autopep8"><a href="#在Pycharm中配置autopep8" class="headerlink" title="在Pycharm中配置autopep8"></a>在Pycharm中配置autopep8</h4><p>Preferences-&gt;Tools-&gt;External Tools-&gt;点击加号<br><img src="http://phdc6jit1.bkt.clouddn.com/blog/2018-11-03-035621.png"><br>点击+号后出现配置选项<br><img src="http://phdc6jit1.bkt.clouddn.com/blog/2018-11-03-032314.png"></p>
-<pre class="line-numbers language-none"><code class="language-none">- Name：Autopep8（可以随便取）
-- Tools settings: 
-    - Programs：autopep8 （前提是你已经安装了哦）
-    - Parameters: --in-place --aggressive --aggressive $FilePath$&#96;
-    - Working directory: $ProjectFileDir$
-- 点击Output Filters→添加，在对话框中的：Regular expression to match output中输入：$FILE_PATH$\:$LINE$\:$COLUMN$\:.*<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>配置完成External Tools出现aotopep8<br><img src="http://phdc6jit1.bkt.clouddn.com/blog/2018-11-03-032417.png"></p>
-<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>autopep8在pycharm中的使用：在Pycharm编辑其中新建一个python文件，编辑一些不符合pep8风格的代码；将鼠标放在该文件的编辑器中→右键→External Tools→点击Autopep8。这样你的代码就符合pep8的风格了。如下图所示<br><img src="http://phdc6jit1.bkt.clouddn.com/blog/2018-11-03-040141.png"></p>
-<h3 id="win10-Pyachrm-配置autopep8"><a href="#win10-Pyachrm-配置autopep8" class="headerlink" title="win10 Pyachrm 配置autopep8"></a>win10 Pyachrm 配置autopep8</h3><p>File-&gt;Settings-&gt;Tools-&gt;External Tools-&gt; 点击<code>+</code>添加</p>
-<p>配置</p>
-<pre class="line-numbers language-none"><code class="language-none">Name: Autopep8（自定义名称）
-Tool Settings:
-    Program:C:\ProgramData\Anaconda4.3.0\Scripts\autopep8.exe
-    Argumetns: --in-place --aggressive --aggressive $FilePath$
-    Working direcroty: $ProjectFileDir$
-    
-Advanced Options:
-    Output filters: $FILE_PATH$\:$LINE$\:$COLUMNS$\:.*<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+COMMAND   PID     USER   FD   TYPE             DEVICE SIZE&#x2F;OFF NODE NAME
+Python  12594 wangqiao    5u  IPv4 0xe79196fc978d9f53      0t0  TCP *:vcom-tunnel (LISTEN)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>netstat -tunlp |grep 端口号，用于查看指定的端口号的进程情况，如查看8000端口的情况，netstat -tunlp |grep 8000</p>
+<pre class="line-numbers language-none"><code class="language-none"># netstat -tunlp 
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address               Foreign Address             State       PID&#x2F;Program name   
+tcp        0      0 0.0.0.0:111                 0.0.0.0:*                   LISTEN      4814&#x2F;rpcbind        
+tcp        0      0 0.0.0.0:5908                0.0.0.0:*                   LISTEN      25492&#x2F;qemu-kvm      
+tcp        0      0 0.0.0.0:6996                0.0.0.0:*                   LISTEN      22065&#x2F;lwfs          
+tcp        0      0 192.168.122.1:53            0.0.0.0:*                   LISTEN      38296&#x2F;dnsmasq       
+tcp        0      0 0.0.0.0:22                  0.0.0.0:*                   LISTEN      5278&#x2F;sshd           
+tcp        0      0 127.0.0.1:631               0.0.0.0:*                   LISTEN      5013&#x2F;cupsd          
+tcp        0      0 127.0.0.1:25                0.0.0.0:*                   LISTEN      5962&#x2F;master         
+tcp        0      0 0.0.0.0:8666                0.0.0.0:*                   LISTEN      44868&#x2F;lwfs          
+tcp        0      0 0.0.0.0:8000                0.0.0.0:*                   LISTEN      22065&#x2F;lwfs<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-none"><code class="language-none"># netstat -tunlp | grep 8000
+tcp        0      0 0.0.0.0:8000                0.0.0.0:*                   LISTEN      22065&#x2F;lwfs <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p>应用</p>
-<p><code>Tools</code>-&gt;<code>External Tools</code>-&gt; <code>Autopep8</code></p>
-<p>参考：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000005816556">Pycharm配置autopep8教程，让Python代码更符合pep8规范</a></li>
-</ul>
-
+<h3 id="磁盘清理"><a href="#磁盘清理" class="headerlink" title="磁盘清理"></a>磁盘清理</h3><pre class="line-numbers language-none"><code class="language-none">du -sh
+du -sh *
+df -h
+du -sh * grep G
+ll 
+ll -h<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -550,7 +549,7 @@ Advanced Options:
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://amuqiao.github.io/2021/04/04/pycharm-pei-zhi-autopep8/">https://amuqiao.github.io/2021/04/04/pycharm-pei-zhi-autopep8/</a>
+                    <a href="https://amuqiao.github.io/2021/04/29/linux-chang-yong-ming-ling-zheng-li/">https://amuqiao.github.io/2021/04/29/linux-chang-yong-ming-ling-zheng-li/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -588,12 +587,12 @@ Advanced Options:
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/pycharm/">
-                                    <span class="chip bg-color">pycharm</span>
+                                <a href="/tags/linux/">
+                                    <span class="chip bg-color">linux</span>
                                 </a>
                             
-                                <a href="/tags/autopep8/">
-                                    <span class="chip bg-color">autopep8</span>
+                                <a href="/tags/shell/">
+                                    <span class="chip bg-color">shell</span>
                                 </a>
                             
                         </div>
@@ -763,91 +762,31 @@ Advanced Options:
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/04/09/python-ri-qi-zhuan-huan/">
+                <a href="/2021/04/29/linux-chang-yong-ming-ling-zheng-li/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/f_6.jpg" class="responsive-img" alt="Python日期转换">
+                        <img src="/medias/featureimages/f_23.jpg" class="responsive-img" alt="Linux常用命令整理">
                         
-                        <span class="card-title">Python日期转换</span>
+                        <span class="card-title">Linux常用命令整理</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                             
-Python日期转换、datetime模块和time模块的使用
+Linux 常用命令整理
 
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-09
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%90%8E%E7%AB%AF/" class="post-category">
-                                    后端
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/python/">
-                        <span class="chip bg-color">python</span>
-                    </a>
-                    
-                    <a href="/tags/datetime/">
-                        <span class="chip bg-color">datetime</span>
-                    </a>
-                    
-                    <a href="/tags/time/">
-                        <span class="chip bg-color">time</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%97%B6%E9%97%B4%E6%88%B3/">
-                        <span class="chip bg-color">时间戳</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2021/04/02/python-wen-jian-lu-jing/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/f_8.jpg" class="responsive-img" alt="Python文件路径">
-                        
-                        <span class="card-title">Python文件路径</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-29
                             </span>
                         <span class="publish-author">
                             
@@ -861,15 +800,79 @@ Python日期转换、datetime模块和time模块的使用
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
+                    
+                    <a href="/tags/linux/">
+                        <span class="chip bg-color">linux</span>
+                    </a>
+                    
+                    <a href="/tags/shell/">
+                        <span class="chip bg-color">shell</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/04/28/pycharm-pei-zhi-autopep8/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/f_11.jpg" class="responsive-img" alt="Pycharm配置autopep8">
+                        
+                        <span class="card-title">Pycharm配置autopep8</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+Pycharm让代码自动转换成pip8风格
+
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="post-category">
+                                    开发工具
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/pycharm/">
+                        <span class="chip bg-color">pycharm</span>
+                    </a>
+                    
+                    <a href="/tags/autopep8/">
+                        <span class="chip bg-color">autopep8</span>
+                    </a>
                     
                     <a href="/tags/python/">
                         <span class="chip bg-color">python</span>
                     </a>
                     
-                    <a href="/tags/%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84/">
-                        <span class="chip bg-color">文件路径</span>
+                    <a href="/tags/ide/">
+                        <span class="chip bg-color">ide</span>
                     </a>
                     
                 </div>
@@ -1072,7 +1075,7 @@ Python日期转换、datetime模块和time模块的使用
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">23.4k</span>&nbsp;字
+                class="white-color">23.7k</span>&nbsp;字
             
             
             

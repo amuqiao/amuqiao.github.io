@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="baidu-site-verification" content="code-XwKXPvlX0k" />
-    <meta name="keywords" content="Docker命令大全, 王路飞">
+    <meta name="keywords" content="Pycharm配置autopep8, 王路飞">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Docker命令大全 | 王路飞</title>
+    <title>Pycharm配置autopep8 | 王路飞</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -311,12 +311,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/f_10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/f_11.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Docker命令大全</h1>
+                    <h1 class="description center-align post-title">Pycharm配置autopep8</h1>
                 </div>
             </div>
         </div>
@@ -432,8 +432,20 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/docker/">
-                                <span class="chip bg-color">docker</span>
+                            <a href="/tags/pycharm/">
+                                <span class="chip bg-color">pycharm</span>
+                            </a>
+                        
+                            <a href="/tags/autopep8/">
+                                <span class="chip bg-color">autopep8</span>
+                            </a>
+                        
+                            <a href="/tags/python/">
+                                <span class="chip bg-color">python</span>
+                            </a>
+                        
+                            <a href="/tags/ide/">
+                                <span class="chip bg-color">ide</span>
                             </a>
                         
                     </div>
@@ -444,8 +456,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
-                                运维
+                            <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="post-category">
+                                开发工具
                             </a>
                         
                     </div>
@@ -457,7 +469,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-26
+                    2021-04-28
                 </div>
                 
 
@@ -466,7 +478,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    199
+                    315
                 </div>
                 
 
@@ -486,54 +498,40 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="容器生命周期管理"><a href="#容器生命周期管理" class="headerlink" title="容器生命周期管理"></a>容器生命周期管理</h3><ul>
-<li>run</li>
-<li>start/stop/restart</li>
-<li>kill</li>
-<li>rm</li>
-<li>pause/unpause</li>
-<li>create</li>
-<li>exec<h3 id="容器操作"><a href="#容器操作" class="headerlink" title="容器操作"></a>容器操作</h3></li>
-<li>ps</li>
-<li>inspect</li>
-<li>top</li>
-<li>attach</li>
-<li>events</li>
-<li>logs</li>
-<li>wait</li>
-<li>export</li>
-<li>port<h3 id="容器rootfs命令"><a href="#容器rootfs命令" class="headerlink" title="容器rootfs命令"></a>容器rootfs命令</h3></li>
-<li>commit</li>
-<li>cp</li>
-<li>diff<h3 id="镜像仓库"><a href="#镜像仓库" class="headerlink" title="镜像仓库"></a>镜像仓库</h3></li>
-<li>login</li>
-<li>pull</li>
-<li>push</li>
-<li>search<h3 id="本地镜像管理"><a href="#本地镜像管理" class="headerlink" title="本地镜像管理"></a>本地镜像管理</h3></li>
-<li>images</li>
-<li>rmi</li>
-<li>tag</li>
-<li>build</li>
-<li>history</li>
-<li>save</li>
-<li>load</li>
-<li>import</li>
-<li>info|version</li>
-<li>info</li>
-<li>version</li>
-</ul>
-<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><h4 id="docker镜像列表存在但删除显示-No-such-image问题解决"><a href="#docker镜像列表存在但删除显示-No-such-image问题解决" class="headerlink" title="docker镜像列表存在但删除显示 No such image问题解决"></a>docker镜像列表存在但删除显示 No such image问题解决</h4><ol>
-<li>停掉容器（docker stop 容器ID或容器名称）</li>
-<li>删除容器（docker rm 容器ID或容器名称）</li>
-<li>删除镜像（docker rmi 镜像ID或镜像名称:版本号）</li>
-</ol>
-<h4 id="docker-run-启动容器"><a href="#docker-run-启动容器" class="headerlink" title="docker run 启动容器"></a>docker run 启动容器</h4><pre class="line-numbers language-none"><code class="language-none">-i	以交互模式运行容器，通常与 -t 同时使用；
--t	为容器重新分配一个伪输入终端，通常与 -i 同时使用；
--d	后台运行容器，并返回容器ID；<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+                <blockquote>
+<p>Pycharm让代码自动转换成pip8风格</p>
+</blockquote>
+<span id="more"></span>
 
+<p>Pycharm本身是有pep8风格检测的，当你敲得代码中不符合规范时，会有下划波浪线提示。为了去掉这些难看的波浪线，我们需要借助autopep8这个工具让代码自动转换成pip8风格。</p>
+<h3 id="安装autopep8"><a href="#安装autopep8" class="headerlink" title="安装autopep8"></a>安装autopep8</h3><pre class="line-numbers language-none"><code class="language-none">pip install autopep8<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://www.runoob.com/docker/docker-command-manual.html">Docker 命令大全</a></li>
+<h3 id="mac-配置"><a href="#mac-配置" class="headerlink" title="mac 配置"></a>mac 配置</h3><p>Preferences-&gt;Tools-&gt;External Tools-&gt;点击加号<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/AcfE3V.png" alt="AcfE3V"><br>点击+号后出现配置选项<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/z0xfgQ.png" alt="z0xfgQ"><br>添加autopep8配置<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/AmDFFI.png" alt="AmDFFI"></p>
+<pre class="line-numbers language-none"><code class="language-none">- Name：Autopep8（可以随便取）
+- Tools settings: 
+    - Programs：autopep8 （前提是你已经安装了哦）
+    - Parameters: --in-place --aggressive --aggressive $FilePath$&#96;
+    - Working directory: $ProjectFileDir$
+- 点击Output Filters→添加，在对话框中的：Regular expression to match output中输入：$FILE_PATH$\:$LINE$\:$COLUMN$\:.*<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>配置完成External Tools出现aotopep8</p>
+<p>使用</p>
+<p>autopep8在pycharm中的使用：在Pycharm编辑其中新建一个python文件，编辑一些不符合pep8风格的代码；将鼠标放在该文件的编辑器中→右键→External Tools→点击Autopep8。这样你的代码就符合pep8的风格了。</p>
+<h3 id="windows-配置"><a href="#windows-配置" class="headerlink" title="windows 配置"></a>windows 配置</h3><p>File-&gt;Settings-&gt;Tools-&gt;External Tools-&gt; 点击<code>+</code>添加</p>
+<p>配置</p>
+<pre class="line-numbers language-none"><code class="language-none">Name: Autopep8（自定义名称）
+Tool Settings:
+    Program:C:\ProgramData\Anaconda4.3.0\Scripts\autopep8.exe
+    Argumetns: --in-place --aggressive --aggressive $FilePath$
+    Working direcroty: $ProjectFileDir$
+    
+Advanced Options:
+    Output filters: $FILE_PATH$\:$LINE$\:$COLUMNS$\:.*<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>应用</p>
+<p><code>Tools</code>-&gt;<code>External Tools</code>-&gt; <code>Autopep8</code></p>
+<p>参考：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000005816556">Pycharm配置autopep8教程，让Python代码更符合pep8规范</a></li>
 </ul>
 
                 
@@ -561,7 +559,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://amuqiao.github.io/2021/03/26/docker-ming-ling-da-quan/">https://amuqiao.github.io/2021/03/26/docker-ming-ling-da-quan/</a>
+                    <a href="https://amuqiao.github.io/2021/04/28/pycharm-pei-zhi-autopep8/">https://amuqiao.github.io/2021/04/28/pycharm-pei-zhi-autopep8/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -599,8 +597,20 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/docker/">
-                                    <span class="chip bg-color">docker</span>
+                                <a href="/tags/pycharm/">
+                                    <span class="chip bg-color">pycharm</span>
+                                </a>
+                            
+                                <a href="/tags/autopep8/">
+                                    <span class="chip bg-color">autopep8</span>
+                                </a>
+                            
+                                <a href="/tags/python/">
+                                    <span class="chip bg-color">python</span>
+                                </a>
+                            
+                                <a href="/tags/ide/">
+                                    <span class="chip bg-color">ide</span>
                                 </a>
                             
                         </div>
@@ -774,31 +784,33 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/03/26/docker-shi-yong-shou-ce/">
+                <a href="/2021/04/29/linux-chang-yong-ming-ling-zheng-li/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/f_28.jpg" class="responsive-img" alt="Docker使用手册">
+                        <img src="/medias/featureimages/f_23.jpg" class="responsive-img" alt="Linux常用命令整理">
                         
-                        <span class="card-title">Docker使用手册</span>
+                        <span class="card-title">Linux常用命令整理</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                             
+Linux 常用命令整理
+
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-26
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-29
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
-                                    运维
+                            <a href="/categories/%E5%90%8E%E7%AB%AF/" class="post-category">
+                                    后端
                                 </a>
                             
                             
@@ -808,8 +820,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/docker/">
-                        <span class="chip bg-color">docker</span>
+                    <a href="/tags/linux/">
+                        <span class="chip bg-color">linux</span>
+                    </a>
+                    
+                    <a href="/tags/shell/">
+                        <span class="chip bg-color">shell</span>
                     </a>
                     
                 </div>
@@ -823,13 +839,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/25/docker-ru-men-shou-ce/">
+                <a href="/2021/04/28/vscode-shi-yong-jiao-cheng/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/f_6.jpg" class="responsive-img" alt="Docker入门手册">
+                        <img src="/medias/featureimages/f_7.jpg" class="responsive-img" alt="vscode使用教程">
                         
-                        <span class="card-title">Docker入门手册</span>
+                        <span class="card-title">vscode使用教程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -840,14 +856,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-25
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-28
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
-                                    运维
+                            <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="post-category">
+                                    开发工具
                                 </a>
                             
                             
@@ -857,8 +873,16 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/docker/">
-                        <span class="chip bg-color">docker</span>
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                    <a href="/tags/vscode/">
+                        <span class="chip bg-color">vscode</span>
+                    </a>
+                    
+                    <a href="/tags/ide/">
+                        <span class="chip bg-color">ide</span>
                     </a>
                     
                 </div>
