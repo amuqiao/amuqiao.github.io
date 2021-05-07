@@ -36,6 +36,20 @@
         <content type="html"><![CDATA[<blockquote><p>在Django项目里单独运行某个py文件</p></blockquote><span id="more"></span><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> os<span class="token punctuation">,</span> sys<span class="token punctuation">,</span> django<span class="token comment"># BASE_DIR 寻找项目根目录</span>BASE_DIR <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>dirname<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>dirname<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>dirname<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>abspath<span class="token punctuation">(</span>__file__<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>sys<span class="token punctuation">.</span>path<span class="token punctuation">.</span>append<span class="token punctuation">(</span>BASE_DIR<span class="token punctuation">)</span>os<span class="token punctuation">.</span>environ<span class="token punctuation">.</span>setdefault<span class="token punctuation">(</span><span class="token string">'DJANGO_SETTINGS_MODULE'</span><span class="token punctuation">,</span> <span class="token string">'project_name.settings'</span><span class="token punctuation">)</span>django<span class="token punctuation">.</span>setup<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token keyword">from</span> app<span class="token punctuation">.</span>models <span class="token keyword">import</span> Person<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>    <span class="token builtin">all</span> <span class="token operator">=</span>Person<span class="token punctuation">.</span>objects<span class="token punctuation">.</span><span class="token builtin">all</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>values<span class="token punctuation">(</span><span class="token punctuation">)</span>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token builtin">all</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
       
       
+      <categories>
+          
+          <category> 后端 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> django </tag>
+            
+        </tags>
       
     </entry>
     
