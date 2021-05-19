@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="baidu-site-verification" content="code-XwKXPvlX0k" />
-    <meta name="keywords" content="django-celery-beat配置定时任务, 王路飞">
+    <meta name="keywords" content="django中使用celery, 王路飞">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>django-celery-beat配置定时任务 | 王路飞</title>
+    <title>django中使用celery | 王路飞</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -311,12 +311,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/f_4.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/f_13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">django-celery-beat配置定时任务</h1>
+                    <h1 class="description center-align post-title">django中使用celery</h1>
                 </div>
             </div>
         </div>
@@ -474,7 +474,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.4k
+                    1.6k
                 </div>
                 
 
@@ -495,9 +495,9 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <blockquote>
-<p>celery很容易集成到Django框架中，实现定时任务需要安装django-celery-beta插件.</p>
+<p>celery很容易集成到Django框架中，实现定时任务需要安装django-celery-beat插件.</p>
 </blockquote>
-<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>通过django-celery-beat 在后台添加定时任务</p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><h4 id="添加定时任务"><a href="#添加定时任务" class="headerlink" title="添加定时任务"></a>添加定时任务</h4><p>通过django-celery-beat 在后台添加定时任务</p>
 <ul>
 <li>安装django-celery-beat</li>
 <li>在tasks.py中添加定任务</li>
@@ -506,7 +506,7 @@
 <li>django-celery-beat会自动发现定时任务</li>
 <li>在CELERY_RESULT_BACKEND中查看定时任务的执行结果</li>
 </ul>
-<p>通过django-celery-results 在后台查看定时任务的执行结果</p>
+<h4 id="在ORM中查看任务执行结果"><a href="#在ORM中查看任务执行结果" class="headerlink" title="在ORM中查看任务执行结果"></a>在ORM中查看任务执行结果</h4><p>通过django-celery-results 在后台查看定时任务的执行结果</p>
 <ul>
 <li>安装 django-celery-results</li>
 <li>登录django admin后台，在CELERY RESULTS中查看任务执行结果</li>
@@ -612,7 +612,7 @@ urlpatterns &#x3D; [
 
 <h4 id="启动Django服务"><a href="#启动Django服务" class="headerlink" title="启动Django服务"></a>启动Django服务</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python">python manage<span class="token punctuation">.</span>py runserver <span class="token number">127.0</span><span class="token number">.0</span><span class="token number">.1</span><span class="token punctuation">:</span><span class="token number">8001</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h4 id="添加定时任务"><a href="#添加定时任务" class="headerlink" title="添加定时任务"></a>添加定时任务</h4><p>打开浏览器访问<a target="_blank" rel="noopener" href="http://127.0.0.1:8001/admin/">http://127.0.0.1:8001/admin/</a><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/E94vxx.png" alt="PERIODIC TASKS"></p>
+<h4 id="添加定时任务-1"><a href="#添加定时任务-1" class="headerlink" title="添加定时任务"></a>添加定时任务</h4><p>打开浏览器访问<a target="_blank" rel="noopener" href="http://127.0.0.1:8001/admin/">http://127.0.0.1:8001/admin/</a><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/E94vxx.png" alt="PERIODIC TASKS"></p>
 <ul>
 <li>Clocked</li>
 <li>Crontabs 计划任务定义</li>
@@ -622,6 +622,40 @@ urlpatterns &#x3D; [
 </ul>
 <p>Periodic tasks 任务定义<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/oAsOHd.png" alt="oAsOHd"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/xkOgGk.png" alt="xkOgGk"></p>
 <p>保存后，可在celery workers中看到定时任务被执行的日志</p>
+<h3 id="动态添加定时任务"><a href="#动态添加定时任务" class="headerlink" title="动态添加定时任务"></a>动态添加定时任务</h3><pre class="line-numbers language-none"><code class="language-none">&gt;&gt;&gt; from django_celery_beat.models import PeriodicTask, IntervalSchedule
+
+# 添加定时间隔周期
+#IntervalSchedule.DAYS
+#IntervalSchedule.HOURS
+#IntervalSchedule.MINUTES
+#IntervalSchedule.SECONDS
+#IntervalSchedule.MICROSECONDS
+&gt;&gt;&gt; schedule, created &#x3D; IntervalSchedule.objects.get_or_create(
+...     every&#x3D;10,
+...     period&#x3D;IntervalSchedule.SECONDS,
+... )
+#添加定时任务
+&gt;&gt;&gt; PeriodicTask.objects.create(
+...     interval&#x3D;schedule,                  # we created this above.
+...     name&#x3D;&#39;Importing contacts&#39;,          # simply describes this periodic task.
+...     task&#x3D;&#39;proj.tasks.add&#39;,  # name of task.
+... )
+#下面是添加带参数的定时任务
+&gt;&gt;&gt; import json
+&gt;&gt;&gt; from datetime import datetime, timedelta
+
+&gt;&gt;&gt; PeriodicTask.objects.create(
+...     interval&#x3D;schedule,                  # we created this above.
+...     name&#x3D;&#39;Importing contacts&#39;,          # simply describes this periodic task.
+...     task&#x3D;&#39;proj.tasks.add&#39;,  # name of task.
+...     args&#x3D;json.dumps([&#39;arg1&#39;, &#39;arg2&#39;]),
+...     kwargs&#x3D;json.dumps(&#123;
+...        &#39;be_careful&#39;: True,
+...     &#125;),
+...     expires&#x3D;datetime.utcnow() + timedelta(seconds&#x3D;30)
+... )
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h3 id="Django的orm作为结果存储"><a href="#Django的orm作为结果存储" class="headerlink" title="Django的orm作为结果存储"></a>Django的orm作为结果存储</h3><p>除了redis、rabbitmq能做结果存储外，还可以使用Django的orm作为结果存储，当然需要安装依赖插件，这样的好处在于我们可以直接通过django的数据查看到任务状态，同时为可以制定更多的操作，下面介绍如何使用orm作为结果存储。</p>
 <p>安装</p>
 <pre class="line-numbers language-none"><code class="language-none">pip install django-celery-results<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -746,6 +780,12 @@ CELERY_RESULT_SERIALIZER <span class="token operator">=</span> <span class="toke
 CELERY_IMPORTS <span class="token operator">=</span> <span class="token punctuation">(</span>
     <span class="token string">'djcelery_beat_app.tasks'</span>
 <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wdliu/p/9530219.html">Django中使用Celery</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wdliu/p/9517535.html">分布式任务队列Celery入门与进阶</a></li>
+</ul>
+
                 
             </div>
             <hr/>
@@ -771,7 +811,7 @@ CELERY_IMPORTS <span class="token operator">=</span> <span class="token punctuat
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://amuqiao.github.io/2021/05/18/django-celery-beat-pei-zhi-ding-shi-ren-wu/">https://amuqiao.github.io/2021/05/18/django-celery-beat-pei-zhi-ding-shi-ren-wu/</a>
+                    <a href="https://amuqiao.github.io/2021/05/18/django-zhong-shi-yong-celery/">https://amuqiao.github.io/2021/05/18/django-zhong-shi-yong-celery/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -993,13 +1033,13 @@ CELERY_IMPORTS <span class="token operator">=</span> <span class="token punctuat
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/2021/05/18/django-celery-beat-pei-zhi-ding-shi-ren-wu/">
+                <a href="/2021/05/18/django-zhong-shi-yong-celery/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/f_4.jpg" class="responsive-img" alt="django-celery-beat配置定时任务">
+                        <img src="/medias/featureimages/f_13.jpg" class="responsive-img" alt="django中使用celery">
                         
-                        <span class="card-title">django-celery-beat配置定时任务</span>
+                        <span class="card-title">django中使用celery</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1291,7 +1331,7 @@ CELERY_IMPORTS <span class="token operator">=</span> <span class="token punctuat
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">26.2k</span>&nbsp;字
+                class="white-color">26.4k</span>&nbsp;字
             
             
             
