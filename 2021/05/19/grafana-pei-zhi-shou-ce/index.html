@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="baidu-site-verification" content="code-XwKXPvlX0k" />
-    <meta name="keywords" content="Tmux使用教程, 王路飞">
+    <meta name="keywords" content="Grafana配置手册, 王路飞">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Tmux使用教程 | 王路飞</title>
+    <title>Grafana配置手册 | 王路飞</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -311,12 +311,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/f_21.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/f_20.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Tmux使用教程</h1>
+                    <h1 class="description center-align post-title">Grafana配置手册</h1>
                 </div>
             </div>
         </div>
@@ -432,8 +432,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/tmux/">
-                                <span class="chip bg-color">tmux</span>
+                            <a href="/tags/grafana/">
+                                <span class="chip bg-color">grafana</span>
                             </a>
                         
                     </div>
@@ -444,8 +444,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="post-category">
-                                开发工具
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
+                                运维
                             </a>
                         
                     </div>
@@ -457,7 +457,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-22
+                    2021-05-19
                 </div>
                 
 
@@ -466,7 +466,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.6k
+                    581
                 </div>
                 
 
@@ -487,387 +487,28 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <blockquote>
-<p>Tmux 是一个终端复用器（terminal multiplexer），非常有用，属于常用的开发工具。</p>
+<p>一个开源的指标量监测和可视化工具</p>
 </blockquote>
 <span id="more"></span>
 
-<h3 id="tmux的基本操作"><a href="#tmux的基本操作" class="headerlink" title="tmux的基本操作"></a>tmux的基本操作</h3><p><code>Prefix-Command</code>前置操作：所有下面介绍的快捷键，都必须以前置操作开始。tmux默认的前置操作是<code>CTRL+b</code>。例如，我们想要新建一个窗体，就需要先在键盘上摁下<code>CTRL+b</code>，松开后再摁下<code>n</code>键。</p>
-<p>下面所有的<code>prefix</code>均代表<code>CTRL+b</code></p>
-<h3 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h3><pre class="line-numbers language-none"><code class="language-none">d  退出 tmux（tmux 仍在后台运行）
-t  窗口中央显示一个数字时钟
-?  列出所有快捷键
-:  命令提示符<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="Session相关操作"><a href="#Session相关操作" class="headerlink" title="Session相关操作"></a>Session相关操作</h3><table>
-<thead>
-<tr>
-<th>操作</th>
-<th>快捷键</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>新建一个无名称的会话</td>
-<td>tmux</td>
-</tr>
-<tr>
-<td>新建一个名称为demo的会话</td>
-<td>tmux new -s demo</td>
-</tr>
-<tr>
-<td>默认进入第一个会话</td>
-<td>tmux a</td>
-</tr>
-<tr>
-<td>进入到名称为demo的会话</td>
-<td>tmux a -t demo</td>
-</tr>
-<tr>
-<td>session 重命名</td>
-<td>tmux rename -t old_name new_name</td>
-</tr>
-<tr>
-<td>查看所有 session</td>
-<td>tmux ls</td>
-</tr>
-<tr>
-<td>查看/切换session</td>
-<td>prefix s</td>
-</tr>
-<tr>
-<td>离开Session</td>
-<td>prefix d</td>
-</tr>
-<tr>
-<td>重命名当前Session</td>
-<td>prefix $</td>
-</tr>
-</tbody></table>
-<h3 id="Window相关操作"><a href="#Window相关操作" class="headerlink" title="Window相关操作"></a>Window相关操作</h3><table>
-<thead>
-<tr>
-<th>操作</th>
-<th>快捷键</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>新建窗口</td>
-<td>prefix c</td>
-</tr>
-<tr>
-<td>新建命名窗口</td>
-<td>prefix -s new_name</td>
-</tr>
-<tr>
-<td>切换到上一个活动的窗口</td>
-<td>prefix space</td>
-</tr>
-<tr>
-<td>关闭当前窗口</td>
-<td>prefix &amp;</td>
-</tr>
-<tr>
-<td>使用窗口号切换</td>
-<td>prefix 窗口号</td>
-</tr>
-<tr>
-<td>列出所有窗口</td>
-<td>prefix w</td>
-</tr>
-<tr>
-<td>前一个窗口</td>
-<td>p</td>
-</tr>
-<tr>
-<td>后一个窗口</td>
-<td>n</td>
-</tr>
-<tr>
-<td>重命名当前窗口</td>
-<td>,</td>
-</tr>
-<tr>
-<td>查找窗口</td>
-<td>f</td>
-</tr>
-</tbody></table>
-<h4 id="调整窗口排序"><a href="#调整窗口排序" class="headerlink" title="调整窗口排序"></a>调整窗口排序</h4><table>
-<thead>
-<tr>
-<th>操作</th>
-<th>快捷键</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>交换 3 号和 1 号窗口</td>
-<td>swap-window -s 3 -t 1</td>
-</tr>
-<tr>
-<td>交换当前和 1 号窗口</td>
-<td>swap-window -t 1</td>
-</tr>
-<tr>
-<td>移动当前窗口到 1 号</td>
-<td>move-window -t 1</td>
-</tr>
-</tbody></table>
-<h3 id="Pane相关操作"><a href="#Pane相关操作" class="headerlink" title="Pane相关操作"></a>Pane相关操作</h3><table>
-<thead>
-<tr>
-<th>操作</th>
-<th>快捷键</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>切换到下一个窗格</td>
-<td>prefix o</td>
-</tr>
-<tr>
-<td>查看所有窗格的编号</td>
-<td>prefix q</td>
-</tr>
-<tr>
-<td>垂直拆分出一个新窗格</td>
-<td>prefix “</td>
-</tr>
-<tr>
-<td>水平拆分出一个新窗格</td>
-<td>prefix %</td>
-</tr>
-<tr>
-<td>切换窗格最大化/最小化</td>
-<td>z</td>
-</tr>
-<tr>
-<td>与上一个窗格交换位置</td>
-<td>{</td>
-</tr>
-<tr>
-<td>与下一个窗格交换位置</td>
-<td>}</td>
-</tr>
-<tr>
-<td>关闭窗格</td>
-<td>x</td>
-</tr>
-<tr>
-<td>垂直分割</td>
-<td>%</td>
-</tr>
-<tr>
-<td>水平分割</td>
-<td>“</td>
-</tr>
-</tbody></table>
-<h4 id="调整窗格尺寸"><a href="#调整窗格尺寸" class="headerlink" title="调整窗格尺寸"></a>调整窗格尺寸</h4><p>如果你不喜欢默认布局，可以重调窗格的尺寸。虽然这很容易实现，但一般不需要这么干。这几个命令用来调整窗格：</p>
-<h3 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h3><pre class="line-numbers language-none"><code class="language-none"># 列出所有快捷键，及其对应的 Tmux 命令
-$ tmux list-keys
-
-# 列出所有 Tmux 命令及其参数
-$ tmux list-commands
-
-# 列出当前所有 Tmux 会话的信息
-$ tmux info
-
-# 重新加载当前的 Tmux 配置
-$ tmux source-file ~&#x2F;.tmux.conf
-
-# 关闭服务器，所有的会话都将关闭, 重启tmux生效配置
-tmux kill-server 
-
-# 在session中，先按C+b，然后输入：，进入命令行模式，在命令行模式下输入
-source-file ~&#x2F;.tmux.conf
-
-# 关闭demo会话
-tmux kill-session -t demo <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-<h3 id="Tmux-安装"><a href="#Tmux-安装" class="headerlink" title="Tmux 安装"></a>Tmux 安装</h3><pre class="line-numbers language-none"><code class="language-none">$ brew install tmux<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="修改tmux配置"><a href="#修改tmux配置" class="headerlink" title="修改tmux配置"></a>修改tmux配置</h3><h4 id="鼠标滚动查看上下文"><a href="#鼠标滚动查看上下文" class="headerlink" title="鼠标滚动查看上下文"></a><a target="_blank" rel="noopener" href="https://github.com/NHDaly/tmux-better-mouse-mode">鼠标滚动查看上下文</a></h4><pre class="line-numbers language-none"><code class="language-none">vi ~&#x2F;.tmux.conf
-# 开启鼠标模式
-set -g mouse on
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="修改Prefix-Command"><a href="#修改Prefix-Command" class="headerlink" title="修改Prefix-Command"></a>修改<code>Prefix-Command</code></h4><pre class="line-numbers language-none"><code class="language-none"># 修改前置快捷键
-set -g prefix C-z
-unbind C-b
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<h4 id="窗口自定义命名"><a href="#窗口自定义命名" class="headerlink" title="窗口自定义命名"></a>窗口自定义命名</h4><pre class="line-numbers language-none"><code class="language-none"># 如果喜欢给窗口自定义命名，那么需要关闭窗口的自动命名
-set-option -g allow-rename off<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h4 id="鼠标选中复制"><a href="#鼠标选中复制" class="headerlink" title="鼠标选中复制"></a>鼠标选中复制</h4><pre class="line-numbers language-none"><code class="language-none"># 鼠标选中复制
-bind -n WheelUpPane if-shell -F -t &#x3D; &quot;#&#123;mouse_any_flag&#125;&quot; &quot;send-keys -M&quot; &quot;if -Ft&#x3D; &#39;#&#123;pane_in_mode&#125;&#39; &#39;send-keys -M&#39; &#39;select-pane -t&#x3D;; copy-mode -e; send-keys -M&#39;&quot;
-bind -n WheelDownPane select-pane -t&#x3D; \; send-keys -M
-bind -n C-WheelUpPane select-pane -t&#x3D; \; copy-mode -e \; send-keys -M
-bind -T copy-mode-vi    C-WheelUpPane   send-keys -X halfpage-up
-bind -T copy-mode-vi    C-WheelDownPane send-keys -X halfpage-down
-bind -T copy-mode-emacs C-WheelUpPane   send-keys -X halfpage-up
-bind -T copy-mode-emacs C-WheelDownPane send-keys -X halfpage-down
-
-# To copy, left click and drag to highlight text in yellow,
-# once you release left click yellow text will disappear and will automatically be available in clibboard
-# # Use vim keybindings in copy mode
-setw -g mode-keys vi
-# Update default binding of &#96;Enter&#96; to also use copy-pipe
-unbind -T copy-mode-vi Enter
-bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel &quot;pbcopy&quot;
-bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel &quot;pbcopy&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="TMUX-插件"><a href="#TMUX-插件" class="headerlink" title="TMUX 插件"></a>TMUX 插件</h3><h4 id="TMUX-插件管理器"><a href="#TMUX-插件管理器" class="headerlink" title="TMUX 插件管理器"></a><a target="_blank" rel="noopener" href="https://github.com/tmux-plugins/tpm">TMUX 插件管理器</a></h4><h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><pre class="line-numbers language-none"><code class="language-none">git clone https:&#x2F;&#x2F;github.com&#x2F;tmux-plugins&#x2F;tpm ~&#x2F;.tmux&#x2F;plugins&#x2F;tpm<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>添加以下信息到配置文件中<code>~/.tmux.conf</code>($XDG_CONFIG_HOME/tmux/tmux.conf works too):</p>
-<pre class="line-numbers language-none"><code class="language-none"># 插件列表
-set -g @plugin &#39;tmux-plugins&#x2F;tpm&#39;
-set -g @plugin &#39;tmux-plugins&#x2F;tmux-sensible&#39;
-
-# 其他示例:
-# set -g @plugin &#39;github_username&#x2F;plugin_name&#39;
-# set -g @plugin &#39;git@github.com:user&#x2F;plugin&#39;
-# set -g @plugin &#39;git@bitbucket.com:user&#x2F;plugin&#39;
-
-# 初始化tmux插件管理器 (将这行添加到配置文件最底部)
-run &#39;~&#x2F;.tmux&#x2F;plugins&#x2F;tpm&#x2F;tpm&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>重启<code>TMUX</code>环境,使<code>TPM</code>生效(添加其他插件也需要执行该命令):</p>
-<pre class="line-numbers language-none"><code class="language-none"># 如果tmux正在运行，在终端执行该命令
-$ tmux source ~&#x2F;.tmux.conf<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h5 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h5><ul>
-<li>添加插件到配置文件<code>~/.tmux.conf</code>中，例如:set -g @plugin ‘…’</li>
-<li>按 prefix + I (如Install中的大写字母I) 安装插件.</li>
-</ul>
-<p>稍等片刻，插件会被下载到<code>~/.tmux/plugins/</code>文件夹中</p>
-<h5 id="卸载插件"><a href="#卸载插件" class="headerlink" title="卸载插件"></a>卸载插件</h5><ul>
-<li>在插件列表中移除该插件.</li>
-<li>输入<code>prefix + alt + u</code> (小写u进行卸载) 来移除插件.</li>
-</ul>
-<h5 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h5><p><code>prefix + I</code></p>
-<ul>
-<li>从<code>github</code>或者其他仓库中安装在插件列表中的插件</li>
-<li>刷新<code>TMUX</code>环境</li>
-</ul>
-<p><code>prefix + U</code></p>
-<ul>
-<li>更新插件<br>prefix + alt + u</li>
-<li>移除/下载不在插件列表中的插件</li>
-</ul>
-<h5 id="更新配置信息"><a href="#更新配置信息" class="headerlink" title="更新配置信息"></a>更新配置信息</h5><p>若对<code>~/.tmux.conf</code>做出修改，执行<code>tmux source-file ~/.tmux.conf</code>命令使配置生效</p>
-<h4 id="TMUX插件中心"><a href="#TMUX插件中心" class="headerlink" title="TMUX插件中心"></a><a target="_blank" rel="noopener" href="https://github.com/tmux-plugins/list">TMUX插件中心</a></h4><p>tmux支持下列插件</p>
-<ul>
-<li>extrakto - Allows you to select text from your window by fuzzy matching it through a set of filters with fzf. Look ma, no mouse!</li>
-<li>tmux-battery - Plug and play battery percentage and icon indicator.</li>
-<li>tmux-colours-superhero - A superhero themed tmux colour theme.</li>
-<li>tmux-continuum - Continuous saving of tmux environment. Automatic restore when tmux is started. Automatic tmux start when computer is turned on.</li>
-<li>tmux-copycat - Enhances tmux search.</li>
-<li>tmux-copytk - Multi utility rapid copy toolkit.</li>
-<li>tmux-cpu - Plug and play cpu percentage and icon indicator.</li>
-<li>tmux-fpp - Quickly open any path on your terminal window in your $EDITOR of choice!</li>
-<li>tmux-jump - Vimium/Easymotion like navigation for tmux.</li>
-<li>tmux-keyboard-layout - Show current keyboard layout in your status bar</li>
-<li>tmux-logging - Easy logging and screen capturing.</li>
-<li>tmux-maildir-counter - Plugin that counts files on a specific mail directory.</li>
-<li>tmux-mem-cpu-load - CPU, RAM, and load monitor for use with tmux.</li>
-<li>tmux-net-speed - Tmux plugin to monitor upload and download speed of one or all interfaces.</li>
-<li>tmux-online-status - Tmux plugin that displays online status of your computer.</li>
-<li>tmux-open - Tmux key bindings for quick opening of a highlighted file or url.</li>
-<li>tmux-pain-control - Standard pane key-bindings for tmux.</li>
-<li>tmux-peacock - Per session color and style based on session name</li>
-<li>tmux-piavpn - Keep track of your Private Internet Access VPN status.</li>
-<li>tmux-pomodoro - Use Pomodoro technique with timer showing in tmux status bar.</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/tmux-plugins/tmux-prefix-highlight">tmux-prefix-highlight</a> 当你按下tmux前缀键时突出显示的插件.</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/tmux-plugins/tmux-resurrect">tmux-resurrect</a> - 在系统重启时持续tmux环境.</li>
-<li>tmux-sensible - Basic tmux settings everyone can agree on.</li>
-<li>tmux-sessionist - Lightweight utils for manipulating sessions.</li>
-<li>tmux-sidebar - A sidebar with the directory tree for the current path. Tries to make tmux more IDE like.</li>
-<li>tmux-ticker - Keep a track of popular market indexes and stock price.</li>
-<li>tmux-update-display - When attaching to tmux session, update $DISPLAY for each tmux pane in that session.</li>
-<li>tmux-urlview - Quickly open any url on your terminal window!</li>
-<li>tmux-weather - Display weather information in your terminal.</li>
-<li>tmux-yank - 用于复制到系统剪贴板。适用于MacOS, Linux和Cygwin.</li>
-<li>tpm - Tmux plugin manager.</li>
-</ul>
-<h4 id="窗口持久化插件-tmux-resurrect"><a href="#窗口持久化插件-tmux-resurrect" class="headerlink" title="窗口持久化插件 tmux-resurrect"></a>窗口持久化插件 <a target="_blank" rel="noopener" href="https://github.com/tmux-plugins/tmux-resurrect"><code>tmux-resurrect</code></a></h4><p>Tmux 虽好，但是一旦重启，之前的窗口环境都会消失得无影无踪，幸好有了这个插件<br>有了它，你可以通过简单的两个快捷键随时备份或恢复窗口环境。</p>
-<p>使用 <a target="_blank" rel="noopener" href="https://github.com/tmux-plugins/tpm">Tmux插件管理器</a>(推荐)，安装插件后，在配置文件中插件列表的位置加入这一行</p>
-<pre class="line-numbers language-none"><code class="language-none">set -g @plugin &#39;tmux-plugins&#x2F;tmux-resurrect&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>点击<code>prefix + I</code>来获取插件使之生效。</p>
-<p>安装成功后使用 <code>prefix + Ctrl-s</code> 保存，使用 <code>prefix + Ctrl-r</code> 恢复。</p>
-<p>值得注意的是，恢复后，原窗口中的进程会被杀掉。如果你是重启后恢复，那自然没什么问题，但是平时试验的时候可要留心有没有重要的任务正在运行中。</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/tmux-plugins/tmux-resurrect/blob/e4825055c92e54b0c6ec572afc9b6c4723aba6c8/docs/save_dir.md">Resurrect save dir</a></p>
-<p>Tmux 环境默认保存在<code> ~/.tmux/resurrect dir</code>中，如果需要更改，使用以下命令</p>
-<pre class="line-numbers language-none"><code class="language-none"># set -g @resurrect-dir &#39;&#x2F;some&#x2F;path&#39;
-set -g @resurrect-dir &#39;~&#x2F;.tmux&#x2F;resurrect&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>在这个选项中不允许使用环境变量或shell插值，因为字符串是按字面意思使用的。所以下面这些不会达到预期的效果:</p>
-<pre class="line-numbers language-none"><code class="language-none">set -g @resurrect-dir &#39;&#x2F;path&#x2F;$MY_VAR&#x2F;$(some_executable)&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>仅支持这些变量设置: <code>$HOME</code>, <code>$HOSTNAME</code>, 和 <code>~</code>.</p>
-<h5 id="mac系统重启后，tmux-插件失效"><a href="#mac系统重启后，tmux-插件失效" class="headerlink" title="mac系统重启后，tmux 插件失效"></a>mac系统重启后，tmux 插件失效</h5><p>mac系统重启后，tmux进程终止，tmux 插件失效，<code>tmux-prefix-highlight</code>无法高亮显示<code>prefix</code>键，使用<code>tmux</code>启动进程，<code>prefix + Ctrl-r</code>无法恢复<code>session</code></p>
-<p>按以下方式可恢复session</p>
-<ol>
-<li>重启mac系统</li>
-<li>启动tmux进程，<code>$ tmux</code></li>
-<li>重载tmux配置文件，<code>$ prefix + I</code></li>
-<li>恢复之前保存的session，<code>prefix + Ctrl-r</code></li>
-</ol>
-<h3 id="我的配置文件-tmux-conf"><a href="#我的配置文件-tmux-conf" class="headerlink" title="我的配置文件~/tmux.conf"></a>我的配置文件<code>~/tmux.conf</code></h3><pre class="line-numbers language-none"><code class="language-none"># -----------------------------------------------------------------------------
-# Tmux 基本配置 - 要求 Tmux &gt;&#x3D; 2.3
-# 如果不想使用插件，只需要将此节的内容写入 ~&#x2F;.tmux.conf 即可
-# -----------------------------------------------------------------------------
-
-# 开启鼠标模式
-set -g mouse on
-
-# 修改前置快捷键
-set -g prefix C-z
-unbind C-b
-
-# 鼠标选中复制
-bind -n WheelUpPane if-shell -F -t &#x3D; &quot;#&#123;mouse_any_flag&#125;&quot; &quot;send-keys -M&quot; &quot;if -Ft&#x3D; &#39;#&#123;pane_in_mode&#125;&#39; &#39;send-keys -M&#39; &#39;select-pane -t&#x3D;; copy-mode -e; send-keys -M&#39;&quot;
-bind -n WheelDownPane select-pane -t&#x3D; \; send-keys -M
-bind -n C-WheelUpPane select-pane -t&#x3D; \; copy-mode -e \; send-keys -M
-bind -T copy-mode-vi    C-WheelUpPane   send-keys -X halfpage-up
-bind -T copy-mode-vi    C-WheelDownPane send-keys -X halfpage-down
-bind -T copy-mode-emacs C-WheelUpPane   send-keys -X halfpage-up
-bind -T copy-mode-emacs C-WheelDownPane send-keys -X halfpage-down
-
-# To copy, left click and drag to highlight text in yellow,
-# once you release left click yellow text will disappear and will automatically be available in clibboard
-# # Use vim keybindings in copy mode
-setw -g mode-keys vi
-# Update default binding of &#96;Enter&#96; to also use copy-pipe
-unbind -T copy-mode-vi Enter
-bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel &quot;pbcopy&quot;
-bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel &quot;pbcopy&quot;
-
-# -----------------------------------------------------------------------------
-# 使用插件 - via tpm
-# -----------------------------------------------------------------------------
-
-# 插件列表
-set -g @plugin &#39;tmux-plugins&#x2F;tpm&#39;
-set -g @plugin &#39;tmux-plugins&#x2F;tmux-sensible&#39;
-set -g @plugin &#39;tmux-plugins&#x2F;tmux-resurrect&#39;
-set -g @plugin &#39;tmux-plugins&#x2F;tmux-prefix-highlight&#39;
-
-# 其他示例:
-# set -g @plugin &#39;github_username&#x2F;plugin_name&#39;
-# set -g @plugin &#39;git@github.com:user&#x2F;plugin&#39;
-# set -g @plugin &#39;git@bitbucket.com:user&#x2F;plugin&#39;
-
-# tmux-prefix-highlight 插件配置
-set -g status-right &#39;#&#123;prefix_highlight&#125; #H | %a %Y-%m-%d %H:%M&#39;
-set -g @prefix_highlight_show_copy_mode &#39;on&#39;
-set -g @prefix_highlight_copy_mode_attr &#39;fg&#x3D;white,bg&#x3D;blue&#39;
-
-# resurrect 插件配置 保存现场到以下目录
-set -g @resurrect-dir &#39;~&#x2F;.tmux&#x2F;resurrect&#39;
-
-# 初始化tmux插件管理器 (将这行添加到配置文件最底部)
-run &#39;~&#x2F;.tmux&#x2F;plugins&#x2F;tpm&#x2F;tpm&#39;
-
-# -----------------------------------------------------------------------------
-# 结束
-# -----------------------------------------------------------------------------<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<p>Grafana是一个开源的指标量监测和可视化工具。常用于展示基础设施的时序数据和应用程序运行分析。Grafana的dashboard展示非常炫酷，绝对是运维提升逼格的一大利器。</p>
+<p>官方在线的demo可以在这里找到: <a target="_blank" rel="noopener" href="http://play.grafana.org/">http://play.grafana.org/</a><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/3uhNgK.jpg" alt="grafana示例"></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>Grafana的安装非常简单，官方就有软件仓库可以直接使用，也可以通过docker镜像等方式直接本地启动。</p>
+<p>参考官方文档的安装方法，对应找到你的操作系统的安装方法即可: <a target="_blank" rel="noopener" href="http://docs.grafana.org/">http://docs.grafana.org/</a></p>
+<blockquote>
+<p>值得一提的是，由于官方仓库托管在S3上，国内用户直接访问苦不堪言，万幸的是清华大学tuna镜像站已经提供了grafana的镜像，只需要将官方文档中提到的仓库地址对应的换成清华大学的镜像站的地址即可: <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/grafana/">https://mirrors.tuna.tsinghua.edu.cn/grafana/</a></p>
+</blockquote>
+<p>安装完毕后，使用service grafana-server start就可以启动grafana，访问<a href="http://your-host:3000就可以看到登录界面了。">http://your-host:3000就可以看到登录界面了。</a></p>
+<p>默认的用户名和密码都是admin。</p>
+<blockquote>
+<p>默认情况下，grafana的配置存储于sqlite3中，如果你想使用其他存储后端，如mysql，postgresql等，请参考官方文档配置: <a target="_blank" rel="noopener" href="http://docs.grafana.org/installation/configuration/">http://docs.grafana.org/installation/configuration/</a></p>
+</blockquote>
+<p>grafana的几个基本构成和基本概念参考官方文档: <a target="_blank" rel="noopener" href="http://docs.grafana.org/guides/basic_concepts/">http://docs.grafana.org/guides/basic_concepts/</a> ，后面会逐步提到这些关键词。</p>
+<h3 id="配置数据源"><a href="#配置数据源" class="headerlink" title="配置数据源"></a>配置数据源</h3><p>先要明确一点，grafana只是一个dashboard(4版本开始将引入报警功能)，负责把数据库中的数据进行可视化展示，本身并不存储任何数据，另外某些查询和聚合使用的是数据库本身提供的功能，需要对应的数据库去支持。因此不代表你换了一个数据库后端就一定能展示相同的图形。</p>
+<p>grafana目前支持的时序数据库有: Graphite, Prometheus, Elasticsearch, InfluxDB, OpenTSDB, AWS Cloudwatch。未来可能会有更多的数据库的支持加入，请关注更新。也可以使用第三方插件引入支持。</p>
+<p>我们这里使用Elasticsearch作为数据库的来源。</p>
 <h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><ul>
-<li><a target="_blank" rel="noopener" href="http://louiszhai.github.io/2017/09/30/tmux/">Tmux使用手册</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kaiye/p/6275207.html">十分钟学会 tmux</a></li>
-<li><a target="_blank" rel="noopener" href="https://gist.github.com/ryerh/14b7c24dfd623ef8edc7">Tmux 快捷键 &amp; 速查表</a></li>
-<li><a target="_blank" rel="noopener" href="http://blog.codepiano.com/2018/06/11/tmux-tpm">tmux 插件管理器和插件</a></li>
+<li><a target="_blank" rel="noopener" href="https://elkguide.elasticsearch.cn/elasticsearch/other/grafana.html">ELKstack 中文指南Grafana【详细】</a></li>
 </ul>
 
                 
@@ -895,7 +536,7 @@ run &#39;~&#x2F;.tmux&#x2F;plugins&#x2F;tpm&#x2F;tpm&#39;
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://amuqiao.github.io/2021/03/22/tmux-shi-yong-jiao-cheng/">https://amuqiao.github.io/2021/03/22/tmux-shi-yong-jiao-cheng/</a>
+                    <a href="https://amuqiao.github.io/2021/05/19/grafana-pei-zhi-shou-ce/">https://amuqiao.github.io/2021/05/19/grafana-pei-zhi-shou-ce/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -933,8 +574,8 @@ run &#39;~&#x2F;.tmux&#x2F;plugins&#x2F;tpm&#x2F;tpm&#39;
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/tmux/">
-                                    <span class="chip bg-color">tmux</span>
+                                <a href="/tags/grafana/">
+                                    <span class="chip bg-color">grafana</span>
                                 </a>
                             
                         </div>
@@ -1104,80 +745,31 @@ run &#39;~&#x2F;.tmux&#x2F;plugins&#x2F;tpm&#x2F;tpm&#39;
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/03/24/git-cao-zuo-shou-ce/">
+                <a href="/2021/05/19/grafana-pei-zhi-shou-ce/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/f_29.jpg" class="responsive-img" alt="Git操作手册">
+                        <img src="/medias/featureimages/f_20.jpg" class="responsive-img" alt="Grafana配置手册">
                         
-                        <span class="card-title">Git操作手册</span>
+                        <span class="card-title">Grafana配置手册</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                             
-Git 常用操作示例
+一个开源的指标量监测和可视化工具
 
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-24
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="post-category">
-                                    开发工具
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/git/">
-                        <span class="chip bg-color">git</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2021/03/22/grafana-ru-men-jiao-cheng/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/f_32.jpg" class="responsive-img" alt="Grafana入门教程">
-                        
-                        <span class="card-title">Grafana入门教程</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-Grafana是一个开源的度量分析与可视化套件。
-                        
-                    </div>
-                    <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-22
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-19
                             </span>
                         <span class="publish-author">
                             
@@ -1191,11 +783,69 @@ Grafana是一个开源的度量分析与可视化套件。
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
                     <a href="/tags/grafana/">
                         <span class="chip bg-color">grafana</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/05/18/django-zhong-shi-yong-celery/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/f_21.jpg" class="responsive-img" alt="django中使用celery">
+                        
+                        <span class="card-title">django中使用celery</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-18
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%90%8E%E7%AB%AF/" class="post-category">
+                                    后端
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/django/">
+                        <span class="chip bg-color">django</span>
+                    </a>
+                    
+                    <a href="/tags/django-celery-beat/">
+                        <span class="chip bg-color">django-celery-beat</span>
+                    </a>
+                    
+                    <a href="/tags/celery/">
+                        <span class="chip bg-color">celery</span>
                     </a>
                     
                 </div>

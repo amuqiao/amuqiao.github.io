@@ -311,7 +311,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/f_19.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/f_4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -470,7 +470,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    417
+                    678
                 </div>
                 
 
@@ -527,7 +527,7 @@ socialLink:
 <p>资源（Asset）代表 source 文件夹中除了文章以外的所有文件，例如图片、CSS、JS 文件等。比方说，如果你的Hexo项目中只有少量图片，那最简单的方法就是将它们放在 source/images 文件夹中。然后通过类似于 <img src="/images/image.jpg"> 的方法访问它们。</p>
 </blockquote>
 <p>添加<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/asset-folders.html">资源文件夹</a></p>
-<h4 id="修改文章特色图片"><a href="#修改文章特色图片" class="headerlink" title="修改文章特色图片"></a>修改文章特色图片</h4><p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/%E6%A3%AE%E6%9E%97%E7%9A%84%E7%8C%AB.jpg" alt="森林的猫"></p>
+<h3 id="指定文章特色图片"><a href="#指定文章特色图片" class="headerlink" title="指定文章特色图片"></a>指定文章特色图片</h3><p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/%E6%A3%AE%E6%9E%97%E7%9A%84%E7%8C%AB.jpg" alt="森林的猫"></p>
 <p>修改文章 Front-matter选项</p>
 <ul>
 <li>修改<code>img</code>为图片的<code>url</code>链接</li>
@@ -537,6 +537,27 @@ socialLink:
 <li>修改为本地资源路径</li>
 </ul>
 <pre class="line-numbers language-none"><code class="language-none">img: images&#x2F;森林的猫.jpg<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+<h3 id="添加文章特色图片"><a href="#添加文章特色图片" class="headerlink" title="添加文章特色图片"></a>添加文章特色图片</h3><p>主题下配置文件</p>
+<pre class="line-numbers language-none"><code class="language-none">featureImages:
+- &#x2F;medias&#x2F;featureimages&#x2F;0.jpg
+- &#x2F;medias&#x2F;featureimages&#x2F;1.jpg
+- &#x2F;medias&#x2F;featureimages&#x2F;2.jpg
+- &#x2F;medias&#x2F;featureimages&#x2F;3.jpg
+...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在<code>featureimages</code>新增图片后添加到配置中</p>
+<h3 id="SEO优化"><a href="#SEO优化" class="headerlink" title="SEO优化"></a>SEO优化</h3><blockquote>
+<p>SEO（Search Engine Optimization）：汉译为搜索引擎优化。是一种方式：利用搜索引擎的规则提高网站在有关搜索引擎内的自然排名。 ——百度百科</p>
+</blockquote>
+<h4 id="百度收录"><a href="#百度收录" class="headerlink" title="百度收录"></a>百度收录</h4><p>GitHub是不允许百度的Spider（蜘蛛）爬取GitHub上的内容的，所以任何部署在GitHub上的静态博客都是不能百度爬取到的！</p>
+<p>让百度收录你的站点<br>首先来搞百度的，刚建完站在百度上是不可能搜索到我们的网站的，可以先在百度上搜索site:&lt;你的域名&gt;，一般是搜不到的，然后点击 提交网址 将自己的网站提交给百度。<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/zsOfGJ.png" alt="zsOfGJ"></p>
+<p>添加自己的站点到百度<br>点击<code>提交网址</code><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/dIPnoa.png" alt="dIPnoa"></p>
+<p>参考文档</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.sky03.cn/posts/42790.html#toc-heading-17">Hexo进阶之各种优化</a></li>
+</ul>
+
                 
             </div>
             <hr/>
@@ -783,7 +804,7 @@ socialLink:
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/f_2.jpg" class="responsive-img" alt="超详细Hexo+Github博客搭建小白教程">
+                        <img src="/medias/featureimages/f_14.jpg" class="responsive-img" alt="超详细Hexo+Github博客搭建小白教程">
                         
                         <span class="card-title">超详细Hexo+Github博客搭建小白教程</span>
                     </div>
@@ -838,7 +859,7 @@ socialLink:
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/f_19.jpg" class="responsive-img" alt="matery主题定制">
+                        <img src="/medias/featureimages/f_4.jpg" class="responsive-img" alt="matery主题定制">
                         
                         <span class="card-title">matery主题定制</span>
                     </div>
@@ -1079,7 +1100,7 @@ socialLink:
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">26.4k</span>&nbsp;字
+                class="white-color">27.2k</span>&nbsp;字
             
             
             
