@@ -68,7 +68,7 @@ socialLink:
 添加[资源文件夹](https://hexo.io/zh-cn/docs/asset-folders.html)
 
 
-#### 修改文章特色图片
+### 指定文章特色图片
 ![森林的猫](https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/%E6%A3%AE%E6%9E%97%E7%9A%84%E7%8C%AB.jpg)
 
 修改文章 Front-matter选项
@@ -82,3 +82,36 @@ img: https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/%E6%A3%AE%E6%9E%97%E7%9A%
 ```
 img: images/森林的猫.jpg
 ```
+
+
+### 添加文章特色图片
+主题下配置文件
+```
+featureImages:
+- /medias/featureimages/0.jpg
+- /medias/featureimages/1.jpg
+- /medias/featureimages/2.jpg
+- /medias/featureimages/3.jpg
+...
+```
+在`featureimages`新增图片后添加到配置中
+
+### SEO优化
+> SEO（Search Engine Optimization）：汉译为搜索引擎优化。是一种方式：利用搜索引擎的规则提高网站在有关搜索引擎内的自然排名。 ——百度百科
+
+
+#### 百度收录
+GitHub是不允许百度的Spider（蜘蛛）爬取GitHub上的内容的，所以任何部署在GitHub上的静态博客都是不能百度爬取到的！
+
+让百度收录你的站点
+首先来搞百度的，刚建完站在百度上是不可能搜索到我们的网站的，可以先在百度上搜索site:<你的域名>，一般是搜不到的，然后点击 提交网址 将自己的网站提交给百度。
+![zsOfGJ](https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/zsOfGJ.png)
+
+添加自己的站点到百度
+点击`提交网址`
+![dIPnoa](https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/dIPnoa.png)
+
+
+参考文档
+
+- [Hexo进阶之各种优化](https://blog.sky03.cn/posts/42790.html#toc-heading-17)
