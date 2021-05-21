@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="baidu-site-verification" content="code-XwKXPvlX0k" />
-    <meta name="keywords" content="Docker部署flask服务, 王路飞">
+    <meta name="keywords" content="Apache Hadoop 完全分布式集群搭建, 王路飞">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Docker部署flask服务 | 王路飞</title>
+    <title>Apache Hadoop 完全分布式集群搭建 | 王路飞</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -311,12 +311,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/f_25.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/f_26.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Docker部署flask服务</h1>
+                    <h1 class="description center-align post-title">Apache Hadoop 完全分布式集群搭建</h1>
                 </div>
             </div>
         </div>
@@ -432,12 +432,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/docker/">
-                                <span class="chip bg-color">docker</span>
-                            </a>
-                        
-                            <a href="/tags/flask/">
-                                <span class="chip bg-color">flask</span>
+                            <a href="/tags/hadoop/">
+                                <span class="chip bg-color">hadoop</span>
                             </a>
                         
                     </div>
@@ -448,8 +444,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
-                                运维
+                            <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" class="post-category">
+                                大数据
                             </a>
                         
                     </div>
@@ -461,7 +457,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-25
+                    2021-05-20
                 </div>
                 
 
@@ -470,7 +466,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.5k
+                    1.3k
                 </div>
                 
 
@@ -491,163 +487,165 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <blockquote>
-<p>docker部署flask服务示例</p>
+<p>记录完全分布式集群搭建详细过程</p>
 </blockquote>
 <span id="more"></span>
-
-<p>首先推荐阅读Flask 官方文档<a target="_blank" rel="noopener" href="https://dormousehole.readthedocs.io/en/latest/">欢迎来到 Flask 的世界</a>快速了解Flask架构</p>
-<h3 id="快速搭建一个flask服务"><a href="#快速搭建一个flask服务" class="headerlink" title="快速搭建一个flask服务"></a>快速搭建一个flask服务</h3><p>一个最小的应用</p>
-<pre class="line-numbers language-none"><code class="language-none">from flask import Flask
-app &#x3D; Flask(__name__)
-
-@app.route(&#39;&#x2F;&#39;)
-def hello():
-	return &quot;Hello World!&quot;
-
-if __name__ &#x3D;&#x3D; &#39;__main__&#39;:
-	app.run(host&#x3D;&#39;0.0.0.0&#39;)
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>运行demo</p>
-<pre class="line-numbers language-none"><code class="language-none">$ export FLASK_APP&#x3D;app.py
-$ flask run
- * Running on http:&#x2F;&#x2F;127.0.0.1:5000&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>或者<code>python -m flask</code></p>
-<pre class="line-numbers language-none"><code class="language-none">$ export FLASK_APP&#x3D;app.py
-$ python -m flask run
- * Running on http:&#x2F;&#x2F;127.0.0.1:5000&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>或者</p>
-<pre class="line-numbers language-none"><code class="language-none">✗ python3 app.py
- * Serving Flask app &quot;app&quot; (lazy loading)
- * Environment: production
-   WARNING: This is a development server. Do not use it in a production deployment.
-   Use a production WSGI server instead.
- * Debug mode: off
- * Running on http:&#x2F;&#x2F;0.0.0.0:5000&#x2F; (Press CTRL+C to quit)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>外部可见的服务器</p>
-<pre class="line-numbers language-none"><code class="language-none">flask run --host&#x3D;0.0.0.0  # 可以让服务器被公开访问<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>调试模式</p>
-<pre class="line-numbers language-none"><code class="language-none"># 如果需要打开所有开发功能（包括调试模式），那么要在运行服务器之前导出 FLASK_ENV 环境变量并把其设置为 development
-$ export FLASK_ENV&#x3D;development
-$ flask run<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="项目文件"><a href="#项目文件" class="headerlink" title="项目文件"></a>项目文件</h3><p><a target="_blank" rel="noopener" href="https://github.com/docker/awesome-compose/tree/master/flask">代码示例下载</a></p>
-<pre class="line-numbers language-none"><code class="language-none">.
-├── README.md
-├── app
-│   ├── Dockerfile
-│   ├── app.py
-│   └── requirements.txt
-└── docker-compose.yaml<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="docker-部署服务"><a href="#docker-部署服务" class="headerlink" title="docker 部署服务"></a>docker 部署服务</h3><pre class="line-numbers language-none"><code class="language-none"> ✗ cd flask-demo&#x2F;app
- ✗ docker build -t&#x3D;&quot;flask-demo:v1&quot; .
-[+] Building 26.3s (11&#x2F;11) FINISHED
- &#x3D;&gt; [internal] load build definition from Dockerfile                                                                                                                0.0s
- &#x3D;&gt; &#x3D;&gt; transferring dockerfile: 296B                                                                                                                                0.0s
- &#x3D;&gt; [internal] load .dockerignore                                                                                                                                   0.0s
- &#x3D;&gt; &#x3D;&gt; transferring context: 2B                                                                                                                                     0.0s
- &#x3D;&gt; [internal] load metadata for docker.io&#x2F;library&#x2F;python:3.7-alpine                                                                                               26.1s
- &#x3D;&gt; [auth] library&#x2F;python:pull token for registry-1.docker.io                                                                                                       0.0s
- &#x3D;&gt; [internal] load build context                                                                                                                                   0.0s
- &#x3D;&gt; &#x3D;&gt; transferring context: 697B                                                                                                                                   0.0s
- &#x3D;&gt; [1&#x2F;5] FROM docker.io&#x2F;library&#x2F;python:3.7-alpine@sha256:39ad96c8188f69d513ded616433396a9ab90e061ca85d8eacf6514fa27ec3d40                                          0.0s
- &#x3D;&gt; &#x3D;&gt; resolve docker.io&#x2F;library&#x2F;python:3.7-alpine@sha256:39ad96c8188f69d513ded616433396a9ab90e061ca85d8eacf6514fa27ec3d40                                          0.0s
- &#x3D;&gt; CACHED [2&#x2F;5] WORKDIR &#x2F;app                                                                                                                                       0.0s
- &#x3D;&gt; CACHED [3&#x2F;5] COPY requirements.txt &#x2F;app                                                                                                                         0.0s
- &#x3D;&gt; CACHED [4&#x2F;5] RUN pip3 install -r requirements.txt --no-cache-dir                                                                                                0.0s
- &#x3D;&gt; [5&#x2F;5] COPY . &#x2F;app                                                                                                                                               0.1s
- &#x3D;&gt; exporting to image                                                                                                                                              0.0s
- &#x3D;&gt; &#x3D;&gt; exporting layers                                                                                                                                             0.0s
- &#x3D;&gt; &#x3D;&gt; writing image sha256:9fc116d3008819bf171b4cb2a10957e842b77aa24bde2582d737040cd6f9eaec                                                                        0.0s
- &#x3D;&gt; &#x3D;&gt; naming to docker.io&#x2F;library&#x2F;flask-demo:v1   
-✗ docker images
-REPOSITORY           TAG       IMAGE ID       CREATED         SIZE
-flask-demo           v1        9fc116d30088   3 minutes ago   51.6MB<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>启动容器</p>
-<ul>
-<li><code>-p </code>指定端口映射，格式为：主机(宿主)端口:容器端口</li>
-<li><code>-d</code>: 后台运行容器，并返回容器ID；</li>
-<li><code>-i</code>: 以交互模式运行容器，通常与 -t 同时使用；</li>
-<li><code>-P</code>: 随机端口映射，容器内部端口随机映射到主机的端口</li>
-<li><code>-p</code>: 指定端口映射，格式为：主机(宿主)端口:容器端口</li>
-<li><code>-t</code>: 为容器重新分配一个伪输入终端，通常与 -i 同时使用；<pre class="line-numbers language-none"><code class="language-none">✗ docker run -d -p 5000:5000 flask-demo:v1
-* Serving Flask app &quot;app&quot; (lazy loading)
-* Environment: production
-  WARNING: This is a development server. Do not use it in a production deployment.
-  Use a production WSGI server instead.
-* Debug mode: off
-* Running on http:&#x2F;&#x2F;0.0.0.0:5000&#x2F; (Press CTRL+C to quit)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/r1MVwF.png" alt="hello world"></li>
+<h2 id="Hadoop搭建方式"><a href="#Hadoop搭建方式" class="headerlink" title="Hadoop搭建方式"></a>Hadoop搭建方式</h2><ul>
+<li>单机模式：单节点模式，非集群，生产不会使用这种方式</li>
+<li>单机伪分布式模式：单节点，多线程模拟集群的效果，生产不会使用这种方式</li>
+<li>完全分布式模式：多台节点，真正的分布式Hadoop集群的搭建（生产环境建议使用这种方式）</li>
 </ul>
-<p>打开浏览器输入<a href="localhost:5000">localhost:5000</a></p>
-<p>关闭容器</p>
-<pre class="line-numbers language-none"><code class="language-none">✗ docker ps
-CONTAINER ID   IMAGE           COMMAND            CREATED              STATUS          PORTS                    NAMES
-8c87f5f494b8   flask-demo:v1   &quot;python3 app.py&quot;   About a minute ago   Up 10 seconds   0.0.0.0:5000-&gt;5000&#x2F;tcp   nervous_bassi
-(venv) ➜  app git:(main) ✗ docker stop 8c87f5f494b8
-8c87f5f494b8
-(venv) ➜  app git:(main) ✗ docker start 8c87f5f494b8
-8c87f5f494b8<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-<h3 id="docker-compose-部署服务"><a href="#docker-compose-部署服务" class="headerlink" title="docker-compose 部署服务"></a><a target="_blank" rel="noopener" href="http://www.dockerinfo.net/docker-compose-%e9%a1%b9%e7%9b%ae">docker-compose</a> 部署服务</h3><blockquote>
-<p>Docker Compose 是 Docker 官方编排（Orchestration）项目之一，负责快速在集群中部署分布式应用。</p>
+<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><blockquote>
+<p>目标：使用vmware虚拟机虚拟三台linux节点，linux操作系统：Centos7</p>
 </blockquote>
-<pre class="line-numbers language-none"><code class="language-none">✗ docker-compose up
-Building web
-[+] Building 16.4s (11&#x2F;11) FINISHED
- &#x3D;&gt; [internal] load build definition from Dockerfile                                                                                                                0.0s
- &#x3D;&gt; &#x3D;&gt; transferring dockerfile: 120B                                                                                                                                0.0s
- &#x3D;&gt; [internal] load .dockerignore                                                                                                                                   0.0s
- &#x3D;&gt; &#x3D;&gt; transferring context: 2B                                                                                                                                     0.0s
- &#x3D;&gt; [internal] load metadata for docker.io&#x2F;library&#x2F;python:3.7-alpine                                                                                               16.3s
- &#x3D;&gt; [auth] library&#x2F;python:pull token for registry-1.docker.io                                                                                                       0.0s
- &#x3D;&gt; [internal] load build context                                                                                                                                   0.0s
- &#x3D;&gt; &#x3D;&gt; transferring context: 505B                                                                                                                                   0.0s
- &#x3D;&gt; [1&#x2F;5] FROM docker.io&#x2F;library&#x2F;python:3.7-alpine@sha256:39ad96c8188f69d513ded616433396a9ab90e061ca85d8eacf6514fa27ec3d40                                          0.0s
- &#x3D;&gt; &#x3D;&gt; resolve docker.io&#x2F;library&#x2F;python:3.7-alpine@sha256:39ad96c8188f69d513ded616433396a9ab90e061ca85d8eacf6514fa27ec3d40                                          0.0s
- &#x3D;&gt; CACHED [2&#x2F;5] WORKDIR &#x2F;app                                                                                                                                       0.0s
- &#x3D;&gt; CACHED [3&#x2F;5] COPY requirements.txt &#x2F;app                                                                                                                         0.0s
- &#x3D;&gt; CACHED [4&#x2F;5] RUN pip3 install -r requirements.txt --no-cache-dir                                                                                                0.0s
- &#x3D;&gt; CACHED [5&#x2F;5] COPY . &#x2F;app                                                                                                                                        0.0s
- &#x3D;&gt; exporting to image                                                                                                                                              0.0s
- &#x3D;&gt; &#x3D;&gt; exporting layers                                                                                                                                             0.0s
- &#x3D;&gt; &#x3D;&gt; writing image sha256:9fc116d3008819bf171b4cb2a10957e842b77aa24bde2582d737040cd6f9eaec                                                                        0.0s
- &#x3D;&gt; &#x3D;&gt; naming to docker.io&#x2F;library&#x2F;flask-demo_web                                                                                                                   0.0s
-Successfully built 9fc116d3008819bf171b4cb2a10957e842b77aa24bde2582d737040cd6f9eaec
-WARNING: Image for service web was built because it did not already exist. To rebuild this image you must use &#96;docker-compose build&#96; or &#96;docker-compose up --build&#96;.
-Creating flask-demo_web_1 ... done
-Attaching to flask-demo_web_1
-web_1  |  * Serving Flask app &quot;app&quot; (lazy loading)
-web_1  |  * Environment: production
-web_1  |    WARNING: This is a development server. Do not use it in a production deployment.
-web_1  |    Use a production WSGI server instead.
-web_1  |  * Debug mode: off
-web_1  |  * Running on http:&#x2F;&#x2F;0.0.0.0:5000&#x2F; (Press CTRL+C to quit)
-
-^CGracefully stopping... (press Ctrl+C again to force)
-Stopping flask-demo_web_1 ... done
-(venv) ➜  flask-demo git:(main) ✗ docker ps -a
-CONTAINER ID   IMAGE                COMMAND                  CREATED          STATUS                        PORTS                    NAMES
-2e48108b8e1d   flask-demo_web       &quot;python3 app.py&quot;         6 minutes ago    Exited (137) 9 seconds ago                             flask-demo_web_1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><code>ctrl+c</code>终止服务,使用<code>docker ps -a</code>查看所有容器，再次启动容器使用<code>docker start 容器id</code></p>
-<pre class="line-numbers language-none"><code class="language-none">✗ docker start 2e48108b8e1d
-2e48108b8e1d
-(venv) ➜  flask-demo git:(main) ✗ docker ps
-CONTAINER ID   IMAGE            COMMAND            CREATED         STATUS          PORTS                    NAMES
-2e48108b8e1d   flask-demo_web   &quot;python3 app.py&quot;   9 minutes ago   Up 16 seconds   0.0.0.0:5000-&gt;5000&#x2F;tcp   flask-demo_web_1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>up参数</p>
 <ul>
-<li>构建，（重新）创建，启动，链接一个服务相关的容器。</li>
-<li>链接的服务都将会启动，除非他们已经运行。</li>
-<li>默认情况， <code>docker-compose up</code> 将会整合所有容器的输出，并且退出时，所有容器将会停止。</li>
-<li>如果使用 <code>docker-compose up -d</code> ，将会在后台启动并运行所有的容器。</li>
-<li>默认情况，如果该服务的容器已经存在， <code>docker-compose up</code> 将会停止并尝试重新创建他们（保持使用<code>volumes-from</code> 挂载的卷），以保证 <code>docker-compose.yml</code> 的修改生效。如果你不想容器被停止并重新创建，可以使用 <code>docker-compose up --no-recreate</code>。如果需要的话，这样将会启动已经停止的容器。</li>
+<li><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html">JDK8版本下载</a>（Hadoop框架是采用Java语言编写，需要java环境（jvm））</li>
+<li><a target="_blank" rel="noopener" href="https://my.vmware.com/web/vmware/downloads/info/slug/desktop_end_user_computing/vmware_fusion/12_0?wd=&eqid=935f58bd0000e0bb0000000660a60ca6">VMware Fusion 12  pro 下载地址</a></li>
+<li><a target="_blank" rel="noopener" href="https://archive.apache.org/dist/hadoop/common/hadoop-2.9.2/">Hadoop-2.9.2下载地址</a></li>
 </ul>
+<h2 id="搭建虚拟机集群"><a href="#搭建虚拟机集群" class="headerlink" title="搭建虚拟机集群"></a>搭建虚拟机集群</h2><blockquote>
+<p>虚拟机软件使用 VMware Fusion 12</p>
+</blockquote>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ol>
+<li>安装软件VMware Fusion 12 </li>
+<li>在虚拟机上安装CentOS7</li>
+<li>准备三台虚拟机（静态IP，关闭防火墙，修改主机名，配置免密登录，集群时间同步）</li>
+<li>集群规划</li>
+<li>安装Hadoop</li>
+<li>启动集群</li>
+<li>集群测试</li>
+<li>配置历史服务器</li>
+<li>…</li>
+</ol>
+<h3 id="VMware-Fusion-12-1-2-激活码"><a href="#VMware-Fusion-12-1-2-激活码" class="headerlink" title="VMware Fusion 12.1.2 激活码"></a>VMware Fusion 12.1.2 激活码</h3><pre class="line-numbers language-none"><code class="language-none">ZF3R0-FHED2-M80TY-8QYGC-NPKYF
+YF390-0HF8P-M81RQ-2DXQE-M2UT6
+ZF71R-DMX85-08DQY-8YMNC-PPHV8<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="安装VMware-Fusion-12和CentOS7"><a href="#安装VMware-Fusion-12和CentOS7" class="headerlink" title="安装VMware Fusion 12和CentOS7"></a>安装VMware Fusion 12和CentOS7</h3><blockquote>
+<p>本示例VMware Fusion使用版本12.1.2，目前生产环境大多数用CentOS7</p>
+</blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://my.vmware.com/web/vmware/downloads/info/slug/desktop_end_user_computing/vmware_fusion/12_0?wd=&eqid=935f58bd0000e0bb0000000660a60ca6">VMware Fusion 12.1.2 下载地址</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.centos.org/centos-linux/">CentOS7 下载地址</a>(选择7(2009)-&gt;x86_64-&gt;选择一个镜像站点-&gt;选择<code>CentOS-7-x86_64-DVD-2009.iso</code>下载即可)</li>
+</ul>
+<p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/azhlDs.png" alt="azhlDs"></p>
+<p>默认容量20GB，默认内存1GB<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/hGVLLt.png" alt="hGVLLt"></p>
+<p>自定义参数</p>
+<ul>
+<li>修改内存为2048MB</li>
+<li>处理器数量1<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/jREAbM.png" alt="内存设置"></li>
+</ul>
+<p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/uES73T.png" alt="选择网络类型"></p>
+<p>磁盘大小一般建议20G，将虚拟磁盘拆分为多个文件<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/OXN98Y.png" alt="磁盘类型"><br>启动磁盘，安装CentOS7<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/p4qjjw.png" alt="p4qjjw"></p>
+<p>配置语言环境，选择English，继续<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/QD3x8A.png" alt="设置语言"></p>
+<p>配置时区，点击DATE&amp;TIME，地图选择中国，时区填上海，点击左上角Done完成配置<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/tGcbHs.png" alt="设置时区"></p>
+<p>选择INSTALLATION DESTINATION，选择<code>I will configure partitioning</code>自定义分区,左上角Done<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/dGp3Qg.png" alt="dGp3Qg"><br>点击+号<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/IDzSv7.png" alt="IDzSv7"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/V0DiUY.png" alt="V0DiUY"><br>点击+ 添加swap分区<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/wAUkjH.png" alt="wAUkjH"><br>点击+，添加根分区，不设置分区大小，把剩余空间都给根分区<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/OGxEVZ.png" alt="OGxEVZ"><br>点击Done完成分区设置，点击Accept Changes 完成设置<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/QKUuxA.png" alt="QKUuxA"></p>
+<p>此时返回上一页，点击Begin Installation开始安装<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/eXml8J.png" alt="eXml8J"></p>
+<p>创建密码，密码为hadoop，不创建用户，默认用户root<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/RMPTvL.png" alt="RMPTvL"></p>
+<p>设置完密码会显示Performing post-installation setup tasks<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/2RUabL.png" alt="2RUabL"></p>
+<p>重启<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/E7tlaP.png" alt="重启"></p>
+<h3 id="给虚拟机配置静态ip地址"><a href="#给虚拟机配置静态ip地址" class="headerlink" title="给虚拟机配置静态ip地址"></a>给虚拟机配置静态ip地址</h3><ol>
+<li>在VMware Fusion的网络配置中新增网络连接，允许使用NAT，并配置自定义网段</li>
+<li>在本机终端中，查看配置好的NAT网段的网关ip</li>
+<li>给虚拟机配置静态ip地址和NAT网关地址，配置主机的DNS解析地址(mac-网络-高级-DNS查看ip)</li>
+<li>验证网络是否通畅(ping 网关ip，ping dns ip，ping baidu.com) </li>
+</ol>
+<h4 id="1-新建NAT网络"><a href="#1-新建NAT网络" class="headerlink" title="1.新建NAT网络"></a>1.新建NAT网络</h4><p>VMware Fusion&gt;偏好设置&gt;网络&gt; 点击+ 新增网络连接</p>
+<ul>
+<li>允许使用NAT</li>
+<li>配置IP网段</li>
+</ul>
+<p>这里主要需要手动配置子网ip，我将它自定义为了：192.168.100.0<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/pKpmgD.png" alt="新建NAT网络"></p>
+<h4 id="2-查看vnet配置"><a href="#2-查看vnet配置" class="headerlink" title="2.查看vnet配置"></a>2.查看vnet配置</h4><pre class="line-numbers language-none"><code class="language-none">cat &#x2F;Library&#x2F;Preferences&#x2F;VMware\ Fusion&#x2F;networking
+
+...
+answer VNET_4_DHCP yes
+answer VNET_4_HOSTONLY_NETMASK 255.255.255.0  # 这个是子网掩码
+answer VNET_4_HOSTONLY_SUBNET 192.168.100.0 # 这个是子网地址
+answer VNET_4_NAT yes
+answer VNET_4_NAT_PARAM_UDP_TIMEOUT 30
+answer VNET_4_VIRTUAL_ADAPTER yes
+...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="3-查看vnet4的nat配置"><a href="#3-查看vnet4的nat配置" class="headerlink" title="3.查看vnet4的nat配置"></a>3.查看vnet4的nat配置</h4><blockquote>
+<p>VMware Fusion 文件夹有空格,vmnet可以替换成其他网络连接名称</p>
+</blockquote>
+<p>主要是查看NAT网段的网关ip</p>
+<pre class="line-numbers language-none"><code class="language-none">cat &#x2F;Library&#x2F;Preferences&#x2F;VMware\ Fusion&#x2F;vmnet4&#x2F;nat.conf
+
+...
+# NAT gateway address
+ip &#x3D; 192.168.100.1
+netmask &#x3D; 255.255.255.0
+
+# Last DHCP address
+lastDhcpAddress &#x3D; 192.168.100.127
+
+...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="4-修改虚拟机网络连接"><a href="#4-修改虚拟机网络连接" class="headerlink" title="4.修改虚拟机网络连接"></a>4.修改虚拟机网络连接</h4><blockquote>
+<p>虚拟机&gt;网络适配器&gt;网络适配器 设置…<br>这里我们选择新增的选择vmnet4<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/HaOZPU.png" alt="HaOZPU"></p>
+</blockquote>
+<h4 id="5-修改虚拟机配置文件"><a href="#5-修改虚拟机配置文件" class="headerlink" title="5.修改虚拟机配置文件"></a>5.修改虚拟机配置文件</h4><blockquote>
+<p>虚拟机中的配置</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">vi &#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;ifcfg-ens33<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>原始配置</p>
+<pre class="line-numbers language-none"><code class="language-none">TYPE&#x3D;Ethernet
+BOOTPROTO&#x3D;dhcp  # 需要修改为 static
+DEFROUTE&#x3D;yes
+PEERDNS&#x3D;yes
+PEERROUTES&#x3D;yes
+IPV4_FAILURE_FATAL&#x3D;no
+NAME&#x3D;ens33
+DEVICE&#x3D;ens33
+ONBOOT&#x3D;no  # 需要修改为 yes<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>配置静态ip地址</p>
+<pre class="line-numbers language-none"><code class="language-none">TYPE&#x3D;Ethernet
+BOOTPROTO&#x3D;static
+DEFROUTE&#x3D;yes
+PEERDNS&#x3D;yes
+PEERROUTES&#x3D;yes
+IPV4_FAILURE_FATAL&#x3D;no
+NAME&#x3D;ens33
+DEVICE&#x3D;ens33
+ONBOOT&#x3D;yes
+
+IPADDR&#x3D;192.168.100.2      &#x2F;&#x2F; 自定义的虚拟机IP， ip属于vmnet4网段
+GATEWAY&#x3D;192.168.100.1      &#x2F;&#x2F; 配置的vmnet4网关地址
+NETMASK&#x3D;255.255.255.0       &#x2F;&#x2F; 配置的掩码
+DNS&#x3D;192.168.8.1        &#x2F;&#x2F; macOS本机的DNS地址。 系统偏好设置-&gt; 网络 -&gt; 在左侧选择当前使用的网络，点击右下角的“高级”按钮 -&gt; 切换Tab页，可找到DNS地址。
+若有多个DNS地址，则用DNS1，DNS2 区分
+
+# 保存退出，重启网络服务
+systemctl restart network 或者 service network restart<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="7-查看IP是否配置成功"><a href="#7-查看IP是否配置成功" class="headerlink" title="7.查看IP是否配置成功"></a>7.查看IP是否配置成功</h4><pre class="line-numbers language-none"><code class="language-none">ip addr 
+
+# 查看DNS配置 修改后立即生效，不需要重启服务
+&#x2F;etc&#x2F;resolv.conf  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/19LS8C.png" alt="查看IP是否配置成功"></p>
+<h4 id="8-验证网络"><a href="#8-验证网络" class="headerlink" title="8.验证网络"></a>8.验证网络</h4><ul>
+<li>虚拟机 ping vmnet4 网关</li>
+<li>主机 ping 虚拟机</li>
+<li>虚拟机 ping dns ip</li>
+<li>虚拟机 ping baidu.com</li>
+</ul>
+<p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/Dthyn9.png" alt="Dthyn9"><br>重启VMware 网络</p>
+<pre class="line-numbers language-none"><code class="language-none">sudo &#x2F;Applications&#x2F;VMware\ Fusion.app&#x2F;Contents&#x2F;Library&#x2F;vmnet-cli --stop
+sudo &#x2F;Applications&#x2F;VMware\ Fusion.app&#x2F;Contents&#x2F;Library&#x2F;vmnet-cli --start
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="关闭CentOS7防⽕墙"><a href="#关闭CentOS7防⽕墙" class="headerlink" title="关闭CentOS7防⽕墙"></a>关闭CentOS7防⽕墙</h4><p>防⽕墙相关的命令：</p>
+<pre class="line-numbers language-none"><code class="language-none">systemctl status ﬁrewalld.service # 查看ﬁrewall状态 
+systemctl stop ﬁrewalld.service # 停⽌ﬁrewall 
+systemctl disable ﬁrewalld.service # 禁⽌ﬁrewall开机启动<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
 <h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/docker/awesome-compose">一些docker-compose 部署示例</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/docker/awesome-compose/tree/master/flask">docker-compose部署flask</a> </li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/352193144">VMWare Fusion12下设置虚拟机的固定IP</a></li>
+<li><a target="_blank" rel="noopener" href="https://wsgzao.github.io/post/vmware-fusion/">VMware Fusion NAT 无法连网解决方案</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ryxiong-blog/p/14543598.html">mac os下 vmware Fusion Linux虚拟机配置静态ip无法上网问题</a></li>
+<li><a target="_blank" rel="noopener" href="https://sysin.org/article/change-vmware-fusion-networking/">如何修改 VMware Fusion 中的虚机网络 IP 地址段</a></li>
 </ul>
 
                 
@@ -675,7 +673,7 @@ CONTAINER ID   IMAGE            COMMAND            CREATED         STATUS       
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://amuqiao.github.io/2021/03/25/docker-bu-shu-flask-fu-wu/">https://amuqiao.github.io/2021/03/25/docker-bu-shu-flask-fu-wu/</a>
+                    <a href="https://amuqiao.github.io/2021/05/20/apache-hadoop-wan-quan-fen-bu-shi-ji-qun-da-jian/">https://amuqiao.github.io/2021/05/20/apache-hadoop-wan-quan-fen-bu-shi-ji-qun-da-jian/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -713,12 +711,8 @@ CONTAINER ID   IMAGE            COMMAND            CREATED         STATUS       
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/docker/">
-                                    <span class="chip bg-color">docker</span>
-                                </a>
-                            
-                                <a href="/tags/flask/">
-                                    <span class="chip bg-color">flask</span>
+                                <a href="/tags/hadoop/">
+                                    <span class="chip bg-color">hadoop</span>
                                 </a>
                             
                         </div>
@@ -888,46 +882,50 @@ CONTAINER ID   IMAGE            COMMAND            CREATED         STATUS       
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/03/25/docker-ru-men-shou-ce/">
+                <a href="/2021/05/20/apache-hadoop-wan-quan-fen-bu-shi-ji-qun-da-jian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/f_11.jpg" class="responsive-img" alt="Docker入门手册">
+                        <img src="/medias/featureimages/f_26.jpg" class="responsive-img" alt="Apache Hadoop 完全分布式集群搭建">
                         
-                        <span class="card-title">Docker入门手册</span>
+                        <span class="card-title">Apache Hadoop 完全分布式集群搭建</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                             
+记录完全分布式集群搭建详细过程
+
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-25
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-20
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
-                                    运维
+                            <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" class="post-category">
+                                    大数据
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/docker/">
-                        <span class="chip bg-color">docker</span>
+                    <a href="/tags/hadoop/">
+                        <span class="chip bg-color">hadoop</span>
                     </a>
                     
                 </div>
@@ -941,33 +939,33 @@ CONTAINER ID   IMAGE            COMMAND            CREATED         STATUS       
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/24/git-cao-zuo-shou-ce/">
+                <a href="/2021/05/19/hexo-bo-ke-ti-jiao-bai-du-bi-ying-gu-ge-sou-suo-yin-qing-shou-lu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/f_37.jpg" class="responsive-img" alt="Git操作手册">
+                        <img src="/medias/featureimages/f_16.jpg" class="responsive-img" alt="Hexo 博客提交百度、必应、谷歌搜索引擎收录">
                         
-                        <span class="card-title">Git操作手册</span>
+                        <span class="card-title">Hexo 博客提交百度、必应、谷歌搜索引擎收录</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                             
-Git 常用操作示例
+让搜索引擎收录你的博客
 
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-24
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-19
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="post-category">
-                                    开发工具
+                            <a href="/categories/%E5%89%8D%E7%AB%AF/" class="post-category">
+                                    前端
                                 </a>
                             
                             
@@ -977,8 +975,12 @@ Git 常用操作示例
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/git/">
-                        <span class="chip bg-color">git</span>
+                    <a href="/tags/hexo/">
+                        <span class="chip bg-color">hexo</span>
+                    </a>
+                    
+                    <a href="/tags/seo/">
+                        <span class="chip bg-color">seo</span>
                     </a>
                     
                 </div>
