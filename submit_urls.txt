@@ -1,4 +1,5 @@
 https://amuqiao.github.io/2021/05/20/apache-hadoop-wan-quan-fen-bu-shi-ji-qun-da-jian-yi/
+https://amuqiao.github.io/2021/05/26/apache-hadoop-wan-quan-fen-bu-shi-ji-qun-da-jian-er/
 https://amuqiao.github.io/2021/05/19/hexo-bo-ke-ti-jiao-bai-du-bi-ying-gu-ge-sou-suo-yin-qing-shou-lu/
 https://amuqiao.github.io/2021/05/19/grafana-pei-zhi-shou-ce/
 https://amuqiao.github.io/2021/03/19/matery-zhu-ti-ding-zhi/
@@ -7,4 +8,3 @@ https://amuqiao.github.io/2021/04/30/zai-django-xiang-mu-li-dan-du-yun-xing-mou-
 https://amuqiao.github.io/2021/05/06/yi-tai-fang-eth-wa-kuang-jiao-cheng/
 https://amuqiao.github.io/2021/04/29/linux-chang-yong-ming-ling-zheng-li/
 https://amuqiao.github.io/2021/04/28/pycharm-pei-zhi-autopep8/
-https://amuqiao.github.io/2021/04/28/vscode-shi-yong-jiao-cheng/
