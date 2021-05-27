@@ -466,7 +466,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.7k
+                    2.7k
                 </div>
                 
 
@@ -489,6 +489,8 @@
                 <blockquote>
 <p>第一部分:虚拟机环境准备</p>
 </blockquote>
+<span id="more"></span>
+
 <p>目标：</p>
 <ul>
 <li>三台虚拟机（静态IP，关闭防火墙，修改主机名，配置免密登录，集群时间同步）(admin:hadoop)</li>
@@ -500,7 +502,7 @@ mkdir -p &#x2F;opt&#x2F;lagou&#x2F;servers   # 软件安装目录<span aria-hidd
 scp ~&#x2F;Downloads&#x2F;hadoop-2.9.2.tar.gz root@192.168.80.122:&#x2F;opt&#x2F;lagou&#x2F;software
 scp ~&#x2F;Downloads&#x2F;hadoop-2.9.2.tar.gz root@192.168.80.123:&#x2F;opt&#x2F;lagou&#x2F;software<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
 </ul>
-<span id="more"></span>
+<!--more-->
 <h3 id="Hadoop搭建方式"><a href="#Hadoop搭建方式" class="headerlink" title="Hadoop搭建方式"></a>Hadoop搭建方式</h3><ul>
 <li>单机模式：单节点模式，非集群，生产不会使用这种方式</li>
 <li>单机伪分布式模式：单节点，多线程模拟集群的效果，生产不会使用这种方式</li>
@@ -675,6 +677,119 @@ hostname&#x3D;linux121 # 新增
 <h3 id="克隆并配置⽹络"><a href="#克隆并配置⽹络" class="headerlink" title="克隆并配置⽹络"></a>克隆并配置⽹络</h3><p>三台机器规划<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/6ZP9e2.png" alt="6ZP9e2"></p>
 <p>在linux122 上ping linux121 成功</p>
 <p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/DLXVfk.png" alt="DLXVfk"></p>
+<h3 id="⼤数据集群环境准备"><a href="#⼤数据集群环境准备" class="headerlink" title="⼤数据集群环境准备"></a>⼤数据集群环境准备</h3><h4 id="三台虚拟机关闭防⽕墙"><a href="#三台虚拟机关闭防⽕墙" class="headerlink" title="三台虚拟机关闭防⽕墙"></a>三台虚拟机关闭防⽕墙</h4><pre class="line-numbers language-none"><code class="language-none">查看防⽕墙状态 
+systemctl status ﬁrewalld
+停用防火墙
+systemctl stop firewalld
+开机自动关闭防火墙
+systemctl disable firewalld<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="三台机器关闭selinux"><a href="#三台机器关闭selinux" class="headerlink" title="三台机器关闭selinux"></a>三台机器关闭selinux</h4><pre class="line-numbers language-none"><code class="language-none">vi &#x2F;etc&#x2F;selinux&#x2F;config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/iMh0B3.png" alt="iMh0B3"></p>
+<h4 id="三台机器机器免密码登录"><a href="#三台机器机器免密码登录" class="headerlink" title="三台机器机器免密码登录"></a>三台机器机器免密码登录</h4><ol>
+<li><p>配置hostname与IP映射<br>pass</p>
+</li>
+<li><p>在所有主机上创建⽬录并赋予权限</p>
+<pre class="line-numbers language-none"><code class="language-none">mkdir &#x2F;root&#x2F;.ssh 
+chmod 700 &#x2F;root&#x2F;.ssh<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p>在三台机器执⾏以下命令，⽣成公钥与私钥</p>
+<pre class="line-numbers language-none"><code class="language-none">cd ~ #进⼊⽤户⽬录 
+ssh-keygen -t rsa -P &quot;&quot; 
+
+是⽣成ssh密码的命令，-t参数表示⽣成算法，有rsa和dsa两种；-P表示使⽤的密码，这⾥使⽤&quot;&quot;空字 符串表示⽆密码。
+
+cd ~&#x2F;.ssh
+
+进⼊.ssh
+
+cat id_rsa.pub &gt;&gt; authorized_keys #这个命令将id_rsa.pub的内容追加到了authorized_keys的内容后⾯<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/uNJHSM.png" alt="uNJHSM"></p>
+</li>
+<li><p>复制第⼀台机器的认证到其他机器</p>
+<pre class="line-numbers language-none"><code class="language-none">scp authorized_keys linux121:&#x2F;root&#x2F;.ssh&#x2F; 
+scp authorized_keys linux123:&#x2F;root&#x2F;.ssh&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+</ol>
+<p>密码传输过程中只使⽤⼀次，以后再使⽤ssh linux121或ssh linux123即不在需要密码，实现免密钥登录。</p>
+<h4 id="三台机器时钟同步"><a href="#三台机器时钟同步" class="headerlink" title="三台机器时钟同步"></a>三台机器时钟同步</h4><p>时间同步的⽅式：在集群中找⼀台机器，作为时间服务器。</p>
+<pre class="line-numbers language-none"><code class="language-none">通过⽹络连接外⽹进⾏时钟同步,必须保证虚拟机连上外⽹
+
+ntpdate us.pool.ntp.org; 阿⾥云时钟同步服务器 
+ntpdate ntp4.aliyun.com<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>集群中其他机器与这台机器定时的同步时间，⽐如，每 隔⼗分钟，同步⼀次时间。</p>
+<ol>
+<li>时间服务器配置（必须root⽤户）</li>
+</ol>
+<p>第⼀步:确定是否安装了ntpd的服务</p>
+<blockquote>
+<p>NTP 是网络时间协议(Network Time Protocol)，它是用来同步网络中各个计算机的时间的协议。<br>ntpd 是网络时间协议 (NTP) 的守护进程</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">如果没有安装,可以进行在线安装
+yum -y install ntp 启动ntpd的服务 
+service ntpd start 设置ntpd的服务开机启动 
+chkconfig ntpd on
+第⼀步:确定是否安装了ntpd的服务 
+rpm -qa | grep ntpd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>第⼆步:编辑/etc/ntp.conf</p>
+<pre class="line-numbers language-none"><code class="language-none">编辑第⼀台机器的&#x2F;etc&#x2F;ntp.conf
+vim &#x2F;etc&#x2F;ntp.conf 
+在⽂件中添加如下内容
+restrict 192.168.80.0 
+
+注释⼀下四⾏内容 
+#server 0.centos.pool.ntp.org 
+#server 1.centos.pool.ntp.org 
+#server 2.centos.pool.ntp.org 
+
+#server 3.centos.pool.ntp.org 去掉以下内容的注释，如果没有这两⾏注释，那就⾃⼰添加上 
+server 127.127.1.0 # local clock 
+fudge 127.127.1.0 stratum 10<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/frJchA.png" alt="frJchA"><br>配置以下内容，保证BIOS与系统时间同步 vim /etc/sysconﬁg/ntpd 添加⼀⾏内容</p>
+<pre class="line-numbers language-none"><code class="language-none">SYNC_HWLOCK&#x3D;yes<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>第三步：重新启动ntpd</p>
+<pre class="line-numbers language-none"><code class="language-none">service ntpd status<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>若ntpd 已停</p>
+<pre class="line-numbers language-none"><code class="language-none">service ntpd start<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>使NTP服务可以在系统引导的时候⾃动启动 ：</p>
+<pre class="line-numbers language-none"><code class="language-none">chkconfig ntpd on<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="2">
+<li>其他机器配置（必须root⽤户）</li>
+</ol>
+<p>第⼀步：在其他机器配置10分钟与时间服务器同步⼀次</p>
+<pre class="line-numbers language-none"><code class="language-none">crontab -e<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>编写脚本 使另外两台机器与192.168.80.121进⾏时钟同步</p>
+<pre class="line-numbers language-none"><code class="language-none">*&#x2F;10 * * * * &#x2F;usr&#x2F;sbin&#x2F;ntpdate 192.168.80.121<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>第⼆步：修改任意机器时间</p>
+<pre class="line-numbers language-none"><code class="language-none">date -s &quot;2020-06-20 11:11:11&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>第三步：⼗分钟后查看机器是否与时间服务器同步</p>
+<pre class="line-numbers language-none"><code class="language-none">date<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="三台机器安装jdk"><a href="#三台机器安装jdk" class="headerlink" title="三台机器安装jdk"></a>三台机器安装jdk</h4><p>查看⾃带的openjdk</p>
+<pre class="line-numbers language-none"><code class="language-none">rpm -qa | grep java<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+<p>如果有⾃带的，卸载系统⾃带的openjdk</p>
+<pre class="line-numbers language-none"><code class="language-none">rpm -e java-1.6.0-openjdk-1.6.0.41-1.13.13.1.el6_8.x86_64 tzdata-java-2016j1.el6.noarch java-1.7.0-openjdk-1.7.0.131-2.6.9.0.el6_8.x86_64 --nodeps<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>上传jdk并解压然后配置环境变量</p>
+<pre class="line-numbers language-none"><code class="language-none">所有软件的安装路径 
+mkdir -p &#x2F;opt&#x2F;lagou&#x2F;servers
+
+所有软件压缩包的存放路径 
+mkdir -p &#x2F;opt&#x2F;lagou&#x2F;software<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">scp ~&#x2F;Downloads&#x2F;jdk-8u231-linux-x64.tar.gz root@192.168.80.121:&#x2F;opt&#x2F;lagou&#x2F;software
+scp ~&#x2F;Downloads&#x2F;jdk-8u231-linux-x64.tar.gz root@192.168.80.122:&#x2F;opt&#x2F;lagou&#x2F;software
+scp ~&#x2F;Downloads&#x2F;jdk-8u231-linux-x64.tar.gz root@192.168.80.123:&#x2F;opt&#x2F;lagou&#x2F;software<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>解压</p>
+<pre class="line-numbers language-none"><code class="language-none">tar -zxvf &#x2F;opt&#x2F;lagou&#x2F;software&#x2F;jdk-8u231-linux-x64.tar.gz -C ..&#x2F;servers<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>配置环境变量 vi /etc/proﬁle</p>
+<pre class="line-numbers language-none"><code class="language-none">export JAVA_HOME&#x3D;&#x2F;opt&#x2F;lagou&#x2F;servers&#x2F;jdk1.8.0_231
+export PATH&#x3D;:$JAVA_HOME&#x2F;bin:$PATH
+
+# 修改完成后 source &#x2F;etc&#x2F;proﬁle 使配置⽣效<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="安装rz上传⼯具"><a href="#安装rz上传⼯具" class="headerlink" title="安装rz上传⼯具"></a>安装rz上传⼯具</h4><pre class="line-numbers language-none"><code class="language-none">yum -y install lrzsz rz 命令上传<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
 <h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/352193144">VMWare Fusion12下设置虚拟机的固定IP</a></li>
 <li><a target="_blank" rel="noopener" href="https://wsgzao.github.io/post/vmware-fusion/">VMware Fusion NAT 无法连网解决方案</a></li>
@@ -933,7 +1048,7 @@ hostname&#x3D;linux121 # 新增
                     <div class="summary block-with-text">
                         
                             
-第二部分:集群规划
+第二部分:集群规划&amp;安装Hadoop
 
                         
                     </div>
@@ -1215,7 +1330,7 @@ hostname&#x3D;linux121 # 新增
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">29.9k</span>&nbsp;字
+                class="white-color">31.4k</span>&nbsp;字
             
             
             

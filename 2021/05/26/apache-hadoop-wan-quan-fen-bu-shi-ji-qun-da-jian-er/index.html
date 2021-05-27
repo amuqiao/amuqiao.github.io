@@ -466,7 +466,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    8
+                    410
                 </div>
                 
 
@@ -487,9 +487,54 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <blockquote>
-<p>第二部分:集群规划</p>
+<p>第二部分:集群规划&amp;安装Hadoop</p>
 </blockquote>
 <span id="more"></span>
+
+<h3 id="集群规划"><a href="#集群规划" class="headerlink" title="集群规划"></a>集群规划</h3><p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/iIVicu.png" alt="集群规划"></p>
+<h3 id="安装Hadoop"><a href="#安装Hadoop" class="headerlink" title="安装Hadoop"></a>安装Hadoop</h3><p>登录linux121节点；进入/opt/lagou/software,解压安装文件到/opt/lagou/servers</p>
+<pre class="line-numbers language-none"><code class="language-none">tar -zxvf hadoop-2.9.2.tar.gz -C &#x2F;opt&#x2F;lagou&#x2F;servers<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>查看是否解压成功</p>
+<pre class="line-numbers language-none"><code class="language-none">ll &#x2F;opt&#x2F;lagou&#x2F;servers&#x2F;hadoop-2.9.2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>添加Hadoop到环境变量 vim /etc/profile</p>
+<pre class="line-numbers language-none"><code class="language-none">##HADOOP_HOME 
+export HADOOP_HOME&#x3D;&#x2F;opt&#x2F;lagou&#x2F;servers&#x2F;hadoop-2.9.2 
+export PATH&#x3D;$PATH:$HADOOP_HOME&#x2F;bin 
+export PATH&#x3D;$PATH:$HADOOP_HOME&#x2F;sbin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>使环境变量生效</p>
+<pre class="line-numbers language-none"><code class="language-none">source &#x2F;etc&#x2F;profile<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>验证hadoop</p>
+<pre class="line-numbers language-none"><code class="language-none">hadoop version<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/ErqgrJ.png" alt="hadoop version"></p>
+<p>hadoop目录<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/xm4o4d.png" alt="xm4o4d"></p>
+<pre class="line-numbers language-none"><code class="language-none">1. bin目录:对Hadoop进行操作的相关命令，如hadoop,hdfs等
+2. etc目录：Hadoop的配置文件目录，入hdfs-site.xml,core-site.xml等
+3. lib目录：Hadoop本地库（解压缩的依赖）
+4. sbin目录：存放的是Hadoop集群启动停止相关脚本，命令
+5. share目录：Hadoop的一些jar,官方案例jar，文档等<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="集群配置"><a href="#集群配置" class="headerlink" title="集群配置"></a>集群配置</h4><blockquote>
+<p>Hadoop集群配置 = HDFS集群配置 + MapReduce集群配置 + Yarn集群配置</p>
+</blockquote>
+<p>HDFS集群配置</p>
+<ol>
+<li>将JDK路径明确配置给HDFS（修改<code>hadoop-env.sh</code>）</li>
+<li>指定NameNode节点以及数据存储目录（修改<code>core-site.xml</code>）</li>
+<li>指定SecondaryNameNode节点（修改hdfs-site.xml）</li>
+<li>指定DataNode从节点（修改etc/hadoop/slaves文件，每个节点配置信息占一行） </li>
+</ol>
+<p>MapReduce集群配置</p>
+<ol>
+<li>将JDK路径明确配置给MapReduce（修改<code>mapred-env.sh</code>）</li>
+<li>指定MapReduce计算框架运行Yarn资源调度框架（修改<code>mapred-site.xml</code>） </li>
+</ol>
+<p>Yarn集群配置</p>
+<ol>
+<li>将JDK路径明确配置给Yarn（修改<code>yarn-env.sh</code>）</li>
+<li>指定ResourceManager老大节点所在计算机节点（修改<code>yarn-site.xml</code>）</li>
+<li>指定NodeManager节点（会通过slaves文件内容确定）</li>
+</ol>
+
                 
             </div>
             <hr/>
@@ -742,7 +787,7 @@
                     <div class="summary block-with-text">
                         
                             
-第二部分:集群规划
+第二部分:集群规划&amp;安装Hadoop
 
                         
                     </div>
@@ -796,10 +841,6 @@
                             
 第一部分:虚拟机环境准备
 
-目标：
-
-三台虚拟机（静态IP，关闭防火墙，修改主机名，配置免密登录，集群时间同步）(admin:hadoop)
-在/opt目录下创建文件夹  mkdir -p &#x2F;opt&#x2F;lagou&#x2
                         
                     </div>
                     <div class="publish-info">
@@ -1025,7 +1066,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">29.9k</span>&nbsp;字
+                class="white-color">31.4k</span>&nbsp;字
             
             
             
