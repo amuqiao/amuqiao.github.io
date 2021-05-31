@@ -466,7 +466,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    410
+                    1.7k
                 </div>
                 
 
@@ -513,7 +513,7 @@ export PATH&#x3D;$PATH:$HADOOP_HOME&#x2F;sbin<span aria-hidden="true" class="lin
 4. sbin目录：存放的是Hadoop集群启动停止相关脚本，命令
 5. share目录：Hadoop的一些jar,官方案例jar，文档等<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="集群配置"><a href="#集群配置" class="headerlink" title="集群配置"></a>集群配置</h4><blockquote>
+<h3 id="集群配置"><a href="#集群配置" class="headerlink" title="集群配置"></a>集群配置</h3><blockquote>
 <p>Hadoop集群配置 = HDFS集群配置 + MapReduce集群配置 + Yarn集群配置</p>
 </blockquote>
 <p>HDFS集群配置</p>
@@ -534,6 +534,209 @@ export PATH&#x3D;$PATH:$HADOOP_HOME&#x2F;sbin<span aria-hidden="true" class="lin
 <li>指定ResourceManager老大节点所在计算机节点（修改<code>yarn-site.xml</code>）</li>
 <li>指定NodeManager节点（会通过slaves文件内容确定）</li>
 </ol>
+<h4 id="HDFS集群配置"><a href="#HDFS集群配置" class="headerlink" title="HDFS集群配置"></a>HDFS集群配置</h4><pre class="line-numbers language-none"><code class="language-none">cd &#x2F;opt&#x2F;lagou&#x2F;servers&#x2F;hadoop-2.9.2&#x2F;etc&#x2F;hadoop<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ol>
+<li>配置：hadoop-env.sh,将JDK路径明确配置给HDFS</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">vim hadoop-env.sh
+
+export JAVA_HOME&#x3D;&#x2F;opt&#x2F;lagou&#x2F;servers&#x2F;jdk1.8.0_231<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<ol start="2">
+<li>指定NameNode节点以及数据存储目录（修改core-site.xml）</li>
+</ol>
+<p>覆盖原文件信息</p>
+<pre class="line-numbers language-none"><code class="language-none">vim core-site.xml
+
+&lt;!-- 指定HDFS中NameNode的地址 --&gt; 
+&lt;property&gt; 
+    &lt;name&gt;fs.defaultFS&lt;&#x2F;name&gt; 
+    &lt;value&gt;hdfs:&#x2F;&#x2F;linux121:9000&lt;&#x2F;value&gt; 
+&lt;&#x2F;property&gt;
+
+&lt;!-- 指定Hadoop运行时产生文件的存储目录 --&gt; 
+&lt;property&gt;
+    &lt;name&gt;hadoop.tmp.dir&lt;&#x2F;name&gt;
+    &lt;value&gt;&#x2F;opt&#x2F;lagou&#x2F;servers&#x2F;hadoop-2.9.2&#x2F;data&#x2F;tmp&lt;&#x2F;value&gt; 
+&lt;&#x2F;property&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/LRVmOT.png" alt="LRVmOT"></p>
+<ol start="3">
+<li><p>指定secondarynamenode节点(修改hdfs-site.xml)</p>
+<pre class="line-numbers language-none"><code class="language-none">vim hdfs-site.xml
+
+&lt;!-- 指定Hadoop辅助名称节点主机配置 --&gt; 
+&lt;property&gt;
+    &lt;name&gt;dfs.namenode.secondary.http-address&lt;&#x2F;name&gt;
+    &lt;value&gt;linux123:50090&lt;&#x2F;value&gt; 
+&lt;&#x2F;property&gt;
+
+&lt;!--副本数量 --&gt; 
+&lt;property&gt;
+    &lt;name&gt;dfs.replication&lt;&#x2F;name&gt;
+    &lt;value&gt;3&lt;&#x2F;value&gt; 
+&lt;&#x2F;property&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>指定datanode从节点(修改slaves文件，每个节点配置信息占一行)</p>
+<pre class="line-numbers language-none"><code class="language-none">vim slaves
+
+linux121 
+linux122 
+linux123<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ol>
+<p><strong>注意：该文件中添加的内容结尾不允许有空格，文件中不允许有空行。</strong></p>
+<h4 id="MapReduce集群配置"><a href="#MapReduce集群配置" class="headerlink" title="MapReduce集群配置"></a>MapReduce集群配置</h4><ol>
+<li>指定MapReduce使用的jdk路径（修改mapred-env.sh）</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">vim mapred-env.sh
+
+export JAVA_HOME&#x3D;&#x2F;opt&#x2F;lagou&#x2F;servers&#x2F;jdk1.8.0_231<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<ol start="2">
+<li>指定MapReduce计算框架运行Yarn资源调度框架(修改mapred-site.xml)</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">mv mapred-site.xml.template mapred-site.xml 
+vim mapred-site.xml
+
+&lt;!-- 指定MR运行在Yarn上 --&gt; 
+&lt;property&gt;
+    &lt;name&gt;mapreduce.framework.name&lt;&#x2F;name&gt;
+    &lt;value&gt;yarn&lt;&#x2F;value&gt; 
+&lt;&#x2F;property&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="Yarn集群配置"><a href="#Yarn集群配置" class="headerlink" title="Yarn集群配置"></a>Yarn集群配置</h4><ol>
+<li>指定JDK路径</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">vim yarn-env.sh export 
+
+JAVA_HOME&#x3D;&#x2F;opt&#x2F;lagou&#x2F;servers&#x2F;jdk1.8.0_231<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<ol start="2">
+<li>指定ResourceMnager的master节点信息(修改yarn-site.xml)</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">vim yarn-site.xml
+
+&lt;!-- 指定YARN的ResourceManager的地址 --&gt; 
+&lt;property&gt;
+    &lt;name&gt;yarn.resourcemanager.hostname&lt;&#x2F;name&gt;
+    &lt;value&gt;linux123&lt;&#x2F;value&gt; 
+&lt;&#x2F;property&gt;
+
+&lt;!-- Reducer获取数据的方式 --&gt; 
+
+&lt;property&gt;
+    &lt;name&gt;yarn.nodemanager.aux-services&lt;&#x2F;name&gt;
+    &lt;value&gt;mapreduce_shuffle&lt;&#x2F;value&gt; 
+&lt;&#x2F;property&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="3">
+<li>指定NodeManager节点（slaves文件已修改）</li>
+</ol>
+<p>注意： Hadoop安装目录所属用户和所属用户组信息，默认是501 dialout，而我们操作Hadoop集群的用户使 用的是虚拟机的root用户， 所以为了避免出现信息混乱，修改Hadoop安装目录所属用户和用户组！！</p>
+<pre class="line-numbers language-none"><code class="language-none">chown -R root:root &#x2F;opt&#x2F;lagou&#x2F;servers&#x2F;hadoop-2.9.2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="分发配置"><a href="#分发配置" class="headerlink" title="分发配置"></a>分发配置</h3><blockquote>
+<p>编写集群分发脚本rsync-script,用于同步linux121的配置信息到linux122、linux123中</p>
+</blockquote>
+<p>rsync主要用于备份和镜像。具有速度快、避免复制相同内容和支持符号链接的优点。 </p>
+<p>rsync和scp区别：用rsync做文件的复制要比scp的速度快，rsync只对差异文件做更新。scp是把所有文 件都复制过去。</p>
+<ol>
+<li>基本语法</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">rsync -rvl $pdir&#x2F;$fname $user@$host:$pdir&#x2F;$fname
+命令 选项参数 要拷贝的文件路径&#x2F;名称 目的用户@主机:目的路径&#x2F;名称<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-r</td>
+<td>递归</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示复制过程</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>拷贝符号连接</td>
+</tr>
+</tbody></table>
+<h4 id="rsync案例"><a href="#rsync案例" class="headerlink" title="rsync案例"></a>rsync案例</h4><ol>
+<li>三台虚拟机安装rsync (执行安装需要保证机器联网)</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">[root@linux121 ~]# yum install -y rsync<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="2">
+<li>把linux121机器上的/opt/lagou/software目录同步到linux122服务器的root用户下的/opt/目录</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">[root@linux121 opt]$ rsync -rvl &#x2F;opt&#x2F;lagou&#x2F;software&#x2F; root@linux122:&#x2F;opt&#x2F;lagou&#x2F;software<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="集群分发脚本编写"><a href="#集群分发脚本编写" class="headerlink" title="集群分发脚本编写"></a>集群分发脚本编写</h4><blockquote>
+<p>需求：循环复制文件到集群所有节点的相同目录下</p>
+</blockquote>
+<p>rsync命令原始拷贝：</p>
+<pre class="line-numbers language-none"><code class="language-none">rsync -rvl &#x2F;opt&#x2F;module root@linux123:&#x2F;opt&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>期望脚本</p>
+<p>脚本+要同步的文件名称</p>
+<p>说明：在/usr/local/bin这个目录下存放的脚本，root用户可以在系统任何地方直接执行。</p>
+<p>脚本实现</p>
+<ol>
+<li><p>在/usr/local/bin目录下创建文件rsync-script，文件内容如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">[root@linux121 bin]$ touch rsync-script
+[root@linux121 bin]$ vim rsync-script<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>在文件中编写shell代码</p>
+<pre class="line-numbers language-none"><code class="language-none">#!&#x2F;bin&#x2F;bash
+
+#1 获取命令输入参数的个数，如果个数为0，直接退出命令 
+paramnum&#x3D;$#
+
+if((paramnum&#x3D;&#x3D;0)); then 
+echo no params; 
+exit; 
+fi
+
+#2 根据传入参数获取文件名称 
+p1&#x3D;$1 
+file_name&#x3D;&#96;basename $p1&#96; 
+echo fname&#x3D;$file_name
+
+#3 获取输入参数的绝对路径
+
+pdir&#x3D;&#96;cd -P $(dirname $p1); pwd&#96; 
+echo pdir&#x3D;$pdir
+
+#4 获取用户名称 
+user&#x3D;&#96;whoami&#96;
+
+#5 循环执行rsync
+
+for((host&#x3D;121; host&lt;124; host++)); do
+
+echo ------------------- linux$host -------------
+rsync -rvl $pdir&#x2F;$file_name $user@linux$host:$pdir
+
+done<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>修改脚本 rsync-script 具有执行权限</p>
+</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">[root@linux121 bin]$ chmod 777 rsync-script<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="3">
+<li>调用脚本形式：rsync-script 文件名称</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">[root@linux121 bin]$ rsync-script &#x2F;home&#x2F;root&#x2F;bin<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>执行该路径会报错，先不理会</p>
+<ol start="4">
+<li>调用脚本分发Hadoop安装目录到其它节点</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">[root@linux121 bin]$ rsync-script &#x2F;opt&#x2F;lagou&#x2F;servers&#x2F;hadoop-2.9.2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/JBuGvl.png" alt="JBuGvl"></p>
+<h3 id="启动集群"><a href="#启动集群" class="headerlink" title="启动集群"></a>启动集群</h3><blockquote>
+<p>注意：如果集群是第一次启动，需要在Namenode所在节点格式化NameNode，非第一次不用执行格 式化Namenode操作！！</p>
+</blockquote>
+<h4 id="单节点启动"><a href="#单节点启动" class="headerlink" title="单节点启动"></a>单节点启动</h4><pre class="line-numbers language-none"><code class="language-none">[root@linux121 hadoop-2.9.2]$ hadoop namenode -format<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/rL5j2p.png" alt="rL5j2p"></p>
 
                 
             </div>
@@ -769,50 +972,48 @@ export PATH&#x3D;$PATH:$HADOOP_HOME&#x2F;sbin<span aria-hidden="true" class="lin
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/05/26/apache-hadoop-wan-quan-fen-bu-shi-ji-qun-da-jian-er/">
+                <a href="/2021/05/31/mac-de-vmwarefusion-an-zhuang-vmware-tools-jie-jue-bu-neng-fu-zhi-nian-tie-de-wen-ti/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/f_17.jpg" class="responsive-img" alt="Apache Hadoop 完全分布式集群搭建（二）">
+                        <img src="/medias/featureimages/f_19.jpg" class="responsive-img" alt="Mac的VMwareFusion安装VMware Tools解决不能复制粘贴的问题">
                         
-                        <span class="card-title">Apache Hadoop 完全分布式集群搭建（二）</span>
+                        <span class="card-title">Mac的VMwareFusion安装VMware Tools解决不能复制粘贴的问题</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                             
-第二部分:集群规划&amp;安装Hadoop
+另一种思路：mac ssh 虚拟机也可以解决复制粘贴问题
 
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-26
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-05-31
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" class="post-category">
-                                    大数据
+                            <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="post-category">
+                                    开发工具
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/hadoop/">
-                        <span class="chip bg-color">hadoop</span>
+                    <a href="/tags/vmware-fusion/">
+                        <span class="chip bg-color">vmware fusion</span>
                     </a>
                     
                 </div>
@@ -1066,7 +1267,7 @@ export PATH&#x3D;$PATH:$HADOOP_HOME&#x2F;sbin<span aria-hidden="true" class="lin
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">31.4k</span>&nbsp;字
+                class="white-color">33.8k</span>&nbsp;字
             
             
             
