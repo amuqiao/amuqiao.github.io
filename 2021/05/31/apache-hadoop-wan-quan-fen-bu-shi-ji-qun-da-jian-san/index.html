@@ -466,7 +466,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    610
+                    984
                 </div>
                 
 
@@ -579,7 +579,66 @@ starting historyserver, logging to &#x2F;opt&#x2F;lagou&#x2F;servers&#x2F;hadoop
 <li><a target="_blank" rel="noopener" href="http://linux121:19888/jobhistory">http://192.168.80.121:19888/jobhistory</a></li>
 </ul>
 <p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/P6W8a8.png" alt="历史服务器"></p>
-<h4 id="配置日志的聚集"><a href="#配置日志的聚集" class="headerlink" title="配置日志的聚集"></a>配置日志的聚集</h4>
+<h4 id="配置日志的聚集"><a href="#配置日志的聚集" class="headerlink" title="配置日志的聚集"></a>配置日志的聚集</h4><ul>
+<li>日志聚集：应用(Job)运行完成以后，将应用运行日志信息从各个task汇总上传到HDFS系统上。</li>
+<li>日志聚集功能好处：可以方便的查看到程序运行详情，方便开发调试。<blockquote>
+<p>注意：开启日志聚集功能，需要重新启动NodeManager 、ResourceManager和 HistoryManager。</p>
+</blockquote>
+</li>
+</ul>
+<ol>
+<li>配置yarn-site.xml</li>
+</ol>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html">[root@linux121 hadoop]$ vi yarn-site.xml
+
+# 新增以下配置
+<span class="token comment">&lt;!-- 日志聚集功能使能 --></span> 
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>yarn.log-aggregation-enable<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>true<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
+
+<span class="token comment">&lt;!-- 日志保留时间设置7天 --></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>yarn.log-aggregation.retain-seconds<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>604800<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>yarn.log.server.url<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>http://linux121:19888/jobhistory/logs<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="2">
+<li>分发yarn-site.xml到集群其它节点</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">rsync-script yarn-site.xml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="3">
+<li>重启历史服务器节点的NodeManager 、ResourceManager和HistoryManager</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none"># 关闭
+[root@linux121 hadoop-2.9.2]$ sbin&#x2F;yarn-daemon.sh stop resourcemanager
+[root@linux121 hadoop-2.9.2]$ sbin&#x2F;yarn-daemon.sh stop nodemanager
+[root@linux121 hadoop-2.9.2]$ sbin&#x2F;mr-jobhistory-daemon.sh stop historyserver
+
+# 开启
+[root@linux121 hadoop-2.9.2]$ sbin&#x2F;yarn-daemon.sh start resourcemanager
+[root@linux121 hadoop-2.9.2]$ sbin&#x2F;yarn-daemon.sh start nodemanager
+[root@linux121 hadoop-2.9.2]$ sbin&#x2F;mr-jobhistory-daemon.sh start historyserver<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="4">
+<li>删除HDFS上已经存在的输出文件</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">[root@linux121 hadoop-2.9.2]$ bin&#x2F;hdfs dfs -rm -R &#x2F;wcoutput<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ol start="5">
+<li>执行WordCount程序</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">[root@linux121 hadoop-2.9.2]$ hadoop jar share&#x2F;hadoop&#x2F;mapreduce&#x2F;hadoop-mapreduce-examples-2.9.2.jar wordcount &#x2F;wcinput &#x2F;wcoutput<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ol start="6">
+<li>查看日志，如图所示<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/gWfN3H.png" alt="历史服务器"><br>点击Job ID查看任务详情<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/H9dSE5.png" alt="任务详情"><br>点击logs查看日志详情<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/WbHxfv.png" alt="日志详情"></li>
+</ol>
+
                 
             </div>
             <hr/>
@@ -1115,7 +1174,7 @@ starting historyserver, logging to &#x2F;opt&#x2F;lagou&#x2F;servers&#x2F;hadoop
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">34.4k</span>&nbsp;字
+                class="white-color">34.8k</span>&nbsp;字
             
             
             
