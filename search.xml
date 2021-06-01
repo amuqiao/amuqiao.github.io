@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Apache Hadoop 完全分布式集群搭建（三）</title>
+      <link href="2021/05/31/apache-hadoop-wan-quan-fen-bu-shi-ji-qun-da-jian-san/"/>
+      <url>2021/05/31/apache-hadoop-wan-quan-fen-bu-shi-ji-qun-da-jian-san/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>第三部分:集群测试&amp;配置历史服务器</p></blockquote><span id="more"></span><h3 id="集群测试"><a href="#集群测试" class="headerlink" title="集群测试"></a>集群测试</h3><h4 id="HDFS-分布式存储初体验"><a href="#HDFS-分布式存储初体验" class="headerlink" title="HDFS 分布式存储初体验"></a>HDFS 分布式存储初体验</h4><p>从linux本地文件系统上传下载文件验证HDFS集群工作正常</p><pre class="line-numbers language-none"><code class="language-none"># 在HDFS文件系统根目录下面创建文件夹hdfs dfs -mkdir -p &#x2F;test&#x2F;input #本地home目录创建一个文件 vim &#x2F;root&#x2F;test.txthello hdfs#上传linxu文件到Hdfs hdfs dfs -put &#x2F;root&#x2F;test.txt &#x2F;test&#x2F;input# 删除本地文件rm -rf &#x2F;root&#x2F;test.txt#从Hdfs下载文件到linux本地 hdfs dfs -get &#x2F;test&#x2F;input&#x2F;test.txt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="MapReduce-分布式计算初体验"><a href="#MapReduce-分布式计算初体验" class="headerlink" title="MapReduce 分布式计算初体验"></a>MapReduce 分布式计算初体验</h4><p>在HDFS文件系统根目录下面创建一个wcinput文件夹</p><pre class="line-numbers language-none"><code class="language-none">[root@linux121 hadoop-2.9.2]$ hdfs dfs -mkdir &#x2F;wcinput<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>在/root/目录下创建一个wc.txt文件(本地文件系统),并进行编辑</p><pre class="line-numbers language-none"><code class="language-none">vi &#x2F;root&#x2F;wc.txthadoop mapreduce yarn hdfs hadoop mapreduce mapreduce yarn lagou lagou lagou<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>上传wc.txt到Hdfs目录/wcinput下</p><pre class="line-numbers language-none"><code class="language-none">hdfs dfs -put wc.txt &#x2F;wcinput<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>执行程序</p><blockquote><p><code>\wcoutput</code> 目录无需手动创建，程序执行过程中会创建</p></blockquote><pre class="line-numbers language-none"><code class="language-none">[root@linux121 hadoop-2.9.2]$ &#x2F;opt&#x2F;lagou&#x2F;servers&#x2F;hadoop-2.9.2&#x2F;hadoop jar share&#x2F;hadoop&#x2F;mapreduce&#x2F;hadoop-mapreduce-examples-2.9.2.jar wordcount &#x2F;wcinput &#x2F;wcoutput<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>查看结果</p><pre class="line-numbers language-none"><code class="language-none">[root@linux121 hadoop-2.9.2]# hdfs dfs -cat &#x2F;wcoutput&#x2F;part-r-00000hadoop  2hdfs    1lagou   3mapreduce       3yarn    2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="本机查看hdfs目录"><a href="#本机查看hdfs目录" class="headerlink" title="本机查看hdfs目录"></a>本机查看hdfs目录</h4><p>访问 <a href="http://192.168.80.121:50070/dfshealth.html#tab-overview">http://192.168.80.121:50070/dfshealth.html#tab-overview</a><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/9nIB44.png" alt="9nIB44"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/zDoOPk.png" alt="zDoOPk"></p><h3 id="配置历史服务器"><a href="#配置历史服务器" class="headerlink" title="配置历史服务器"></a>配置历史服务器</h3><blockquote><p>在Yarn中运行的任务产生的日志数据不能查看，为了查看程序的历史运行情况，需要配置一下历史日志服务器</p></blockquote><ol><li>配置mapred-site.xml<pre class="line-numbers language-none"><code class="language-none">[root@linux121 hadoop]# vi &#x2F;opt&#x2F;lagou&#x2F;servers&#x2F;hadoop-2.9.2&#x2F;etc&#x2F;hadoop&#x2F;mapred-site.xml# 添加以下配置&lt;!-- 历史服务器端地址 --&gt;&lt;property&gt;     &lt;name&gt;mapreduce.jobhistory.address&lt;&#x2F;name&gt;    &lt;value&gt;linux121:10020&lt;&#x2F;value&gt; &lt;&#x2F;property&gt;&lt;!-- 历史服务器web端地址 --&gt;&lt;property&gt;     &lt;name&gt;mapreduce.jobhistory.webapp.address&lt;&#x2F;name&gt;    &lt;value&gt;linux121:19888&lt;&#x2F;value&gt; &lt;&#x2F;property&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li><li>分发mapred-site.xml到其它节点</li></ol><pre class="line-numbers language-none"><code class="language-none">rsync-script mapred-site.xml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol start="3"><li>启动历史服务器</li></ol><pre class="line-numbers language-none"><code class="language-none">[root@linux121 hadoop-2.9.2]$ sbin&#x2F;mr-jobhistory-daemon.sh start historyserverstarting historyserver, logging to &#x2F;opt&#x2F;lagou&#x2F;servers&#x2F;hadoop-2.9.2&#x2F;logs&#x2F;mapred-root-historyserver-linux121.out<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><ol start="4"><li>查看历史服务器是否启动</li></ol><pre class="line-numbers language-none"><code class="language-none">[root@linux121 hadoop-2.9.2]$ jps...82008 JobHistoryServer...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><ol start="5"><li>查看JobHistory</li></ol><ul><li><a href="http://linux121:19888/jobhistory">http://linux121:19888/jobhistory</a> 或者</li><li><a href="http://linux121:19888/jobhistory">http://192.168.80.121:19888/jobhistory</a></li></ul><p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/P6W8a8.png" alt="历史服务器"></p><h4 id="配置日志的聚集"><a href="#配置日志的聚集" class="headerlink" title="配置日志的聚集"></a>配置日志的聚集</h4>]]></content>
+      
+      
+      <categories>
+          
+          <category> 大数据 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> hadoop </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Linux配置ssh免密登陆</title>
       <link href="2021/05/31/linux-pei-zhi-ssh-mian-mi-deng-lu/"/>
       <url>2021/05/31/linux-pei-zhi-ssh-mian-mi-deng-lu/</url>
