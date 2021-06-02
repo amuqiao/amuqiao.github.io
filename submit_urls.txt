@@ -1,3 +1,4 @@
+https://amuqiao.github.io/2021/05/26/apache-hadoop-wan-quan-fen-bu-shi-ji-qun-da-jian-er/
 https://amuqiao.github.io/2021/04/02/python-wen-jian-lu-jing/
 https://amuqiao.github.io/2021/04/21/django-orm-zhong-yuan-sheng-jsonfield-de-shi-yong-fang-fa/
 https://amuqiao.github.io/2021/03/26/docker-shi-yong-shou-ce/
@@ -7,4 +8,3 @@ https://amuqiao.github.io/2021/03/31/gitignore-wen-jian-ping-bi-gui-ze/
 https://amuqiao.github.io/2021/04/22/python-mo-kuai-sou-suo-lu-jing-kan-zhe-yi-pian-jiu-gou-liao/
 https://amuqiao.github.io/2021/04/28/vscode-shi-yong-jiao-cheng/
 https://amuqiao.github.io/2021/04/23/python-shen-kao-bei-yu-qian-kao-bei-de-qu-bie-yi-wen-kan-dong/
-https://amuqiao.github.io/2021/05/18/django-zhong-shi-yong-celery/
