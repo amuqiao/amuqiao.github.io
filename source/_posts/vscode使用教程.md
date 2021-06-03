@@ -7,7 +7,7 @@ mathjax: true
 date: 2021-04-28 08:56:39
 img:
 password:
-summary:
+summary: 在vscode中调试django ...
 tags:
 - vscode
 - python
@@ -17,8 +17,6 @@ categories:
 - 开发工具
 
 ---
-
-
 ### python
 
 #### 在vscode中调试django

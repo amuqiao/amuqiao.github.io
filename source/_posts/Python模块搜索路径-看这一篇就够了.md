@@ -7,7 +7,7 @@ mathjax: true
 date: 2021-04-22 09:33:28
 img:
 password:
-summary:
+summary: 理解Python导包规则
 tags:
 - python
 - 模块搜索路径
@@ -15,8 +15,6 @@ categories:
 - 后端
 
 ---
-
-
 
 > 由于某些原因，执行Python程序时，常常出现ImportError、ModuleNotFoundError等错误，归根究底，是当前需要的模块不在python搜索路径中。那么，Python 如何知道在哪里搜索模块的路径呢？
 
@@ -87,3 +85,5 @@ $ python
 参考：
 - [为Python添加默认模块搜索路径](https://www.jianshu.com/p/cb6447e1cf88)
 - [Python 模块搜索路径](https://blog.csdn.net/liang19890820/article/details/76219560)
+- [python在不同层级目录import模块的方法](https://www.cnblogs.com/luoye00/p/5223543.html)
+- [python 导入模块的坑(帮助理解导包)](https://www.cnblogs.com/ydf0509/p/8298551.html)

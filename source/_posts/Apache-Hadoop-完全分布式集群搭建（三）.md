@@ -7,7 +7,7 @@ mathjax: true
 date: 2021-05-31 17:43:06
 img:
 password:
-summary:
+summary: 第三部分:集群测试&配置历史服务器
 tags:
 - hadoop
 categories:

@@ -26,7 +26,8 @@ categories:
     mkdir -p /opt/lagou/software  # 软件安装包存放目录
     mkdir -p /opt/lagou/servers   # 软件安装目录
     ```
-- [Hadoop下载地址](https://archive.apache.org/dist/hadoop/common/hadoop-2.9.2/)
+- [Hadoop-2.9.2下载地址](https://archive.apache.org/dist/hadoop/common/hadoop-2.9.2/)
+- [Hadoop最新下载地址](https://hadoop.apache.org/releases.html)
 - [Hadoop官网地址](http://hadoop.apache.org/)
 - 上传hadoop安装文件到/opt/lagou/software
     ```
@@ -55,15 +56,19 @@ categories:
 
 
 ### 概述
+第一部分
 1. 安装软件VMware Fusion 12 
 2. 在虚拟机上安装CentOS7
 3. 准备三台虚拟机（静态IP，关闭防火墙，修改主机名，配置免密登录，集群时间同步）
+
+第二部分
 1. 集群规划
 1. 安装Hadoop
 1. 启动集群
+
+第三部分
 1. 集群测试
-2. 配置历史服务器
-3. ...
+2. 配置日志历史服务器
 
 ### VMware Fusion 12.1.2 激活码
 ```

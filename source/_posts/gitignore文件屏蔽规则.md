@@ -7,9 +7,9 @@ mathjax: true
 date: 2021-03-31 19:27:48
 img:
 password:
-summary:
+summary: 屏蔽不想提交的的文件
 tags:
-- git
+- Git
 - gitignore
 categories:
 - 开发工具

@@ -7,7 +7,7 @@ mathjax: true
 date: 2021-05-18 09:42:53
 img:
 password:
-summary:
+summary: 将celery集成到Django框架中
 tags:
 - django
 - django-celery-beat
@@ -16,8 +16,11 @@ categories:
 - 后端
 
 ---
+> 将celery集成到Django框架中
 
-> celery很容易集成到Django框架中，实现定时任务需要安装django-celery-beat插件.
+<!--more-->
+
+celery很容易集成到Django框架中，实现定时任务需要安装django-celery-beat插件.
 
 ### 前言
 #### 添加定时任务

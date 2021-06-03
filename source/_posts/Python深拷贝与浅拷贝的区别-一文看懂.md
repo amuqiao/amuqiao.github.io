@@ -7,7 +7,7 @@ mathjax: true
 date: 2021-04-23 16:54:53
 img:
 password:
-summary:
+summary: 深刻理解Python深拷贝与浅拷贝的区别
 tags:
 - python
 - copy
@@ -15,8 +15,6 @@ categories:
 - 后端
 
 ---
-
-
 
 > 很多人在学python的过程中往往会混淆深拷贝与浅拷贝的概念，深拷贝是对于对象的完全复制，这个好理解。很多人对浅拷贝理解为windows的快捷方式，其实也不尽然...下面的文字将会让你彻底理解他们之间的关系。
 > <!-- more -->

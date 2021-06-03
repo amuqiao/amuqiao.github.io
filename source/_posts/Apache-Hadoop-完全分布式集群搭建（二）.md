@@ -100,9 +100,9 @@ export JAVA_HOME=/opt/lagou/servers/jdk1.8.0_231
 2. 指定NameNode节点以及数据存储目录（修改core-site.xml）
 
 覆盖原文件信息
-```
+```xml
 vim core-site.xml
-
+<configuration>
 <!-- 指定HDFS中NameNode的地址 --> 
 <property> 
     <name>fs.defaultFS</name> 
@@ -114,13 +114,15 @@ vim core-site.xml
     <name>hadoop.tmp.dir</name>
     <value>/opt/lagou/servers/hadoop-2.9.2/data/tmp</value> 
 </property>
+</configuration>
 ```
 ![LRVmOT](https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/LRVmOT.png)
 
 3. 指定secondarynamenode节点(修改hdfs-site.xml)
-```
+```xml
 vim hdfs-site.xml
 
+<configuration>
 <!-- 指定Hadoop辅助名称节点主机配置 --> 
 <property>
     <name>dfs.namenode.secondary.http-address</name>
@@ -132,6 +134,7 @@ vim hdfs-site.xml
     <name>dfs.replication</name>
     <value>3</value> 
 </property>
+</configuration>
 ```
 
 4. 指定datanode从节点(修改slaves文件，每个节点配置信息占一行)
@@ -156,15 +159,18 @@ export JAVA_HOME=/opt/lagou/servers/jdk1.8.0_231
 2. 指定MapReduce计算框架运行Yarn资源调度框架(修改mapred-site.xml)
 
 
-```
+```xml
 mv mapred-site.xml.template mapred-site.xml 
 vim mapred-site.xml
 
+<configuration>
 <!-- 指定MR运行在Yarn上 --> 
 <property>
     <name>mapreduce.framework.name</name>
     <value>yarn</value> 
 </property>
+
+</configuration>
 ```
 
 #### Yarn集群配置
@@ -172,16 +178,16 @@ vim mapred-site.xml
 
 
 ```
-vim yarn-env.sh export 
-
-JAVA_HOME=/opt/lagou/servers/jdk1.8.0_231
+vim yarn-env.sh 
+export JAVA_HOME=/opt/lagou/servers/jdk1.8.0_231
 ```
 2. 指定ResourceMnager的master节点信息(修改yarn-site.xml)
 
 
-```
+```xml
 vim yarn-site.xml
 
+<configuration>
 <!-- 指定YARN的ResourceManager的地址 --> 
 <property>
     <name>yarn.resourcemanager.hostname</name>
@@ -194,6 +200,7 @@ vim yarn-site.xml
     <name>yarn.nodemanager.aux-services</name>
     <value>mapreduce_shuffle</value> 
 </property>
+</configuration>
 ```
 
 3. 指定NodeManager节点（slaves文件已修改）
@@ -262,7 +269,7 @@ rsync -rvl /opt/module root@linux123:/opt/
 [root@linux121 bin]$ vim rsync-script
 ```
 在文件中编写shell代码
-```
+```bash
 #!/bin/bash
 
 #1 获取命令输入参数的个数，如果个数为0，直接退出命令 
@@ -323,4 +330,93 @@ done
 ```
 [root@linux121 hadoop-2.9.2]$ hadoop namenode -format
 ```
-![rL5j2p](https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/rL5j2p.png)
+格式化命令执行效果：
+![formatted](https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/d2gPoU.png)
+格式化后创建的文件：/opt/lagou/servers/hadoop-2.9.2/data/tmp/dfs/name/current
+![fsimage](https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/lXfYXL.png)
+
+1. 在linux121上启动NameNode
+```
+[root@linux121 hadoop-2.9.2]$ hadoop-daemon.sh start namenode [root@linux121 hadoop-2.9.2]$ jps
+```
+> jps是jdk提供的一个查看当前java进程的小工具,JavaVirtual Machine Process Status Tool的缩写
+
+2. 在linux121、linux122以及linux123上分别启动DataNode
+```
+[root@linux121 hadoop-2.9.2]# hadoop-daemon.sh start namenode
+starting namenode, logging to /opt/lagou/servers/hadoop-2.9.2/logs/hadoop-root-namenode-linux121.out
+[root@linux121 hadoop-2.9.2]# jps
+75537 Jps
+75452 NameNode
+```
+
+3. web端查看Hdfs界面
+
+- [http://linux121:50070/dfshealth.html#tab-overview](http://linux121:50070/dfshealth.html#tab-overview)【主机已配置域名映射点击这个链接】
+- [http://192.168.80.121:50070/dfshealth.html#tab-overview](http://192.168.80.121:50070/dfshealth.html#tab-overview)【主机未配置域名映射点击这个链接】
+
+![bbYvlR](https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/bbYvlR.png)
+
+![4geSBI](https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/4geSBI.png)
+点击Live Nodes查看详情
+![vym73F](https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/vym73F.png)
+
+若配置后，没有按照预期的显示
+
+关闭集群，把三台机子上的Hadoop安装目录下的data、logs文件夹均删除，然后格式化namenode，最后重启集群
+
+#### 集群群起
+
+如果已经单节点方式启动了Hadoop,可以先停止之前的启动的Namenode与Datanode进程,如果之前Namenode没有执行格式化，这里需要执行格式化!!!!
+
+```
+hadoop namenode -format
+```
+1. 启动HDFS
+```
+[root@linux121 hadoop-2.9.2]$ sbin/start-dfs.sh 
+[root@linux121 hadoop-2.9.2]$ jps 
+4166 NameNode 
+4482 Jps 
+4263 DataNode
+
+[root@linux122 hadoop-2.9.2]$ jps 
+3218 DataNode 
+3288 Jps
+
+[root@linux123 hadoop-2.9.2]$ jps 
+3221 DataNode 
+3283 SecondaryNameNode 
+3364 Jps
+```
+
+2. 启动YARN
+> NameNode和ResourceManger不是在同一台机器，不能在NameNode上启动 YARN，应该 在ResouceManager所在的机器上启动YARN。
+
+在linux123上启动yarn
+```
+[root@linux123 hadoop-2.9.2]$ sbin/start-yarn.sh
+```
+
+#### Hadoop集群启动停止命令汇总
+各个服务组件逐一启动/停止
+```
+# 分别启动/停止HDFS组件
+hadoop-daemon.sh start|stop namenode|datanode|secondarynamenode
+
+# 启动/停止YARN
+yarn-daemon.sh start|stop resourcemanager|nodemanager
+```
+
+各个模块分开启动/停止（配置ssh是前提）常用
+```
+# 整体启动/停止HDFS
+
+start-dfs.sh
+stop-dfs.sh
+
+# 整体启动/停止YARN
+
+start-yarn.sh
+stop-yarn.sh
+```

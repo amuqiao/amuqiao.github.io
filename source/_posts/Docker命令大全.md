@@ -7,22 +7,23 @@ mathjax: true
 date: 2021-03-26 10:35:52
 img:
 password:
-summary:
+summary: 操作命令分类整理
 tags:
-- docker
+- Docker
 categories:
 - 运维
 
 ---
 
 ### 容器生命周期管理
-- run
-- start/stop/restart
-- kill
-- rm
-- pause/unpause
-- create
-- exec
+#### run
+#### start/stop/restart
+#### kill
+#### rm
+#### pause/unpause
+#### create
+#### exec
+
 ### 容器操作
 - ps
 - inspect

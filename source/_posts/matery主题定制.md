@@ -96,22 +96,19 @@ featureImages:
 ```
 在`featureimages`新增图片后添加到配置中
 
-### SEO优化
-> SEO（Search Engine Optimization）：汉译为搜索引擎优化。是一种方式：利用搜索引擎的规则提高网站在有关搜索引擎内的自然排名。 ——百度百科
+### 添加视频链接
 
+若不设置height和width则采用默认大小
 
-#### 百度收录
-GitHub是不允许百度的Spider（蜘蛛）爬取GitHub上的内容的，所以任何部署在GitHub上的静态博客都是不能百度爬取到的！
+```
+<iframe src="https://vdn1.vzuu.com/SD/e3cc53d8-a9cb-11e8-9bd8-0242ac112a24.mp4?disable_local_cache=1&auth_key=1622534176-0-0-63692becd56e6a743c78d08f951eccd8&f=mp4&bu=http-com&expiration=1622534176&v=hw" </iframe>
+```
+<iframe src="https://vdn1.vzuu.com/SD/e3cc53d8-a9cb-11e8-9bd8-0242ac112a24.mp4?disable_local_cache=1&auth_key=1622534176-0-0-63692becd56e6a743c78d08f951eccd8&f=mp4&bu=http-com&expiration=1622534176&v=hw" </iframe>
 
-让百度收录你的站点
-首先来搞百度的，刚建完站在百度上是不可能搜索到我们的网站的，可以先在百度上搜索site:<你的域名>，一般是搜不到的，然后点击 提交网址 将自己的网站提交给百度。
-![zsOfGJ](https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/zsOfGJ.png)
+html中的iframe标签
 
-添加自己的站点到百度
-点击`提交网址`
-![dIPnoa](https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/dIPnoa.png)
+```
+<iframe height=520 width=820 src="//player.bilibili.com/player.html?aid=502349665&bvid=BV1KK411w7rv&cid=315155499&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+```
 
-
-参考文档
-
-- [Hexo进阶之各种优化](https://blog.sky03.cn/posts/42790.html#toc-heading-17)
+<iframe height=520 width=820 src="//player.bilibili.com/player.html?aid=502349665&bvid=BV1KK411w7rv&cid=315155499&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>

@@ -7,7 +7,7 @@ mathjax: true
 date: 2021-04-21 14:28:53
 img:
 password:
-summary:
+summary: JSONField定义和查询示例
 tags:
 - django
 - python
@@ -21,8 +21,9 @@ categories:
 
 
 > Django最新版v3.1的主要更新之一便是完善了对JSON数据存储的支持，新增models.JSONField
-> 和forms.JSONField
-> ，可在所有受支持的数据库后端上使用
+> 和forms.JSONField，可在所有受支持的数据库后端上使用
+
+
 
 目前支持的数据库以及对应版本主要有
 - MariaDB 10.2.7+
@@ -158,3 +159,8 @@ Hero.objects.filter(data__age__lte=12)
 Hero.objects.filter(data__group__name__startswith='ow')
 
 ```
+
+
+参考文档
+
+- [Django ORM中原生JSONField的使用方法](https://www.modb.pro/db/28826)

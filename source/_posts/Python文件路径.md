@@ -6,10 +6,10 @@ toc: true
 mathjax: true
 date: 2021-04-02 14:41:34
 img:
-password:
+password: 获取不同层级的目录路径
 summary:
 tags:
-- python
+- Python
 - 文件路径
 categories:
 - 后端
