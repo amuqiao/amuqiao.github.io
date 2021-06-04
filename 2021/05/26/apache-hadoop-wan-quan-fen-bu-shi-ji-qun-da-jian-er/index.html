@@ -698,8 +698,9 @@ export JAVA_HOME&#x3D;&#x2F;opt&#x2F;lagou&#x2F;servers&#x2F;jdk1.8.0_231<span a
 <span class="token comment">#1 获取命令输入参数的个数，如果个数为0，直接退出命令 </span>
 <span class="token assign-left variable">paramnum</span><span class="token operator">=</span><span class="token variable">$#</span>
 
-<span class="token keyword">if</span><span class="token variable"><span class="token punctuation">((</span>paramnum<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">))</span></span><span class="token punctuation">;</span> <span class="token keyword">then</span> 
-<span class="token builtin class-name">echo</span> no params<span class="token punctuation">;</span> 
+<span class="token keyword">if</span><span class="token variable"><span class="token punctuation">((</span>paramnum<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">))</span></span><span class="token punctuation">;</span> 
+<span class="token keyword">then</span> 
+    <span class="token builtin class-name">echo</span> no params<span class="token punctuation">;</span> 
 <span class="token builtin class-name">exit</span><span class="token punctuation">;</span> 
 <span class="token keyword">fi</span>
 
@@ -718,12 +719,13 @@ export JAVA_HOME&#x3D;&#x2F;opt&#x2F;lagou&#x2F;servers&#x2F;jdk1.8.0_231<span a
 
 <span class="token comment">#5 循环执行rsync</span>
 
-<span class="token keyword">for</span><span class="token variable"><span class="token punctuation">((</span>host<span class="token operator">=</span><span class="token number">121</span><span class="token punctuation">;</span> host<span class="token operator">&lt;</span><span class="token number">124</span><span class="token punctuation">;</span> host<span class="token operator">++</span><span class="token punctuation">))</span></span><span class="token punctuation">;</span> <span class="token keyword">do</span>
+<span class="token keyword">for</span><span class="token variable"><span class="token punctuation">((</span>host<span class="token operator">=</span><span class="token number">121</span><span class="token punctuation">;</span> host<span class="token operator">&lt;</span><span class="token number">124</span><span class="token punctuation">;</span> host<span class="token operator">++</span><span class="token punctuation">))</span></span><span class="token punctuation">;</span> 
+<span class="token keyword">do</span>
 
-<span class="token builtin class-name">echo</span> ------------------- linux<span class="token variable">$host</span> -------------
+<span class="token builtin class-name">echo</span> -------------linux<span class="token variable">$host</span> -------------
 <span class="token function">rsync</span> -rvl <span class="token variable">$pdir</span>/<span class="token variable">$file_name</span> <span class="token variable">$user</span>@linux<span class="token variable">$host</span><span class="token builtin class-name">:</span><span class="token variable">$pdir</span>
 
-<span class="token keyword">done</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<span class="token keyword">done</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li><p>修改脚本 rsync-script 具有执行权限</p>
 </li>
 </ol>
@@ -1113,9 +1115,7 @@ stop-yarn.sh<span aria-hidden="true" class="line-numbers-rows"><span></span><spa
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
-第一部分:虚拟机环境准备
-
+                            第一部分:虚拟机环境准备
                         
                     </div>
                     <div class="publish-info">
@@ -1341,7 +1341,7 @@ stop-yarn.sh<span aria-hidden="true" class="line-numbers-rows"><span></span><spa
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">35.4k</span>&nbsp;字
+                class="white-color">37k</span>&nbsp;字
             
             
             
