@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="baidu-site-verification" content="code-XwKXPvlX0k" />
-    <meta name="keywords" content="Mac的VMwareFusion安装VMware Tools解决不能复制粘贴的问题, 王路飞">
+    <meta name="keywords" content="Apache Hadoop 完全分布式集群搭建（四）, 王路飞">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Mac的VMwareFusion安装VMware Tools解决不能复制粘贴的问题 | 王路飞</title>
+    <title>Apache Hadoop 完全分布式集群搭建（四） | 王路飞</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -311,12 +311,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/43.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/30.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Mac的VMwareFusion安装VMware Tools解决不能复制粘贴的问题</h1>
+                    <h1 class="description center-align post-title">Apache Hadoop 完全分布式集群搭建（四）</h1>
                 </div>
             </div>
         </div>
@@ -432,8 +432,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/vmware-fusion/">
-                                <span class="chip bg-color">vmware fusion</span>
+                            <a href="/tags/hadoop/">
+                                <span class="chip bg-color">hadoop</span>
                             </a>
                         
                     </div>
@@ -444,8 +444,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="post-category">
-                                开发工具
+                            <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" class="post-category">
+                                大数据
                             </a>
                         
                     </div>
@@ -457,7 +457,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-05-31
+                    2021-06-04
                 </div>
                 
 
@@ -466,7 +466,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    855
+                    101
                 </div>
                 
 
@@ -486,102 +486,17 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <blockquote>
-<p>另一种思路：mac ssh 虚拟机也可以解决复制粘贴问题</p>
-</blockquote>
-<span id="more"></span>
+                <h3 id="其他配置"><a href="#其他配置" class="headerlink" title="其他配置"></a>其他配置</h3><h4 id="修改副本数量"><a href="#修改副本数量" class="headerlink" title="修改副本数量"></a>修改副本数量</h4><p>在configuration中新增配置，并同步到其他节点</p>
+<pre class="line-numbers language-none"><code class="language-none">vi hdfs-site.xml
 
-<ul>
-<li>将VMTools拷贝到虚拟机中手动安装</li>
-<li>在虚拟机中安装VMTools，缺少编译环境则安装编辑环境</li>
-<li>在所需环境都安装完成后，执行VMTools安装</li>
-<li>开启共享文件夹</li>
-</ul>
-<p>/Applications/VMware Fusion.app/Contents/Library/isoimages<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/qh9yVD.png" alt="qh9yVD"><br>点击linux.iso<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/qLgrZi.png" alt="qLgrZi"><br>将MwareTools-10.3.23-17030940.tar.gz复制到Downloads文件夹<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/CAnncG.png" alt="CAnncG"></p>
-<p>将VMTools拷贝到虚拟机中进行安装</p>
-<pre class="line-numbers language-none"><code class="language-none">scp ~&#x2F;Downloads&#x2F;VMwareTools-10.3.23-17030940.tar.gz root@192.168.80.121:&#x2F;opt&#x2F;lagou&#x2F;software
-scp ~&#x2F;Downloads&#x2F;VMwareTools-10.3.23-17030940.tar.gz root@192.168.80.122:&#x2F;opt&#x2F;lagou&#x2F;software
-scp ~&#x2F;Downloads&#x2F;VMwareTools-10.3.23-17030940.tar.gz root@192.168.80.123:&#x2F;opt&#x2F;lagou&#x2F;software<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>解压</p>
-<pre class="line-numbers language-none"><code class="language-none">tar -zxvf VMwareTools-10.3.23-17030940.tar.gz ..&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h3 id="安装VMTools"><a href="#安装VMTools" class="headerlink" title="安装VMTools"></a>安装VMTools</h3><pre class="line-numbers language-none"><code class="language-none">cd vmware-tools-distrib
-.&#x2F;vmware-install.pl 
--bash: .&#x2F;vmware-install.pl: &#x2F;usr&#x2F;bin&#x2F;perl: bad interpreter: No such file or directory<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>安装perl, gcc</p>
-<pre class="line-numbers language-none"><code class="language-none">yum -y update
-
-yum -y install kernel-headers kernel-devel gcc perl<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>重启reboot 很重要！！！</p>
-<p>环境安装后重复上面运行vmware-install.pl即可</p>
-<pre class="line-numbers language-none"><code class="language-none">sudo .&#x2F;vmware-install.pl 
-open-vm-tools packages are available from the OS vendor and VMware recommends 
-using open-vm-tools packages. See http:&#x2F;&#x2F;kb.vmware.com&#x2F;kb&#x2F;2073803 for more 
-information.
-Do you still want to proceed with this installation? [no]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>输入yes，然后一路回车，默认选项安装。</p>
-<pre class="line-numbers language-none"><code class="language-none">To enable advanced X features (e.g., guest resolution fit, drag and drop, and 
-file and text copy&#x2F;paste), you will need to do one (or more) of the following:
-1. Manually start &#x2F;usr&#x2F;bin&#x2F;vmware-user
-2. Log out and log back into your desktop session
-3. Restart your X session.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/WNqYPN.png" alt="WNqYPN"></p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;usr&#x2F;bin&#x2F;vmware-user start &#x2F;&#x2F;&#x2F;手动启动
-vmware-user: could not open &#x2F;proc&#x2F;fs&#x2F;vmblock&#x2F;dev<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>此错误未解决</p>
-<p>可以设置共享目录</p>
-<p>然后设置虚拟机共享目录后即可在/mnt/hgfs下看到共享目录</p>
-<h3 id="其他解决途径"><a href="#其他解决途径" class="headerlink" title="其他解决途径"></a>其他解决途径</h3><blockquote>
-<p>mac ssh vmware 虚拟机 解决复制粘贴问题</p>
-</blockquote>
-<pre class="line-numbers language-none"><code class="language-none">ssh 虚拟机用户名@虚拟机ip地址
-输入密码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-
-<h3 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h3><h4 id="yum-y-install安装失败"><a href="#yum-y-install安装失败" class="headerlink" title="yum -y install安装失败"></a>yum -y install安装失败</h4><p>安装编译环境</p>
-<pre class="line-numbers language-none"><code class="language-none"># yum -y install perl gcc make kernel-headers kernel-devel
-yum -y update
-
-yum -y install kernel-headers kernel-devel gcc perl<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>出现错误</p>
-<pre class="line-numbers language-none"><code class="language-none">...
-http:&#x2F;&#x2F;mirrors.163.com&#x2F;centos&#x2F;7.2.1511&#x2F;os&#x2F;x86_64&#x2F;repodata&#x2F;repomd.xml: [Errno 14] curl#6 - &quot;Could not resolve host: mirrors.163.com; Unknown error&quot;
-Trying other mirror.
-...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>一眼一看就知道是网络的问题，是不是没设置DNS，检查发现ping baidu.com不通，应该是DNS问题</p>
-<p>修改DNS配置，将MAC的DNS地址添加进来</p>
-<pre class="line-numbers language-none"><code class="language-none">vi &#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;ifcfg-ens33
-
-DNS1&#x3D;xxxx
-DNS2&#x3D;xxxx
-
-# 保存退出，重启网络服务
-systemctl restart network 或者 service network restart<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>重启网络后，能正常ping通baidu.com</p>
-<p>继续执行</p>
-<h4 id="卸载VMTools"><a href="#卸载VMTools" class="headerlink" title="卸载VMTools"></a>卸载VMTools</h4><p>三、卸载：</p>
-<p>到刚才解压的目录/usr/local/vmware-tools-distrib/bin 目录或者 /usr/bin</p>
-<pre class="line-numbers language-none"><code class="language-none">cd vmware-tools-distrib&#x2F;bin
-
-.&#x2F;vmware-uninstall-tools.pl    &#x2F;&#x2F;&#x2F;运行卸载程序
-
-rm -rf &#x2F;etc&#x2F;vmware-caf     &#x2F;&#x2F;&#x2F;递归强制 删除残留目录
-
-rm -rf &#x2F;etc&#x2F;vmware-tools   &#x2F;&#x2F;&#x2F;递归强制 删除残留目录
-
-rm -rvf &#x2F;usr&#x2F;lib&#x2F;vmware-tools     &#x2F;&#x2F;&#x2F;递归强制 删除残留目录
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/joxin/p/9700653.html">VMware安装CentOS7踩坑</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yuesichiu/article/details/53351324">【CentOS7】yum安装时出现错误Errno 14 Couldn’t resolve host的解决办法</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013162548/article/details/45567681/">VMwareTools安装及出现kernel header path的解决方法</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/z69183787/article/details/79283313">Centos7最小化终端命令行安装VMware-tools.pl</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sirchenhua/article/details/49719659">解决vmware fusion + centos 7安装vmtools时提示The path “” is not a valid path to the xxx kernel headers.</a></li>
-<li><a target="_blank" rel="noopener" href="https://finolo.gy/2020/01/Windows%E4%B8%BB%E6%9C%BA%E7%8E%AF%E5%A2%83CentOS7%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85VMware-Tools/">Windows主机环境CentOS7虚拟机安装VMware Tools</a></li>
-</ul>
+&lt;configuration&gt; 
+    &lt;property&gt; 
+        &lt;name&gt;dfs.replication&lt;&#x2F;name&gt; 
+        &lt;value&gt;1&lt;&#x2F;value&gt; 
+    &lt;&#x2F;property&gt; 
+&lt;&#x2F;configuration&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>参数优先级</p>
+<p>参数优先级排序：（1）代码中设置的值 &gt;（2）用户自定义配置文件 &gt;（3）服务器的默认配置</p>
 
                 
             </div>
@@ -608,7 +523,7 @@ rm -rvf &#x2F;usr&#x2F;lib&#x2F;vmware-tools     &#x2F;&#x2F;&#x2F;递归强制 
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://amuqiao.github.io/2021/05/31/mac-de-vmwarefusion-an-zhuang-vmware-tools-jie-jue-bu-neng-fu-zhi-nian-tie-de-wen-ti/">https://amuqiao.github.io/2021/05/31/mac-de-vmwarefusion-an-zhuang-vmware-tools-jie-jue-bu-neng-fu-zhi-nian-tie-de-wen-ti/</a>
+                    <a href="https://amuqiao.github.io/2021/06/04/apache-hadoop-wan-quan-fen-bu-shi-ji-qun-da-jian-si/">https://amuqiao.github.io/2021/06/04/apache-hadoop-wan-quan-fen-bu-shi-ji-qun-da-jian-si/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -646,8 +561,8 @@ rm -rvf &#x2F;usr&#x2F;lib&#x2F;vmware-tools     &#x2F;&#x2F;&#x2F;递归强制 
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/vmware-fusion/">
-                                    <span class="chip bg-color">vmware fusion</span>
+                                <a href="/tags/hadoop/">
+                                    <span class="chip bg-color">hadoop</span>
                                 </a>
                             
                         </div>
@@ -817,31 +732,80 @@ rm -rvf &#x2F;usr&#x2F;lib&#x2F;vmware-tools     &#x2F;&#x2F;&#x2F;递归强制 
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/05/31/linux-pei-zhi-ssh-mian-mi-deng-lu/">
+                <a href="/2021/06/04/apache-hadoop-wan-quan-fen-bu-shi-ji-qun-da-jian-si/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="Linux配置ssh免密登陆">
+                        <img src="/medias/featureimages/30.jpg" class="responsive-img" alt="Apache Hadoop 完全分布式集群搭建（四）">
                         
-                        <span class="card-title">Linux配置ssh免密登陆</span>
+                        <span class="card-title">Apache Hadoop 完全分布式集群搭建（四）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
-三台机器机器实现互相免密码登录
-
+                            其他配置
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-05-31
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-06-04
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" class="post-category">
+                                    大数据
+                                </a>
+                            
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/hadoop/">
+                        <span class="chip bg-color">hadoop</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/06/04/junit-ji-ben-zhu-jie/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="Junit基本注解">
+                        
+                        <span class="card-title">Junit基本注解</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Before、After等使用方法
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-06-04
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -857,61 +821,12 @@ rm -rvf &#x2F;usr&#x2F;lib&#x2F;vmware-tools     &#x2F;&#x2F;&#x2F;递归强制 
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/linux/">
-                        <span class="chip bg-color">linux</span>
+                    <a href="/tags/java/">
+                        <span class="chip bg-color">java</span>
                     </a>
                     
-                    <a href="/tags/ssh/">
-                        <span class="chip bg-color">ssh</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2021/05/26/apache-hadoop-wan-quan-fen-bu-shi-ji-qun-da-jian-er/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="Apache Hadoop 完全分布式集群搭建（二）">
-                        
-                        <span class="card-title">Apache Hadoop 完全分布式集群搭建（二）</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            第二部分:集群规划&安装Hadoop
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-26
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" class="post-category">
-                                    大数据
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/hadoop/">
-                        <span class="chip bg-color">hadoop</span>
+                    <a href="/tags/junit/">
+                        <span class="chip bg-color">junit</span>
                     </a>
                     
                 </div>

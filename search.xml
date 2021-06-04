@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Apache Hadoop 完全分布式集群搭建（四）</title>
+      <link href="2021/06/04/apache-hadoop-wan-quan-fen-bu-shi-ji-qun-da-jian-si/"/>
+      <url>2021/06/04/apache-hadoop-wan-quan-fen-bu-shi-ji-qun-da-jian-si/</url>
+      
+        <content type="html"><![CDATA[<h3 id="其他配置"><a href="#其他配置" class="headerlink" title="其他配置"></a>其他配置</h3><h4 id="修改副本数量"><a href="#修改副本数量" class="headerlink" title="修改副本数量"></a>修改副本数量</h4><p>在configuration中新增配置，并同步到其他节点</p><pre class="line-numbers language-none"><code class="language-none">vi hdfs-site.xml&lt;configuration&gt;     &lt;property&gt;         &lt;name&gt;dfs.replication&lt;&#x2F;name&gt;         &lt;value&gt;1&lt;&#x2F;value&gt;     &lt;&#x2F;property&gt; &lt;&#x2F;configuration&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>参数优先级</p><p>参数优先级排序：（1）代码中设置的值 &gt;（2）用户自定义配置文件 &gt;（3）服务器的默认配置</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 大数据 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> hadoop </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Junit基本注解</title>
       <link href="2021/06/04/junit-ji-ben-zhu-jie/"/>
       <url>2021/06/04/junit-ji-ben-zhu-jie/</url>
