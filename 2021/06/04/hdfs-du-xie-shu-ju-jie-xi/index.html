@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="baidu-site-verification" content="code-XwKXPvlX0k" />
-    <meta name="keywords" content="Docker部署flask服务, 王路飞">
+    <meta name="keywords" content="HDFS读写数据解析, 王路飞">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Docker部署flask服务 | 王路飞</title>
+    <title>HDFS读写数据解析 | 王路飞</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -311,12 +311,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/39.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Docker部署flask服务</h1>
+                    <h1 class="description center-align post-title">HDFS读写数据解析</h1>
                 </div>
             </div>
         </div>
@@ -432,12 +432,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/docker/">
-                                <span class="chip bg-color">docker</span>
+                            <a href="/tags/hadoop/">
+                                <span class="chip bg-color">hadoop</span>
                             </a>
                         
-                            <a href="/tags/flask/">
-                                <span class="chip bg-color">flask</span>
+                            <a href="/tags/hdfs/">
+                                <span class="chip bg-color">hdfs</span>
                             </a>
                         
                     </div>
@@ -448,8 +448,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
-                                运维
+                            <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" class="post-category">
+                                大数据
                             </a>
                         
                     </div>
@@ -461,7 +461,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-25
+                    2021-06-04
                 </div>
                 
 
@@ -470,7 +470,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.5k
+                    347
                 </div>
                 
 
@@ -490,165 +490,24 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <blockquote>
-<p>docker部署flask服务示例</p>
-</blockquote>
-<span id="more"></span>
-
-<p>首先推荐阅读Flask 官方文档<a target="_blank" rel="noopener" href="https://dormousehole.readthedocs.io/en/latest/">欢迎来到 Flask 的世界</a>快速了解Flask架构</p>
-<h3 id="快速搭建一个flask服务"><a href="#快速搭建一个flask服务" class="headerlink" title="快速搭建一个flask服务"></a>快速搭建一个flask服务</h3><p>一个最小的应用</p>
-<pre class="line-numbers language-none"><code class="language-none">from flask import Flask
-app &#x3D; Flask(__name__)
-
-@app.route(&#39;&#x2F;&#39;)
-def hello():
-	return &quot;Hello World!&quot;
-
-if __name__ &#x3D;&#x3D; &#39;__main__&#39;:
-	app.run(host&#x3D;&#39;0.0.0.0&#39;)
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>运行demo</p>
-<pre class="line-numbers language-none"><code class="language-none">$ export FLASK_APP&#x3D;app.py
-$ flask run
- * Running on http:&#x2F;&#x2F;127.0.0.1:5000&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>或者<code>python -m flask</code></p>
-<pre class="line-numbers language-none"><code class="language-none">$ export FLASK_APP&#x3D;app.py
-$ python -m flask run
- * Running on http:&#x2F;&#x2F;127.0.0.1:5000&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>或者</p>
-<pre class="line-numbers language-none"><code class="language-none">✗ python3 app.py
- * Serving Flask app &quot;app&quot; (lazy loading)
- * Environment: production
-   WARNING: This is a development server. Do not use it in a production deployment.
-   Use a production WSGI server instead.
- * Debug mode: off
- * Running on http:&#x2F;&#x2F;0.0.0.0:5000&#x2F; (Press CTRL+C to quit)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>外部可见的服务器</p>
-<pre class="line-numbers language-none"><code class="language-none">flask run --host&#x3D;0.0.0.0  # 可以让服务器被公开访问<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>调试模式</p>
-<pre class="line-numbers language-none"><code class="language-none"># 如果需要打开所有开发功能（包括调试模式），那么要在运行服务器之前导出 FLASK_ENV 环境变量并把其设置为 development
-$ export FLASK_ENV&#x3D;development
-$ flask run<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="项目文件"><a href="#项目文件" class="headerlink" title="项目文件"></a>项目文件</h3><p><a target="_blank" rel="noopener" href="https://github.com/docker/awesome-compose/tree/master/flask">代码示例下载</a></p>
-<pre class="line-numbers language-none"><code class="language-none">.
-├── README.md
-├── app
-│   ├── Dockerfile
-│   ├── app.py
-│   └── requirements.txt
-└── docker-compose.yaml<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="docker-部署服务"><a href="#docker-部署服务" class="headerlink" title="docker 部署服务"></a>docker 部署服务</h3><pre class="line-numbers language-none"><code class="language-none"> ✗ cd flask-demo&#x2F;app
- ✗ docker build -t&#x3D;&quot;flask-demo:v1&quot; .
-[+] Building 26.3s (11&#x2F;11) FINISHED
- &#x3D;&gt; [internal] load build definition from Dockerfile                                                                                                                0.0s
- &#x3D;&gt; &#x3D;&gt; transferring dockerfile: 296B                                                                                                                                0.0s
- &#x3D;&gt; [internal] load .dockerignore                                                                                                                                   0.0s
- &#x3D;&gt; &#x3D;&gt; transferring context: 2B                                                                                                                                     0.0s
- &#x3D;&gt; [internal] load metadata for docker.io&#x2F;library&#x2F;python:3.7-alpine                                                                                               26.1s
- &#x3D;&gt; [auth] library&#x2F;python:pull token for registry-1.docker.io                                                                                                       0.0s
- &#x3D;&gt; [internal] load build context                                                                                                                                   0.0s
- &#x3D;&gt; &#x3D;&gt; transferring context: 697B                                                                                                                                   0.0s
- &#x3D;&gt; [1&#x2F;5] FROM docker.io&#x2F;library&#x2F;python:3.7-alpine@sha256:39ad96c8188f69d513ded616433396a9ab90e061ca85d8eacf6514fa27ec3d40                                          0.0s
- &#x3D;&gt; &#x3D;&gt; resolve docker.io&#x2F;library&#x2F;python:3.7-alpine@sha256:39ad96c8188f69d513ded616433396a9ab90e061ca85d8eacf6514fa27ec3d40                                          0.0s
- &#x3D;&gt; CACHED [2&#x2F;5] WORKDIR &#x2F;app                                                                                                                                       0.0s
- &#x3D;&gt; CACHED [3&#x2F;5] COPY requirements.txt &#x2F;app                                                                                                                         0.0s
- &#x3D;&gt; CACHED [4&#x2F;5] RUN pip3 install -r requirements.txt --no-cache-dir                                                                                                0.0s
- &#x3D;&gt; [5&#x2F;5] COPY . &#x2F;app                                                                                                                                               0.1s
- &#x3D;&gt; exporting to image                                                                                                                                              0.0s
- &#x3D;&gt; &#x3D;&gt; exporting layers                                                                                                                                             0.0s
- &#x3D;&gt; &#x3D;&gt; writing image sha256:9fc116d3008819bf171b4cb2a10957e842b77aa24bde2582d737040cd6f9eaec                                                                        0.0s
- &#x3D;&gt; &#x3D;&gt; naming to docker.io&#x2F;library&#x2F;flask-demo:v1   
-✗ docker images
-REPOSITORY           TAG       IMAGE ID       CREATED         SIZE
-flask-demo           v1        9fc116d30088   3 minutes ago   51.6MB<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>启动容器</p>
-<ul>
-<li><code>-p </code>指定端口映射，格式为：主机(宿主)端口:容器端口</li>
-<li><code>-d</code>: 后台运行容器，并返回容器ID；</li>
-<li><code>-i</code>: 以交互模式运行容器，通常与 -t 同时使用；</li>
-<li><code>-P</code>: 随机端口映射，容器内部端口随机映射到主机的端口</li>
-<li><code>-p</code>: 指定端口映射，格式为：主机(宿主)端口:容器端口</li>
-<li><code>-t</code>: 为容器重新分配一个伪输入终端，通常与 -i 同时使用；<pre class="line-numbers language-none"><code class="language-none">✗ docker run -d -p 5000:5000 flask-demo:v1
-* Serving Flask app &quot;app&quot; (lazy loading)
-* Environment: production
-  WARNING: This is a development server. Do not use it in a production deployment.
-  Use a production WSGI server instead.
-* Debug mode: off
-* Running on http:&#x2F;&#x2F;0.0.0.0:5000&#x2F; (Press CTRL+C to quit)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/r1MVwF.png" alt="hello world"></li>
-</ul>
-<p>打开浏览器输入<a href="localhost:5000">localhost:5000</a></p>
-<p>关闭容器</p>
-<pre class="line-numbers language-none"><code class="language-none">✗ docker ps
-CONTAINER ID   IMAGE           COMMAND            CREATED              STATUS          PORTS                    NAMES
-8c87f5f494b8   flask-demo:v1   &quot;python3 app.py&quot;   About a minute ago   Up 10 seconds   0.0.0.0:5000-&gt;5000&#x2F;tcp   nervous_bassi
-(venv) ➜  app git:(main) ✗ docker stop 8c87f5f494b8
-8c87f5f494b8
-(venv) ➜  app git:(main) ✗ docker start 8c87f5f494b8
-8c87f5f494b8<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-<h3 id="docker-compose-部署服务"><a href="#docker-compose-部署服务" class="headerlink" title="docker-compose 部署服务"></a><a target="_blank" rel="noopener" href="http://www.dockerinfo.net/docker-compose-%e9%a1%b9%e7%9b%ae">docker-compose</a> 部署服务</h3><blockquote>
-<p>Docker Compose 是 Docker 官方编排（Orchestration）项目之一，负责快速在集群中部署分布式应用。</p>
-</blockquote>
-<pre class="line-numbers language-none"><code class="language-none">✗ docker-compose up
-Building web
-[+] Building 16.4s (11&#x2F;11) FINISHED
- &#x3D;&gt; [internal] load build definition from Dockerfile                                                                                                                0.0s
- &#x3D;&gt; &#x3D;&gt; transferring dockerfile: 120B                                                                                                                                0.0s
- &#x3D;&gt; [internal] load .dockerignore                                                                                                                                   0.0s
- &#x3D;&gt; &#x3D;&gt; transferring context: 2B                                                                                                                                     0.0s
- &#x3D;&gt; [internal] load metadata for docker.io&#x2F;library&#x2F;python:3.7-alpine                                                                                               16.3s
- &#x3D;&gt; [auth] library&#x2F;python:pull token for registry-1.docker.io                                                                                                       0.0s
- &#x3D;&gt; [internal] load build context                                                                                                                                   0.0s
- &#x3D;&gt; &#x3D;&gt; transferring context: 505B                                                                                                                                   0.0s
- &#x3D;&gt; [1&#x2F;5] FROM docker.io&#x2F;library&#x2F;python:3.7-alpine@sha256:39ad96c8188f69d513ded616433396a9ab90e061ca85d8eacf6514fa27ec3d40                                          0.0s
- &#x3D;&gt; &#x3D;&gt; resolve docker.io&#x2F;library&#x2F;python:3.7-alpine@sha256:39ad96c8188f69d513ded616433396a9ab90e061ca85d8eacf6514fa27ec3d40                                          0.0s
- &#x3D;&gt; CACHED [2&#x2F;5] WORKDIR &#x2F;app                                                                                                                                       0.0s
- &#x3D;&gt; CACHED [3&#x2F;5] COPY requirements.txt &#x2F;app                                                                                                                         0.0s
- &#x3D;&gt; CACHED [4&#x2F;5] RUN pip3 install -r requirements.txt --no-cache-dir                                                                                                0.0s
- &#x3D;&gt; CACHED [5&#x2F;5] COPY . &#x2F;app                                                                                                                                        0.0s
- &#x3D;&gt; exporting to image                                                                                                                                              0.0s
- &#x3D;&gt; &#x3D;&gt; exporting layers                                                                                                                                             0.0s
- &#x3D;&gt; &#x3D;&gt; writing image sha256:9fc116d3008819bf171b4cb2a10957e842b77aa24bde2582d737040cd6f9eaec                                                                        0.0s
- &#x3D;&gt; &#x3D;&gt; naming to docker.io&#x2F;library&#x2F;flask-demo_web                                                                                                                   0.0s
-Successfully built 9fc116d3008819bf171b4cb2a10957e842b77aa24bde2582d737040cd6f9eaec
-WARNING: Image for service web was built because it did not already exist. To rebuild this image you must use &#96;docker-compose build&#96; or &#96;docker-compose up --build&#96;.
-Creating flask-demo_web_1 ... done
-Attaching to flask-demo_web_1
-web_1  |  * Serving Flask app &quot;app&quot; (lazy loading)
-web_1  |  * Environment: production
-web_1  |    WARNING: This is a development server. Do not use it in a production deployment.
-web_1  |    Use a production WSGI server instead.
-web_1  |  * Debug mode: off
-web_1  |  * Running on http:&#x2F;&#x2F;0.0.0.0:5000&#x2F; (Press CTRL+C to quit)
-
-^CGracefully stopping... (press Ctrl+C again to force)
-Stopping flask-demo_web_1 ... done
-(venv) ➜  flask-demo git:(main) ✗ docker ps -a
-CONTAINER ID   IMAGE                COMMAND                  CREATED          STATUS                        PORTS                    NAMES
-2e48108b8e1d   flask-demo_web       &quot;python3 app.py&quot;         6 minutes ago    Exited (137) 9 seconds ago                             flask-demo_web_1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><code>ctrl+c</code>终止服务,使用<code>docker ps -a</code>查看所有容器，再次启动容器使用<code>docker start 容器id</code></p>
-<pre class="line-numbers language-none"><code class="language-none">✗ docker start 2e48108b8e1d
-2e48108b8e1d
-(venv) ➜  flask-demo git:(main) ✗ docker ps
-CONTAINER ID   IMAGE            COMMAND            CREATED         STATUS          PORTS                    NAMES
-2e48108b8e1d   flask-demo_web   &quot;python3 app.py&quot;   9 minutes ago   Up 16 seconds   0.0.0.0:5000-&gt;5000&#x2F;tcp   flask-demo_web_1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>up参数</p>
-<ul>
-<li>构建，（重新）创建，启动，链接一个服务相关的容器。</li>
-<li>链接的服务都将会启动，除非他们已经运行。</li>
-<li>默认情况， <code>docker-compose up</code> 将会整合所有容器的输出，并且退出时，所有容器将会停止。</li>
-<li>如果使用 <code>docker-compose up -d</code> ，将会在后台启动并运行所有的容器。</li>
-<li>默认情况，如果该服务的容器已经存在， <code>docker-compose up</code> 将会停止并尝试重新创建他们（保持使用<code>volumes-from</code> 挂载的卷），以保证 <code>docker-compose.yml</code> 的修改生效。如果你不想容器被停止并重新创建，可以使用 <code>docker-compose up --no-recreate</code>。如果需要的话，这样将会启动已经停止的容器。</li>
-</ul>
-<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/docker/awesome-compose">一些docker-compose 部署示例</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/docker/awesome-compose/tree/master/flask">docker-compose部署flask</a> </li>
-</ul>
+                <h3 id="HDFS读数据流程"><a href="#HDFS读数据流程" class="headerlink" title="HDFS读数据流程"></a>HDFS读数据流程</h3><p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/s76ija.png" alt="读数据流程"></p>
+<ol>
+<li>客户端通过Distributed FileSystem向NameNode请求下载文件，NameNode通过查询元数据， 找到文件块所在的DataNode地址。</li>
+<li>挑选一台DataNode（就近原则，然后随机）服务器，请求读取数据。</li>
+<li>DataNode开始传输数据给客户端（从磁盘里面读取数据输入流，以Packet为单位来做校验）。</li>
+<li>客户端以Packet为单位接收，先在本地缓存，然后写入目标文件。</li>
+</ol>
+<h3 id="HDFS写数据流程"><a href="#HDFS写数据流程" class="headerlink" title="HDFS写数据流程"></a>HDFS写数据流程</h3><p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/vB0RtP.png" alt="写数据流程"></p>
+<ol>
+<li>客户端通过Distributed FileSystem模块向NameNode请求上传文件，NameNode检查目标文件 是否已存在，父目录是否存在。</li>
+<li>NameNode返回是否可以上传。</li>
+<li>客户端请求第一个 Block上传到哪几个DataNode服务器上。</li>
+<li>NameNode返回3个DataNode节点，分别为dn1、dn2、dn3。</li>
+<li>客户端通过FSDataOutputStream模块请求dn1上传数据，dn1收到请求会继续调用dn2，然后 dn2调用dn3，将这个通信管道建立完成。</li>
+<li>dn1、dn2、dn3逐级应答客户端。</li>
+<li>客户端开始往dn1上传第一个Block（先从磁盘读取数据放到一个本地内存缓存），以Packet为单 位，dn1收到一个Packet就会传给dn2，dn2传给dn3；dn1每传一个packet会放入一个确认队列 等待确认。</li>
+<li>当一个Block传输完成之后，客户端再次请求NameNode上传第二个Block的服务器。（重复执行 3-7步）。</li>
+</ol>
 
                 
             </div>
@@ -675,7 +534,7 @@ CONTAINER ID   IMAGE            COMMAND            CREATED         STATUS       
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://amuqiao.github.io/2021/03/25/docker-bu-shu-flask-fu-wu/">https://amuqiao.github.io/2021/03/25/docker-bu-shu-flask-fu-wu/</a>
+                    <a href="https://amuqiao.github.io/2021/06/04/hdfs-du-xie-shu-ju-jie-xi/">https://amuqiao.github.io/2021/06/04/hdfs-du-xie-shu-ju-jie-xi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -713,12 +572,12 @@ CONTAINER ID   IMAGE            COMMAND            CREATED         STATUS       
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/docker/">
-                                    <span class="chip bg-color">docker</span>
+                                <a href="/tags/hadoop/">
+                                    <span class="chip bg-color">hadoop</span>
                                 </a>
                             
-                                <a href="/tags/flask/">
-                                    <span class="chip bg-color">flask</span>
+                                <a href="/tags/hdfs/">
+                                    <span class="chip bg-color">hdfs</span>
                                 </a>
                             
                         </div>
@@ -888,46 +747,52 @@ CONTAINER ID   IMAGE            COMMAND            CREATED         STATUS       
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/03/25/docker-ru-men-shou-ce/">
+                <a href="/2021/06/04/hdfs-du-xie-shu-ju-jie-xi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="Docker入门手册">
+                        <img src="/medias/featureimages/39.jpg" class="responsive-img" alt="HDFS读写数据解析">
                         
-                        <span class="card-title">Docker入门手册</span>
+                        <span class="card-title">HDFS读写数据解析</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            快速入门docker
+                            介绍hdfs读写原理
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-25
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-06-04
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
-                                    运维
+                            <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" class="post-category">
+                                    大数据
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Docker/">
-                        <span class="chip bg-color">Docker</span>
+                    <a href="/tags/hadoop/">
+                        <span class="chip bg-color">hadoop</span>
+                    </a>
+                    
+                    <a href="/tags/hdfs/">
+                        <span class="chip bg-color">hdfs</span>
                     </a>
                     
                 </div>
@@ -941,33 +806,31 @@ CONTAINER ID   IMAGE            COMMAND            CREATED         STATUS       
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/24/git-cao-zuo-shou-ce/">
+                <a href="/2021/06/04/apache-hadoop-wan-quan-fen-bu-shi-ji-qun-da-jian-si/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="Git操作手册">
+                        <img src="/medias/featureimages/30.jpg" class="responsive-img" alt="Apache Hadoop 完全分布式集群搭建（四）">
                         
-                        <span class="card-title">Git操作手册</span>
+                        <span class="card-title">Apache Hadoop 完全分布式集群搭建（四）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
-Git 常用操作示例
-
+                            其他配置
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-24
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-06-04
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="post-category">
-                                    开发工具
+                            <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" class="post-category">
+                                    大数据
                                 </a>
                             
                             
@@ -977,8 +840,8 @@ Git 常用操作示例
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/git/">
-                        <span class="chip bg-color">git</span>
+                    <a href="/tags/hadoop/">
+                        <span class="chip bg-color">hadoop</span>
                     </a>
                     
                 </div>

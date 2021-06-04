@@ -1,3 +1,4 @@
+https://amuqiao.github.io/2021/06/04/hdfs-du-xie-shu-ju-jie-xi/
 https://amuqiao.github.io/2021/06/04/apache-hadoop-wan-quan-fen-bu-shi-ji-qun-da-jian-si/
 https://amuqiao.github.io/2021/06/04/junit-ji-ben-zhu-jie/
 https://amuqiao.github.io/2021/03/31/gitignore-wen-jian-ping-bi-gui-ze/
@@ -7,4 +8,3 @@ https://amuqiao.github.io/2021/05/20/apache-hadoop-wan-quan-fen-bu-shi-ji-qun-da
 https://amuqiao.github.io/2021/05/26/apache-hadoop-wan-quan-fen-bu-shi-ji-qun-da-jian-er/
 https://amuqiao.github.io/2021/06/03/hdfs-chang-yong-shell-ming-ling/
 https://amuqiao.github.io/2021/04/02/python-wen-jian-lu-jing/
-https://amuqiao.github.io/2021/04/21/django-orm-zhong-yuan-sheng-jsonfield-de-shi-yong-fang-fa/
