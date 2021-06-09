@@ -470,7 +470,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    347
+                    556
                 </div>
                 
 
@@ -507,8 +507,31 @@
 <li>dn1、dn2、dn3逐级应答客户端。</li>
 <li>客户端开始往dn1上传第一个Block（先从磁盘读取数据放到一个本地内存缓存），以Packet为单 位，dn1收到一个Packet就会传给dn2，dn2传给dn3；dn1每传一个packet会放入一个确认队列 等待确认。</li>
 <li>当一个Block传输完成之后，客户端再次请求NameNode上传第二个Block的服务器。（重复执行 3-7步）。</li>
+<li></li>
 </ol>
+<h3 id="演示从本地文件系统上传文件到hdfs"><a href="#演示从本地文件系统上传文件到hdfs" class="headerlink" title="演示从本地文件系统上传文件到hdfs"></a>演示从本地文件系统上传文件到hdfs</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">uploadPackage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">//1. 准备读取本地文件的输入流</span>
+    <span class="token class-name">FileInputStream</span> fileInputStream <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileInputStream</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span><span class="token string">"/Users/wangqiao/Downloads/test.txt"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
+    <span class="token comment">//2. 准备好写出数据到hdfs的输出流</span>
+    <span class="token class-name">FSDataOutputStream</span> fsDataOutputStream <span class="token operator">=</span> fs<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Path</span><span class="token punctuation">(</span><span class="token string">"/api_test/test.txt"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Progressable</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">progress</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">// 这个progress方法就是每传输64KB（packet）就会执行一次</span>
+            <span class="token comment">// 如果有数据要传递，建立通道时会执行一次</span>
+            <span class="token comment">// 所以当传输 0kb的文件时，不会打印&amp;</span>
+            <span class="token comment">// 传递小于64kb的文件时打印2个&amp;</span>
+            <span class="token comment">// 传递小于128kb的文件时会打印3个&amp;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"&amp;"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">//3. 实现流拷贝 默认关闭流选项是true，所以会自动关闭</span>
+    <span class="token class-name">IOUtils</span><span class="token punctuation">.</span><span class="token function">copyBytes</span><span class="token punctuation">(</span>fileInputStream<span class="token punctuation">,</span> fsDataOutputStream<span class="token punctuation">,</span> conf<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//4. 关闭流 可以再次关闭也可以不关了</span>
+    <span class="token class-name">IOUtils</span><span class="token punctuation">.</span><span class="token function">closeStream</span><span class="token punctuation">(</span>fsDataOutputStream<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">IOUtils</span><span class="token punctuation">.</span><span class="token function">closeStream</span><span class="token punctuation">(</span>fileInputStream<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -1044,7 +1067,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">37.6k</span>&nbsp;字
+                class="white-color">37.8k</span>&nbsp;字
             
             
             
