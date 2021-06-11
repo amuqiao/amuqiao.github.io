@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>HDFS日志采集案例</title>
+      <link href="2021/06/11/hdfs-ri-zhi-cai-ji-an-li/"/>
+      <url>2021/06/11/hdfs-ri-zhi-cai-ji-an-li/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/G4Qbv4.png" alt="G4Qbv4"></p><h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h3><ul><li>定时采集已滚动完毕日志文件 </li><li>将待采集文件上传到临时目录 </li><li>备份日志文件</li></ul><h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><h3 id="验证调优"><a href="#验证调优" class="headerlink" title="验证调优"></a>验证调优</h3>]]></content>
+      
+      
+      <categories>
+          
+          <category> 大数据 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> hadoop </tag>
+            
+            <tag> log </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>HDFS读写数据解析</title>
       <link href="2021/06/04/hdfs-du-xie-shu-ju-jie-xi/"/>
       <url>2021/06/04/hdfs-du-xie-shu-ju-jie-xi/</url>
