@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Python生成csv</title>
+      <link href="2022/07/03/python-sheng-cheng-csv/"/>
+      <url>2022/07/03/python-sheng-cheng-csv/</url>
+      
+        <content type="html"><![CDATA[<pre class="line-numbers language-none"><code class="language-none">import csvymds &#x3D; [&#39;20180611&#39;, &#39;20180612&#39;]data &#x3D; &#123;    &#39;20180611&#39;:&#123;        &#39;name&#39;: &#39;tom&#39;,        &#39;score&#39;: 90    &#125;,    &#39;20180612&#39;:&#123;        &#39;name&#39;: &#39;tom&#39;,        &#39;score&#39;: 95    &#125;&#125;with open(&#39;test.csv&#39;, &#39;w&#39;) as f:    title_list &#x3D; [&#39;date&#39;, &#39;name&#39;, &#39;score&#39;]    fieldnames &#x3D; title_list  # 标题名称    writer &#x3D; csv.DictWriter(f, fieldnames&#x3D;fieldnames)    writer.writeheader()        for ymd in ymds:        row &#x3D; &#123;            &#39;date&#39;: ymd,            &#39;name&#39;: data[ymd][&#39;name&#39;],            &#39;score&#39;: data[ymd][&#39;score&#39;]        &#125;        writer.writerow(row)  # 按行写入    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="读取csv"><a href="#读取csv" class="headerlink" title="读取csv"></a>读取csv</h3><pre class="line-numbers language-none"><code class="language-none">def read_csv(file_name):    line &#x3D; []<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Python </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> csv </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>非谓语动词详解II</title>
       <link href="2022/06/24/fei-wei-yu-dong-ci-xiang-jie-ii/"/>
       <url>2022/06/24/fei-wei-yu-dong-ci-xiang-jie-ii/</url>
