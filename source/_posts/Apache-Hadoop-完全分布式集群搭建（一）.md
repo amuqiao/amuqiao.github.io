@@ -7,7 +7,7 @@ mathjax: true
 date: 2021-05-20 14:43:43
 img:
 password:
-summary:
+summary: 第一部分:虚拟机环境准备
 tags:
 - hadoop
 categories:

@@ -7,7 +7,7 @@ mathjax: true
 date: 2021-05-26 21:09:46
 img:
 password:
-summary:
+summary: 第二部分:集群规划&安装Hadoop
 tags:
 - hadoop
 categories:
@@ -275,8 +275,9 @@ rsync -rvl /opt/module root@linux123:/opt/
 #1 获取命令输入参数的个数，如果个数为0，直接退出命令 
 paramnum=$#
 
-if((paramnum==0)); then 
-echo no params; 
+if((paramnum==0)); 
+then 
+    echo no params; 
 exit; 
 fi
 
@@ -295,9 +296,10 @@ user=`whoami`
 
 #5 循环执行rsync
 
-for((host=121; host<124; host++)); do
+for((host=121; host<124; host++)); 
+do
 
-echo ------------------- linux$host -------------
+echo -------------linux$host -------------
 rsync -rvl $pdir/$file_name $user@linux$host:$pdir
 
 done

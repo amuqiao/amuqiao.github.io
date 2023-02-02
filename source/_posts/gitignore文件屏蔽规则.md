@@ -9,7 +9,7 @@ img:
 password:
 summary: 屏蔽不想提交的的文件
 tags:
-- Git
+- git
 - gitignore
 categories:
 - 开发工具
