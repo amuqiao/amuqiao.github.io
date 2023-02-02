@@ -4,21 +4,48 @@
   
     
     <entry>
-      <title>Python生成csv</title>
-      <link href="2022/07/03/python-sheng-cheng-csv/"/>
-      <url>2022/07/03/python-sheng-cheng-csv/</url>
+      <title>经济学人20230202</title>
+      <link href="2023/02/02/jing-ji-xue-ren-20230202/"/>
+      <url>2023/02/02/jing-ji-xue-ren-20230202/</url>
       
-        <content type="html"><![CDATA[<pre class="line-numbers language-none"><code class="language-none">import csvymds &#x3D; [&#39;20180611&#39;, &#39;20180612&#39;]data &#x3D; &#123;    &#39;20180611&#39;:&#123;        &#39;name&#39;: &#39;tom&#39;,        &#39;score&#39;: 90    &#125;,    &#39;20180612&#39;:&#123;        &#39;name&#39;: &#39;tom&#39;,        &#39;score&#39;: 95    &#125;&#125;with open(&#39;test.csv&#39;, &#39;w&#39;) as f:    title_list &#x3D; [&#39;date&#39;, &#39;name&#39;, &#39;score&#39;]    fieldnames &#x3D; title_list  # 标题名称    writer &#x3D; csv.DictWriter(f, fieldnames&#x3D;fieldnames)    writer.writeheader()        for ymd in ymds:        row &#x3D; &#123;            &#39;date&#39;: ymd,            &#39;name&#39;: data[ymd][&#39;name&#39;],            &#39;score&#39;: data[ymd][&#39;score&#39;]        &#125;        writer.writerow(row)  # 按行写入    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="读取csv"><a href="#读取csv" class="headerlink" title="读取csv"></a>读取csv</h3><pre class="line-numbers language-none"><code class="language-none">def read_csv(file_name):    line &#x3D; []<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>]]></content>
+        <content type="html"><![CDATA[<p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0001.jpg" alt="0001"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0002.jpg" alt="0002"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0003.jpg" alt="0003"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0004.jpg" alt="0004"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0005.jpg" alt="0005"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0006.jpg" alt="0006"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0007.jpg" alt="0007"></p>]]></content>
       
       
       <categories>
           
-          <category> Python </category>
+          <category> 外刊精读 </category>
           
       </categories>
       
       
         <tags>
+            
+            <tag> 经济学人 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Python生成csv</title>
+      <link href="2022/07/03/python-sheng-cheng-csv/"/>
+      <url>2022/07/03/python-sheng-cheng-csv/</url>
+      
+        <content type="html"><![CDATA[<h3 id="写csv"><a href="#写csv" class="headerlink" title="写csv"></a>写csv</h3><pre class="line-numbers language-none"><code class="language-none">import csvymds &#x3D; [&#39;20180611&#39;, &#39;20180612&#39;]data &#x3D; &#123;    &#39;20180611&#39;:&#123;        &#39;name&#39;: &#39;tom&#39;,        &#39;score&#39;: 90    &#125;,    &#39;20180612&#39;:&#123;        &#39;name&#39;: &#39;tom&#39;,        &#39;score&#39;: 95    &#125;&#125;with open(&#39;test.csv&#39;, &#39;w&#39;) as f:    title_list &#x3D; [&#39;date&#39;, &#39;name&#39;, &#39;score&#39;]    fieldnames &#x3D; title_list  # 标题名称    writer &#x3D; csv.DictWriter(f, fieldnames&#x3D;fieldnames)    writer.writeheader()        for ymd in ymds:        row &#x3D; &#123;            &#39;date&#39;: ymd,            &#39;name&#39;: data[ymd][&#39;name&#39;],            &#39;score&#39;: data[ymd][&#39;score&#39;]        &#125;        writer.writerow(row)  # 按行写入    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="读csv"><a href="#读csv" class="headerlink" title="读csv"></a>读csv</h3><pre class="line-numbers language-none"><code class="language-none">def read_csv(file_name):    line &#x3D; []<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 后端 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
             
             <tag> csv </tag>
             

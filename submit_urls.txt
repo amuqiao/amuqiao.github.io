@@ -1,3 +1,4 @@
+https://amuqiao.github.io/2023/02/02/jing-ji-xue-ren-20230202/
 https://amuqiao.github.io/2022/07/03/python-sheng-cheng-csv/
 https://amuqiao.github.io/2022/06/24/fei-wei-yu-dong-ci-xiang-jie-ii/
 https://amuqiao.github.io/2022/06/23/fei-wei-yu-dong-ci-xiang-jie-i/
@@ -7,4 +8,3 @@ https://amuqiao.github.io/2021/06/04/apache-hadoop-wan-quan-fen-bu-shi-ji-qun-da
 https://amuqiao.github.io/2021/06/04/junit-ji-ben-zhu-jie/
 https://amuqiao.github.io/2021/03/31/gitignore-wen-jian-ping-bi-gui-ze/
 https://amuqiao.github.io/2021/06/03/mac-an-zhuang-jdk8/
-https://amuqiao.github.io/2021/06/03/mac-pei-zhi-huan-jing-bian-liang/
