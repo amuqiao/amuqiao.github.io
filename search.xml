@@ -4,11 +4,36 @@
   
     
     <entry>
+      <title>ChatGPT注册攻略</title>
+      <link href="2023/02/14/chatgpt-zhu-ce-gong-lue/"/>
+      <url>2023/02/14/chatgpt-zhu-ce-gong-lue/</url>
+      
+        <content type="html"><![CDATA[<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ul><li>首先能能访问 Google（前置条件，不能明确说，懂得都懂）</li><li>你得有一个国外手机号，GV 号肯定不行。<ul><li>如果你没有国外手机号，推荐 sms-activate.org</li></ul></li></ul><h3 id="注册短信平台并充值"><a href="#注册短信平台并充值" class="headerlink" title="注册短信平台并充值"></a>注册短信平台并充值</h3><ul><li>先行注册 sms-activate.org</li><li>注册好之后进行对应的充值(支持支付宝)<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/n4x6tR.png" alt="n4x6tR"></li></ul><h3 id="注册OpenAI账号"><a href="#注册OpenAI账号" class="headerlink" title="注册OpenAI账号"></a>注册OpenAI账号</h3><ul><li>打开beta.openai.com/signup 页面进行相应的注册。<ul><li>这里同样需要你能访问Google且 ip 不是香港，最好是美国、新加坡等等，不然会提示不能在当前国家服务。</li></ul></li><li>注册成功进入下面填写手机号的页面<ul><li>下面记得切换下国家区号，这里的区号默认是你代理的。</li></ul></li></ul><p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/QT6qj0.jpg" alt="QT6qj0"></p><h3 id="准备接码"><a href="#准备接码" class="headerlink" title="准备接码"></a>准备接码</h3><blockquote><p>这里需要注意下的就是，部分地区可能收到码，我选择的是巴西</p></blockquote><p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/Opk2cg.png" alt="Opk2cg"></p><p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/Uehg4b.png" alt="Uehg4b"></p><p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/JGISFI.png" alt="JGISFI"></p><p>然后再刚刚填写手机号码的页面填入申请的手机号</p><h3 id="开始使用ChatGPT"><a href="#开始使用ChatGPT" class="headerlink" title="开始使用ChatGPT"></a>开始使用ChatGPT</h3><p>注册完后，我们去ChatGPT网站去登陆。chat.openai.com/auth/login<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/YeHrD8.jpg" alt="YeHrD8"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/Fe12re.jpg" alt="Fe12re"></p><h3 id="可能碰到的问题"><a href="#可能碰到的问题" class="headerlink" title="可能碰到的问题"></a>可能碰到的问题</h3><h4 id="接不到码"><a href="#接不到码" class="headerlink" title="接不到码"></a>接不到码</h4><ul><li>接不到码，可以在那个有效期内退回换个号试试。</li><li>有人直接把发的电话输入框里，没去掉区号也可以收到</li><li>这个接码网站很全面，我演示充值是 1 美元，你也可以冲一个 0.18美元</li><li>目前完全支持的是印度+巴西。你也可以选择其他国家的 any+other 选择合适的费用即可。</li></ul><h4 id="无法访问"><a href="#无法访问" class="headerlink" title="无法访问"></a>无法访问</h4><p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/E6N9kY.png" alt="E6N9kY"><br>若出现ChatGPT官网拒绝访问的情况<br>一般你出现这种问题，就是因为你的代理没有全局，或者位置不对。香港或中国的的代理是100%无法通过的。</p><p>只要你出现了这个提示，那么你接下来怎么切换代理，都是没用的。需要清空浏览器缓存。<br>快速轻松浏览器缓存，先复制下面这段代码</p><pre class="line-numbers language-none"><code class="language-none">window.localStorage.removeItem(Object.keys(window.localStorage).find(i&#x3D;&gt;i.startsWith(&#39;@@auth0spajs&#39;)))<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>按f12进入开发者模式，在控制台进行粘贴<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/8uxplO.png" alt="8uxplO"></p><h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul><li><a href="https://juejin.cn/post/7173447848292253704">https://juejin.cn/post/7173447848292253704</a></li><li><a href="https://www.bilibili.com/read/cv20340415">https://www.bilibili.com/read/cv20340415</a></li><li><a href="https://uzbox.com/ai/sms-activate-chatgpt.html">https://uzbox.com/ai/sms-activate-chatgpt.html</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> AI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ChatGPT </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>经济学人20230202</title>
       <link href="2023/02/02/jing-ji-xue-ren-20230202/"/>
       <url>2023/02/02/jing-ji-xue-ren-20230202/</url>
       
-        <content type="html"><![CDATA[<p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0001.jpg" alt="0001"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0002.jpg" alt="0002"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0003.jpg" alt="0003"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0004.jpg" alt="0004"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0005.jpg" alt="0005"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0006.jpg" alt="0006"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0007.jpg" alt="0007"></p>]]></content>
+        <content type="html"><![CDATA[<p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0001.jpg" alt="0001"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0002.jpg" alt="0002"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0003.jpg" alt="0003"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0004.jpg" alt="0004"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0005.jpg" alt="0005"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0006.jpg" alt="0006"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0007.jpg" alt="0007"></p><iframe src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/economist/2023/2.2.pdf" style="width:800px; height:500px;" frameborder="0"></iframe>]]></content>
       
       
       <categories>

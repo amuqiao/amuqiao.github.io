@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="baidu-site-verification" content="code-XwKXPvlX0k" />
-    <meta name="keywords" content="HDFS读写数据解析, 王路飞">
+    <meta name="keywords" content="ChatGPT注册攻略, 王路飞">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>HDFS读写数据解析 | 王路飞</title>
+    <title>ChatGPT注册攻略 | 王路飞</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -311,12 +311,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/39.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">HDFS读写数据解析</h1>
+                    <h1 class="description center-align post-title">ChatGPT注册攻略</h1>
                 </div>
             </div>
         </div>
@@ -432,12 +432,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/hadoop/">
-                                <span class="chip bg-color">hadoop</span>
-                            </a>
-                        
-                            <a href="/tags/hdfs/">
-                                <span class="chip bg-color">hdfs</span>
+                            <a href="/tags/ChatGPT/">
+                                <span class="chip bg-color">ChatGPT</span>
                             </a>
                         
                     </div>
@@ -448,8 +444,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" class="post-category">
-                                大数据
+                            <a href="/categories/AI/" class="post-category">
+                                AI
                             </a>
                         
                     </div>
@@ -461,7 +457,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-06-04
+                    2023-02-14
                 </div>
                 
 
@@ -470,7 +466,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    556
+                    548
                 </div>
                 
 
@@ -490,48 +486,52 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="HDFS读数据流程"><a href="#HDFS读数据流程" class="headerlink" title="HDFS读数据流程"></a>HDFS读数据流程</h3><p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/s76ija.png" alt="读数据流程"></p>
-<ol>
-<li>客户端通过Distributed FileSystem向NameNode请求下载文件，NameNode通过查询元数据， 找到文件块所在的DataNode地址。</li>
-<li>挑选一台DataNode（就近原则，然后随机）服务器，请求读取数据。</li>
-<li>DataNode开始传输数据给客户端（从磁盘里面读取数据输入流，以Packet为单位来做校验）。</li>
-<li>客户端以Packet为单位接收，先在本地缓存，然后写入目标文件。</li>
-</ol>
-<h3 id="HDFS写数据流程"><a href="#HDFS写数据流程" class="headerlink" title="HDFS写数据流程"></a>HDFS写数据流程</h3><p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/vB0RtP.png" alt="写数据流程"></p>
-<ol>
-<li>客户端通过Distributed FileSystem模块向NameNode请求上传文件，NameNode检查目标文件 是否已存在，父目录是否存在。</li>
-<li>NameNode返回是否可以上传。</li>
-<li>客户端请求第一个 Block上传到哪几个DataNode服务器上。</li>
-<li>NameNode返回3个DataNode节点，分别为dn1、dn2、dn3。</li>
-<li>客户端通过FSDataOutputStream模块请求dn1上传数据，dn1收到请求会继续调用dn2，然后 dn2调用dn3，将这个通信管道建立完成。</li>
-<li>dn1、dn2、dn3逐级应答客户端。</li>
-<li>客户端开始往dn1上传第一个Block（先从磁盘读取数据放到一个本地内存缓存），以Packet为单 位，dn1收到一个Packet就会传给dn2，dn2传给dn3；dn1每传一个packet会放入一个确认队列 等待确认。</li>
-<li>当一个Block传输完成之后，客户端再次请求NameNode上传第二个Block的服务器。（重复执行 3-7步）。</li>
-<li></li>
-</ol>
-<h3 id="演示从本地文件系统上传文件到hdfs"><a href="#演示从本地文件系统上传文件到hdfs" class="headerlink" title="演示从本地文件系统上传文件到hdfs"></a>演示从本地文件系统上传文件到hdfs</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
-<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">uploadPackage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
-    <span class="token comment">//1. 准备读取本地文件的输入流</span>
-    <span class="token class-name">FileInputStream</span> fileInputStream <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileInputStream</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span><span class="token string">"/Users/wangqiao/Downloads/test.txt"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ul>
+<li>首先能能访问 Google（前置条件，不能明确说，懂得都懂）</li>
+<li>你得有一个国外手机号，GV 号肯定不行。<ul>
+<li>如果你没有国外手机号，推荐 sms-activate.org</li>
+</ul>
+</li>
+</ul>
+<h3 id="注册短信平台并充值"><a href="#注册短信平台并充值" class="headerlink" title="注册短信平台并充值"></a>注册短信平台并充值</h3><ul>
+<li>先行注册 sms-activate.org</li>
+<li>注册好之后进行对应的充值(支持支付宝)<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/n4x6tR.png" alt="n4x6tR"></li>
+</ul>
+<h3 id="注册OpenAI账号"><a href="#注册OpenAI账号" class="headerlink" title="注册OpenAI账号"></a>注册OpenAI账号</h3><ul>
+<li>打开beta.openai.com/signup 页面进行相应的注册。<ul>
+<li>这里同样需要你能访问Google且 ip 不是香港，最好是美国、新加坡等等，不然会提示不能在当前国家服务。</li>
+</ul>
+</li>
+<li>注册成功进入下面填写手机号的页面<ul>
+<li>下面记得切换下国家区号，这里的区号默认是你代理的。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/QT6qj0.jpg" alt="QT6qj0"></p>
+<h3 id="准备接码"><a href="#准备接码" class="headerlink" title="准备接码"></a>准备接码</h3><blockquote>
+<p>这里需要注意下的就是，部分地区可能收到码，我选择的是巴西</p>
+</blockquote>
+<p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/Opk2cg.png" alt="Opk2cg"></p>
+<p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/Uehg4b.png" alt="Uehg4b"></p>
+<p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/JGISFI.png" alt="JGISFI"></p>
+<p>然后再刚刚填写手机号码的页面填入申请的手机号</p>
+<h3 id="开始使用ChatGPT"><a href="#开始使用ChatGPT" class="headerlink" title="开始使用ChatGPT"></a>开始使用ChatGPT</h3><p>注册完后，我们去ChatGPT网站去登陆。chat.openai.com/auth/login<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/YeHrD8.jpg" alt="YeHrD8"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/Fe12re.jpg" alt="Fe12re"></p>
+<h3 id="可能碰到的问题"><a href="#可能碰到的问题" class="headerlink" title="可能碰到的问题"></a>可能碰到的问题</h3><h4 id="接不到码"><a href="#接不到码" class="headerlink" title="接不到码"></a>接不到码</h4><ul>
+<li>接不到码，可以在那个有效期内退回换个号试试。</li>
+<li>有人直接把发的电话输入框里，没去掉区号也可以收到</li>
+<li>这个接码网站很全面，我演示充值是 1 美元，你也可以冲一个 0.18美元</li>
+<li>目前完全支持的是印度+巴西。你也可以选择其他国家的 any+other 选择合适的费用即可。</li>
+</ul>
+<h4 id="无法访问"><a href="#无法访问" class="headerlink" title="无法访问"></a>无法访问</h4><p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/E6N9kY.png" alt="E6N9kY"><br>若出现ChatGPT官网拒绝访问的情况<br>一般你出现这种问题，就是因为你的代理没有全局，或者位置不对。香港或中国的的代理是100%无法通过的。</p>
+<p>只要你出现了这个提示，那么你接下来怎么切换代理，都是没用的。需要清空浏览器缓存。<br>快速轻松浏览器缓存，先复制下面这段代码</p>
+<pre class="line-numbers language-none"><code class="language-none">window.localStorage.removeItem(Object.keys(window.localStorage).find(i&#x3D;&gt;i.startsWith(&#39;@@auth0spajs&#39;)))<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>按f12进入开发者模式，在控制台进行粘贴<br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/8uxplO.png" alt="8uxplO"></p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7173447848292253704">https://juejin.cn/post/7173447848292253704</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv20340415">https://www.bilibili.com/read/cv20340415</a></li>
+<li><a target="_blank" rel="noopener" href="https://uzbox.com/ai/sms-activate-chatgpt.html">https://uzbox.com/ai/sms-activate-chatgpt.html</a></li>
+</ul>
 
-    <span class="token comment">//2. 准备好写出数据到hdfs的输出流</span>
-    <span class="token class-name">FSDataOutputStream</span> fsDataOutputStream <span class="token operator">=</span> fs<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Path</span><span class="token punctuation">(</span><span class="token string">"/api_test/test.txt"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Progressable</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">progress</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token comment">// 这个progress方法就是每传输64KB（packet）就会执行一次</span>
-            <span class="token comment">// 如果有数据要传递，建立通道时会执行一次</span>
-            <span class="token comment">// 所以当传输 0kb的文件时，不会打印&amp;</span>
-            <span class="token comment">// 传递小于64kb的文件时打印2个&amp;</span>
-            <span class="token comment">// 传递小于128kb的文件时会打印3个&amp;</span>
-            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"&amp;"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token comment">//3. 实现流拷贝 默认关闭流选项是true，所以会自动关闭</span>
-    <span class="token class-name">IOUtils</span><span class="token punctuation">.</span><span class="token function">copyBytes</span><span class="token punctuation">(</span>fileInputStream<span class="token punctuation">,</span> fsDataOutputStream<span class="token punctuation">,</span> conf<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">//4. 关闭流 可以再次关闭也可以不关了</span>
-    <span class="token class-name">IOUtils</span><span class="token punctuation">.</span><span class="token function">closeStream</span><span class="token punctuation">(</span>fsDataOutputStream<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token class-name">IOUtils</span><span class="token punctuation">.</span><span class="token function">closeStream</span><span class="token punctuation">(</span>fileInputStream<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -557,7 +557,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://amuqiao.github.io/2021/06/04/hdfs-du-xie-shu-ju-jie-xi/">https://amuqiao.github.io/2021/06/04/hdfs-du-xie-shu-ju-jie-xi/</a>
+                    <a href="https://amuqiao.github.io/2023/02/14/chatgpt-zhu-ce-gong-lue/">https://amuqiao.github.io/2023/02/14/chatgpt-zhu-ce-gong-lue/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -595,12 +595,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/hadoop/">
-                                    <span class="chip bg-color">hadoop</span>
-                                </a>
-                            
-                                <a href="/tags/hdfs/">
-                                    <span class="chip bg-color">hdfs</span>
+                                <a href="/tags/ChatGPT/">
+                                    <span class="chip bg-color">ChatGPT</span>
                                 </a>
                             
                         </div>
@@ -770,50 +766,48 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/06/11/hdfs-ri-zhi-cai-ji-an-li/">
+                <a href="/2023/02/14/chatgpt-zhu-ce-gong-lue/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/30.jpg" class="responsive-img" alt="HDFS日志采集案例">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="ChatGPT注册攻略">
                         
-                        <span class="card-title">HDFS日志采集案例</span>
+                        <span class="card-title">ChatGPT注册攻略</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            需求分析+代码实现
+                            分享ChatGPT注册攻略
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-06-11
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-14
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" class="post-category">
-                                    大数据
+                            <a href="/categories/AI/" class="post-category">
+                                    AI
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/hadoop/">
-                        <span class="chip bg-color">hadoop</span>
-                    </a>
-                    
-                    <a href="/tags/log/">
-                        <span class="chip bg-color">log</span>
+                    <a href="/tags/ChatGPT/">
+                        <span class="chip bg-color">ChatGPT</span>
                     </a>
                     
                 </div>
@@ -827,31 +821,31 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/06/04/apache-hadoop-wan-quan-fen-bu-shi-ji-qun-da-jian-si/">
+                <a href="/2023/02/02/jing-ji-xue-ren-20230202/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/30.jpg" class="responsive-img" alt="Apache Hadoop 完全分布式集群搭建（四）">
+                        <img src="/medias/featureimages/28.jpg" class="responsive-img" alt="经济学人20230202">
                         
-                        <span class="card-title">Apache Hadoop 完全分布式集群搭建（四）</span>
+                        <span class="card-title">经济学人20230202</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            其他配置
+                            英文外刊双语精读|科学的变化本质：科学颠覆性已达巅峰？
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-06-04
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-02
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" class="post-category">
-                                    大数据
+                            <a href="/categories/%E5%A4%96%E5%88%8A%E7%B2%BE%E8%AF%BB/" class="post-category">
+                                    外刊精读
                                 </a>
                             
                             
@@ -861,8 +855,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/hadoop/">
-                        <span class="chip bg-color">hadoop</span>
+                    <a href="/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%BA%BA/">
+                        <span class="chip bg-color">经济学人</span>
                     </a>
                     
                 </div>
