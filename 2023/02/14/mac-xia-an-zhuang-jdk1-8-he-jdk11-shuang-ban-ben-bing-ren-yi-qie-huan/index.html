@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="baidu-site-verification" content="code-XwKXPvlX0k" />
-    <meta name="keywords" content="经济学人20230202, 王路飞">
+    <meta name="keywords" content="Mac下安装JDK1.8和JDK11双版本并任意切换, 王路飞">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>经济学人20230202 | 王路飞</title>
+    <title>Mac下安装JDK1.8和JDK11双版本并任意切换 | 王路飞</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -311,12 +311,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/28.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/50.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">经济学人20230202</h1>
+                    <h1 class="description center-align post-title">Mac下安装JDK1.8和JDK11双版本并任意切换</h1>
                 </div>
             </div>
         </div>
@@ -432,8 +432,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%BA%BA/">
-                                <span class="chip bg-color">经济学人</span>
+                            <a href="/tags/jdk/">
+                                <span class="chip bg-color">jdk</span>
                             </a>
                         
                     </div>
@@ -444,8 +444,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%A4%96%E5%88%8A%E7%B2%BE%E8%AF%BB/" class="post-category">
-                                外刊精读
+                            <a href="/categories/Java/" class="post-category">
+                                Java
                             </a>
                         
                     </div>
@@ -457,7 +457,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-02-02
+                    2023-02-14
                 </div>
                 
 
@@ -466,7 +466,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    403
                 </div>
                 
 
@@ -486,8 +486,50 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0001.jpg" alt="0001"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0002.jpg" alt="0002"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0003.jpg" alt="0003"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0004.jpg" alt="0004"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0005.jpg" alt="0005"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0006.jpg" alt="0006"><br><img src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/uPic/0007.jpg" alt="0007"></p>
-<iframe src="https://aamuqiao.oss-cn-beijing.aliyuncs.com/economist/2023/2.2.pdf" style="width:800px; height:500px;" frameborder="0"></iframe>
+                <p>1.官网下载JDK8和JDK11安装包，安装后打开bash,可以看到2个版本安装成功</p>
+<pre class="line-numbers language-none"><code class="language-none">XXX-MacBook-Pro:~ chunyanzhang$ cd &#x2F;Library&#x2F;Java&#x2F;JavaVirtualMachines
+XXX-MacBook-Pro:JavaVirtualMachines chunyanzhang$ ls -al
+total 0
+drwxr-xr-x  4 root  wheel  128 12 18 00:18 .
+drwxr-xr-x  4 root  wheel  128 11 15 17:25 ..
+drwxr-xr-x  3 root  wheel   96 11 15 17:25 jdk-11.0.2.jdk
+drwxr-xr-x  3 root  wheel   96 12 18 00:18 jdk1.8.0_271.jdk<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>2.编辑环境变量</p>
+<pre class="line-numbers language-none"><code class="language-none">xport JAVA_11_HOME&#x3D;&#x2F;Library&#x2F;Java&#x2F;JavaVirtualMachines&#x2F;jdk-11.0.2.jdk&#x2F;Contents&#x2F;Home
+export JAVA_8_HOME&#x3D;&#x2F;Library&#x2F;Java&#x2F;JavaVirtualMachines&#x2F;jdk1.8.0_271.jdk&#x2F;Contents&#x2F;Home
+alias jdk8&#x3D;&#39;export JAVA_HOME&#x3D;$JAVA_8_HOME&#39;
+alias jdk11&#x3D;&#39;export JAVA_HOME&#x3D;$JAVA_11_HOME&#39;
+export JAVA_HOME&#x3D;$JAVA_8_HOME
+
+export ANDROID_HOME&#x3D;&#x2F;Users&#x2F;chunyanzhang&#x2F;Library&#x2F;Android&#x2F;sdk
+export PATH&#x3D;$PATH:$ANDROID_HOME&#x2F;tools:$ANDROID_HOME&#x2F;platform-tools
+
+alias python&#x3D;&quot;&#x2F;Library&#x2F;Frameworks&#x2F;Python.framework&#x2F;Versions&#x2F;3.11&#x2F;bin&#x2F;python3&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>3.：wq! 保存并退出</p>
+<p>4.执行使配置的环境变量生效 source ～/.bash_profile</p>
+<p>5.查看当前jdk版本，使用命令： java -version</p>
+<pre class="line-numbers language-none"><code class="language-none">XXX-MacBook-Pro:JavaVirtualMachines chunyanzhang$ java -version
+java version &quot;1.8.0_271&quot;
+Java(TM) SE Runtime Environment (build 1.8.0_271-b09)
+Java HotSpot(TM) 64-Bit Server VM (build 25.271-b09, mixed mode)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>6.在jdk8和jdk11之间切换</p>
+<p>默认：jdk8</p>
+<p>1）从jdk8切换到jdk11</p>
+<pre class="line-numbers language-none"><code class="language-none">XXX-MacBook-Pro:JavaVirtualMachines chunyanzhang$ jdk11
+XXX-MacBook-Pro:JavaVirtualMachines chunyanzhang$ java -version
+java version &quot;11.0.2&quot; 2019-01-15 LTS
+Java(TM) SE Runtime Environment 18.9 (build 11.0.2+9-LTS)
+Java HotSpot(TM) 64-Bit Server VM 18.9 (build 11.0.2+9-LTS, mixed mode)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="2">
+<li>从jdk11切换到jdk8<pre class="line-numbers language-none"><code class="language-none">XXX-MacBook-Pro:JavaVirtualMachines chunyanzhang$ jdk8
+XXX-MacBook-Pro:JavaVirtualMachines chunyanzhang$ java -version
+java version &quot;1.8.0_271&quot;
+Java(TM) SE Runtime Environment (build 1.8.0_271-b09)
+Java HotSpot(TM) 64-Bit Server VM (build 25.271-b09, mixed mode)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ol>
 
                 
             </div>
@@ -514,7 +556,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://amuqiao.github.io/2023/02/02/jing-ji-xue-ren-20230202/">https://amuqiao.github.io/2023/02/02/jing-ji-xue-ren-20230202/</a>
+                    <a href="https://amuqiao.github.io/2023/02/14/mac-xia-an-zhuang-jdk1-8-he-jdk11-shuang-ban-ben-bing-ren-yi-qie-huan/">https://amuqiao.github.io/2023/02/14/mac-xia-an-zhuang-jdk1-8-he-jdk11-shuang-ban-ben-bing-ren-yi-qie-huan/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -552,8 +594,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%BA%BA/">
-                                    <span class="chip bg-color">经济学人</span>
+                                <a href="/tags/jdk/">
+                                    <span class="chip bg-color">jdk</span>
                                 </a>
                             
                         </div>
@@ -723,9 +765,60 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2023/02/14/mac-xia-an-zhuang-jdk1-8-he-jdk11-shuang-ban-ben-bing-ren-yi-qie-huan/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/50.jpg" class="responsive-img" alt="Mac下安装JDK1.8和JDK11双版本并任意切换">
+                        
+                        <span class="card-title">Mac下安装JDK1.8和JDK11双版本并任意切换</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-14
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/jdk/">
+                        <span class="chip bg-color">jdk</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2023/02/14/chatgpt-zhu-ce-gong-lue/">
                     <div class="card-image">
@@ -743,9 +836,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-14
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-14
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -763,59 +856,6 @@
                     
                     <a href="/tags/ChatGPT/">
                         <span class="chip bg-color">ChatGPT</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/07/03/python-sheng-cheng-csv/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="Python生成csv">
-                        
-                        <span class="card-title">Python生成csv</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            脚本处理csv
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-03
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%90%8E%E7%AB%AF/" class="post-category">
-                                    后端
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/python/">
-                        <span class="chip bg-color">python</span>
-                    </a>
-                    
-                    <a href="/tags/csv/">
-                        <span class="chip bg-color">csv</span>
                     </a>
                     
                 </div>
