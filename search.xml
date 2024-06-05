@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>args和kwargs的区别和使用</title>
+      <link href="2024/06/05/args-he-kwargs-de-qu-bie-he-shi-yong/"/>
+      <url>2024/06/05/args-he-kwargs-de-qu-bie-he-shi-yong/</url>
+      
+        <content type="html"><![CDATA[<p>当我们需要定义一个函数，但是不确定会传入多少个参数时，可以使用 <code>*args</code> 和 <code>**kwargs</code>。</p><ol><li><p><code>args</code> 的使用情况：</p><ul><li><p>当函数的参数数量是不确定的时候，可以使用 <code>args</code> 来接收任意数量的位置参数，并将它们存储在一个元组中。</p></li><li><p>示例：</p><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">)</span><span class="token punctuation">:</span>    total <span class="token operator">=</span> <span class="token number">0</span>    <span class="token keyword">for</span> num <span class="token keyword">in</span> args<span class="token punctuation">:</span>        total <span class="token operator">+=</span> num    <span class="token keyword">return</span> total<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li></ul></li><li><p><code>*kwargs</code> 的使用情况：</p><ul><li><p>当函数的参数是带有关键字的时候，可以使用 <code>*kwargs</code> 来接收任意数量的关键字参数，并将它们存储在一个字典中。</p></li><li><p>示例：</p><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">print_info</span><span class="token punctuation">(</span><span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>    <span class="token keyword">for</span> key<span class="token punctuation">,</span> value <span class="token keyword">in</span> kwargs<span class="token punctuation">.</span>items<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">&#123;</span>key<span class="token punctuation">&#125;</span></span><span class="token string">: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>value<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li></ul></li><li><p>同时使用 <code>args</code> 和 <code>*kwargs</code> 的情况：</p><ul><li><p>当函数的参数既不确定数量又带有关键字时，可以同时使用 <code>args</code> 和 <code>*kwargs</code>。</p></li><li><p>示例：</p><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">process_data</span><span class="token punctuation">(</span>title<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"=== </span><span class="token interpolation"><span class="token punctuation">&#123;</span>title<span class="token punctuation">&#125;</span></span><span class="token string"> ==="</span></span><span class="token punctuation">)</span>    <span class="token keyword">for</span> item <span class="token keyword">in</span> args<span class="token punctuation">:</span>        <span class="token keyword">print</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span>    <span class="token keyword">for</span> key<span class="token punctuation">,</span> value <span class="token keyword">in</span> kwargs<span class="token punctuation">.</span>items<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">&#123;</span>key<span class="token punctuation">&#125;</span></span><span class="token string">: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>value<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li></ul></li></ol><p>综上所述，<code>*args</code> 用于处理不确定数量的位置参数，而 <code>**kwargs</code> 用于处理不确定数量的关键字参数。当两者一起使用时，可以应对各种不确定数量和属性的参数情况。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 后端 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>云南旅游备忘录</title>
       <link href="2023/03/09/yun-nan-lu-you-bei-wang-lu/"/>
       <url>2023/03/09/yun-nan-lu-you-bei-wang-lu/</url>
